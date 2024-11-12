@@ -31,9 +31,16 @@ nav {
     display: flex;
     align-items: center;
     background-color: white;
+    position: fixed;
+    top: 0;
+    z-index: 10; 
 }
 
 .nav-menu-button{
+    display: none;
+}
+
+.nav-menu-profile{
     display: none;
 }
 
@@ -48,7 +55,7 @@ nav {
     display: flex;
     justify-content: flex-end;
 }
-
+ 
 .nav-links.show {
     display: flex;
     flex-direction: column;
@@ -126,6 +133,165 @@ nav {
     display: none;
 }
 
+/*--------------HEADER----------------*/
+
+header{
+    width: 100%;
+    padding-top: 100px; 
+}
+
+.header-container{
+    width: 100%;
+}
+
+.header-container img{
+    width: 100%;
+    margin-bottom: -4px; 
+}
+
+.header-add{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #15213E;
+    padding: 20px 30px;
+    margin: 0;
+}
+
+.header-descriptions {
+    width: 80%;
+    display: block;
+    padding: 40px 0;
+    margin: 0;
+}
+
+.header-descriptions p{
+    margin: 0;
+    padding: 10px;
+}
+
+.header-descriptions p:nth-child(1){
+    color: white;
+    font: 700 2.6vw/1em "Trebuchet MS";
+}
+
+.header-descriptions p:nth-child(2){
+    color: white;
+    font: 700 3vw/1em "Trebuchet MS";
+}
+
+.header-container button{
+    font: 700 0.845em/1em "Trebuchet MS";
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid white;
+    background-color: #15213E;
+    color: white;
+    padding: 0px 50px;
+    cursor: pointer;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+/*--------------MAIN----------------*/
+
+main{
+    height: 500px;
+}
+
+
+/*--------------FOOTER----------------*/
+
+footer{
+    width: 100%;
+    background-color: #15213E;
+    padding: 20px 0;
+    margin: 0;
+}
+
+.footer-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-links{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #F2F2F2;
+    margin: 30px;
+    padding: 0;
+}
+
+.footer-links li{
+    width: 80px;
+    flex: 1 1 0;
+    list-style-type: none;
+    padding: 0px 10px 50px 0px;
+    margin: 0;
+}
+
+.footer-links li a{
+    text-decoration: none;
+    flex: 1 1 0;
+    color: white;
+    font-family: "Trebuchet MS";
+    font-size: 0.8em;
+    font-weight: 800;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+}
+
+.footer-links li a:hover{
+    text-decoration: none;
+    color: rgb(212, 212, 212);
+    font-family: "Trebuchet MS";
+    font-size: 0.8em;
+    font-weight: 800;
+}
+
+.footer-socials{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.footer-socials img{
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.footer-copyright{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.footer-copyright p{
+    color: white;
+    font-family: "Trebuchet MS 600";
+    font-size: 0.8em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 40px 0px 10px 0px;
+}
+
+
 /*--------------MEDIA QUERIES----------------*/
 
 @media only screen and (max-width: 980px) {
@@ -142,6 +308,18 @@ nav {
         cursor: pointer;
     }
 
+    .nav-menu-profile{
+        width: 10%;
+        border: 0;
+        background-color: white;
+        display: block;
+        margin-right: 10px;
+    }
+
+    .nav-menu-profile:hover{
+        cursor: pointer;
+    }
+
     .nav-button {
         display: none;
     }
@@ -155,7 +333,6 @@ nav {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 50px;
     }
 
     .nav-links li {
@@ -168,4 +345,21 @@ nav {
         justify-content: flex-end;
         margin: 0;
     }
+
+    /*-----FOOTER-----*/
+    .footer-links{
+        flex-direction: column;
+    }
+
+    .footer-links li{
+        width: 100%;
+        padding: 0px 5px 20px 5px;
+    }
+
+    .footer-links li a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 }
