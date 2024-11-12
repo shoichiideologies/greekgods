@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F2;
+}
+
+.container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* --------------FONTS---------------- */
+
+@font-face {
+    font-family: 'Trebuchet MS 600';
+    src: url(fonts/trebuchet-ms/trebuc.ttf);
+    font-weight: 600;
+    font-size: 1em;
+}
+
+/* --------------NAV---------------- */
+
+nav {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+
+.nav-logo {
+    width: 30%;
+}
+
+.nav-links {
+    width: 50%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-logo img {
+    width: 150px;
+    margin-left: 50px;
+}
+
+.nav-links li {
+    list-style-type: none;
+    padding: 10px;
+    margin: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: rgb(43, 43, 43);
+    font-family: "Trebuchet MS";
+    font-size: 0.8em;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.nav-links li a:hover {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-family: "Trebuchet MS";
+    font-size: 0.8em;
+    font-weight: 800;
+}
+
+.nav-button {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-button button {
+    font: 700 0.845em/1em "Trebuchet MS";
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    background-color: black;
+    color: white;
+    padding: 0px 30px;
+    cursor: pointer;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+.nav-button img {
+    display: none;
+}
+
+/*--------------MEDIA QUERIES----------------*/
+
+@media only screen and (max-width: 980px) {
+    /*-----NAV-----*/
+    .nav-links, .nav-button {
+        display: none;
+    }
+
+    .nav-logo {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+    }
+
+    .nav-logo::before {
+        width: 10%;
+        content: url("graphics/svg/menu-black.svg");
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .nav-logo:hover::before {
+        content: url("graphics/svg/menu-gray.svg");
+    }
+}
