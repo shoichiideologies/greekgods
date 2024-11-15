@@ -106,3 +106,14 @@ a:hover{
 a:visited{
     color: #1e3d86;
 }
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+    text-align: right;
+    font: 500 0.8em/1em "Trebuchet MS";
+    padding-left: 5px;
+}
+
+

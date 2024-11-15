@@ -7,14 +7,16 @@ function displayErrorMessage(inputId, message) {
     errorMessage.classList.add('error-message');
     errorMessage.textContent = message;
 
-    const existingError = document.querySelector(`#${inputId} + .error-message`);
-    if (existingError) {
-        existingError.remove();
-    }
+    // Get the container for the error messages under the terms section
+    const errorMessageContainer = document.querySelector('.error-message-container');
 
-    const inputElement = document.getElementById(inputId);
-    inputElement.parentNode.appendChild(errorMessage);
+    // Clear any existing error message in the container
+    errorMessageContainer.innerHTML = ''; 
+
+    // Append the error message to the container
+    errorMessageContainer.appendChild(errorMessage);
 }
+
 
 function validatePassword(password) {
     const minLength = 8;

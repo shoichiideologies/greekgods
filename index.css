@@ -138,6 +138,7 @@ nav {
 header{
     width: 100%;
     padding-top: 100px; 
+    transition: padding-top 0.3s ease-in-out;
 }
 
 .header-container{
