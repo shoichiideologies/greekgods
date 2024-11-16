@@ -64,7 +64,7 @@ input[type="number"]{
 }
 
 .body-number > input[type="text"]{
-    width: 185px;
+    width: 100px;
     text-align: right;
 }
 
@@ -102,4 +102,10 @@ select {
     border-radius: 5px;
     outline: none;
     background-size: 20px;
+    height: 35px;
+    font: 500 0.8em/1em "Trebuchet MS";
+}
+
+.body-number > select{
+    width: 80px;
 }

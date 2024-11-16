@@ -45,9 +45,19 @@
             
                 <div class="body-number">
                     <label for="height">Height</label>
-                    <input id="height" type="text" placeholder=".cm" name="height"/> 
+                    <input id="height" type="text" name="height"/> 
+                    <select name="heightMetrics" id="heightMetric">
+                        <option value="cm">.cm</option>
+                        <option value="in">.in</option>
+                        <option value="m">.m</option>
+                        <option value="ft">.ft</option>
+                    </select>
                     <label for="weight">Weight</label>
-                    <input id="weight" type="text" placeholder=".lbs" name="weight"/>
+                    <input id="weight" type="text" name="weight"/>
+                    <select name="weightMetrics" id="weightMetric">
+                        <option value="kg">.kg</option>
+                        <option value="lb">.lb</option>
+                    </select>
                 </div>
             
                 <label for="activity">Activity per week</label>
@@ -62,14 +72,14 @@
                 </select>                
             
                 <label for="formula">BMR estimation formula</label>
-                <select name="formula" id="formula"> <!-- Added name attribute -->
+                <select name="formula" id="formula">
                     <option value="" disabled selected>Select a BMR formula</option>
                     <option value="mifflin_st_jeor">Mifflin St Jeor</option>
                     <option value="revised_harris_benedict">Revised Harris-Benedict</option>
                     <option value="katch_mcardle">Katch-McArdle</option>
                 </select>
             
-                <input type="submit" value="Calculate" name="submit"/> <!-- Added name attribute -->
+                <input type="submit" value="Calculate" name="submit"/>
             </form>            
         </div>
     </header>
@@ -101,5 +111,6 @@
         </div>
     </footer>
     <script src="/index.js"></script>
+    <script src="calculator.js"></script>
 </body>
 </html>
