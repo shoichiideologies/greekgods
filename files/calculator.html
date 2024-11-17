@@ -30,6 +30,11 @@
         </div>
     </nav>
     <header>
+        <h2>Fitness Calculator</h2>
+        <p>
+            This calculator covers calculating your Body Mass Index (BMI), Basal Metabolic Rate (BMR), and Protein Intake. 
+            Input your personal details such as age, gender, height, weight, and activity level to get accurate fitness statistics.
+        </p>
         <div class="header-container">
             <form class="header-calculator" action="">
                 <div class="personal-info">
@@ -60,29 +65,94 @@
                     </select>
                 </div>
             
-                <label for="activity">Activity per week</label>
+                <label for="activity">Activity</label>
                 <select name="activity" id="activity"> 
-                    <option value="" disabled selected>Select your activity level</option>
+                    <option value="" disabled selected></option>
                     <option value="sedentary">Sedentary: little or no exercise</option>
                     <option value="light">Light: exercise 1-3 times/week</option>
-                    <option value="moderate">Moderate: exercise 4-5 times/week</option>
-                    <option value="active">Active: daily exercise or intense exercise 3-4 times/week</option>
-                    <option value="very_active">Very Active: intense exercise 6-7 times/week</option>
-                    <option value="extra_active">Extra Active: very intense exercise daily, or physical job</option>
+                    <option value="moderate">Moderate: exercise 3-5 times/week</option>
+                    <option value="active">Active: intense exercise 6-7 times/week</option>
+                    <option value="very_active">Very Active: very intense exercise daily, or physical job</option>
                 </select>                
             
-                <label for="formula">BMR estimation formula</label>
-                <select name="formula" id="formula">
-                    <option value="" disabled selected>Select a BMR formula</option>
-                    <option value="mifflin_st_jeor">Mifflin St Jeor</option>
+                <label for="formula">Select Formula</label>
+                <select id="formula">
+                    <option value="" disabled selected></option>
+                    <option value="mifflin_st_jeor">Mifflin St. Jeor</option>
                     <option value="revised_harris_benedict">Revised Harris-Benedict</option>
                     <option value="katch_mcardle">Katch-McArdle</option>
                 </select>
-            
-                <input type="submit" value="Calculate" name="submit"/>
-            </form>            
+
+                <div class="katch-mcardle-container" id="katchMcardleContainer" style="display: none;">
+                    <label for="bodyFat">Body Fat:</label>
+                    <input type="range" id="bodyFat" min="0" max="100" value="20" step="1">
+                    <input type="number" id="sliderValue" min="0" max="100" value="20" step="1">
+                </div>
+              
+
+                <input type="submit" value="Calculate" name="submit" />
+            </form>              
         </div>
     </header>
+    <main>
+        <div class="main-container">
+            <div class="main-info">
+                <p>Statistics</p>
+                <p>Age: <span id="age-result">N/A</span></p>
+                <p>Gender: <span id="gender-result">N/A</span></p>
+                <p>Height: <span id="height-result">N/A</span></p>
+                <p>Weight: <span id="weight-result">N/A</span></p>
+                <p>Activity: <span id="activity-result">N/A</span></p>
+            </div>
+            <div class="main-statistics">
+                <div class="main-bmi">
+                    <table>
+                        <th colspan="2">BODY MASS INDEX (BMI)</th>
+                        <tr>
+                            <td>BMI:</td>
+                            <td><span id="bmi-result">N/A</span></td>
+                        </tr>
+                        <tr>
+                            <td>Classification:</td>
+                            <td><span id="classification-result">N/A</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="main-calorie">
+                    <table>
+                        <th colspan="2">TOTAL DAILY ENERGY EXPENDITURE (TDEE)</th>
+                        <tr>
+                            <td>Maintain Weight:</td>
+                            <td><span id="maintain-weight"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Mid Weight Loss:</td>
+                            <td><span id="mid-weight-loss"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Weight Loss:</td>
+                            <td><span id="weight-loss"></span></td>
+                        </tr>
+                        <tr>
+                            <td>Extreme Weight Loss:</td>
+                            <td><span id="extreme-weight-loss"></span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="main-protein">
+                    <table>
+                        <th colspan="2">PROTEIN</th>
+                        <tr>
+                            <td>Recommended Protein Intake:</td>
+                            <td><span id="protein-intake"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <section>
+    </section>
     <footer>
         <div class="footer-container">
             <ul class="footer-links">

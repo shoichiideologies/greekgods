@@ -20,11 +20,30 @@ header{
     align-items: center;
 }
 
+h2 {
+    font: 600 2em/1.2em "Trebuchet MS";
+    text-align: center;
+    margin: 40px 0px 10px 0px;
+    color:#545353;
+}
+
+p {
+    font: 500 0.845em/1.5em "Trebuchet MS";
+    text-align: justify;
+    margin: 0 auto 20px;
+    max-width: 600px;
+    line-height: 1.6em;
+    color: #555; 
+}
+
+
 .header-calculator{
     width: 600px;
     display: flex;
     flex-direction: column;
     padding: 50px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 9px rgb(255, 255, 255);
 }
 
 label, span{
@@ -68,7 +87,11 @@ input[type="number"]{
     text-align: right;
 }
 
-#height + label{
+.body-number > select{
+    width: 80px;
+}
+
+#heightMetric + label{
     margin-left: 16px;
 }
 
@@ -98,7 +121,7 @@ input[type="submit"]:hover{
 select {
     appearance: none; 
     background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
-    background-color: #f8f8f8;
+    background-color: #ffffff;
     border-radius: 5px;
     outline: none;
     background-size: 20px;
@@ -106,6 +129,194 @@ select {
     font: 500 0.8em/1em "Trebuchet MS";
 }
 
-.body-number > select{
-    width: 80px;
+/*---SLIDER---*/
+
+/* Container styling */
+.katch-mcardle-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    display: none;
+}
+
+.katch-mcardle-container > label {
+    width: 15%;
+    font: 500 0.845em/1em "Trebuchet MS";
+}
+
+.katch-mcardle-container > input[type="range"] {
+    width: 60%;
+    max-width: 290px;
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none;
+    background: #ddd;
+    height: 8px;
+    border-radius: 5px;
+    outline: none;
+    margin: 0 20px;
+}
+
+/* Thumb (draggable circle) customization */
+.katch-mcardle-container > input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.katch-mcardle-container > input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.katch-mcardle-container > input[type="range"]::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Span styling */
+.katch-mcardle-container > span {
+    width: 20%;
+    text-align: center;
+    font: 500 0.845em/1em "Trebuchet MS";
+}
+
+.katch-mcardle-container > #sliderValue::after {
+    content: "%";
+    font: 500 0.845em/1em "Trebuchet MS";
+}
+
+.katch-mcardle-container > #sliderValue {
+    width: 20%;
+    margin: 0;
+    text-align: left;
+    font: 500 0.845em/1em "Trebuchet MS";
+}
+
+/*-------------MAIN--------------*/
+
+main{
+    width: 100%;
+    height: auto;
+}
+
+.main-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 150px 0px;
+}
+
+.main-statistics, .main-info{
+    width: 100%;
+}
+
+.main-info{
+    max-width: 90%;
+    align-self: center;
+}
+
+.main-info > p:first-child{
+    font: 600 2em/1em "Trebuchet MS";
+    text-align: center;
+}
+
+.main-info > p:not(:first-child){
+    font: 500 0.845em/1em "Trebuchet MS";
+    display: inline-block;
+    width: 19%;
+    background-color:#2e59bc;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.main-statistics{
+    max-width: 90%;
+    align-self: center;
+    display: flex;
+}
+
+.main-statistics > div{
+    width: 31.3%;
+}
+
+.main-statistics > div:nth-child(2){
+    margin: 0px 1%;
+}
+
+table{
+    width: 100%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    margin: 20px 0px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 9px rgb(255, 255, 255);
+}
+
+table th{
+    padding: 20px;
+    width: 100%;
+    font: 600 0.845em/1em "Trebuchet MS";
+}
+
+table tr{
+    border-bottom: 1px solid #e6e6e6;
+    font: 500 0.9em/1em "Trebuchet MS";
+}
+
+table td{
+    padding: 10px;
+    width: 50%;
+    font: 500 0.845em/1em "Trebuchet MS";
+    padding: 15px 20px;
+}
+
+table td:nth-child(2){
+    text-align: right;
+}
+
+/*-------------SECTION--------------*/
+
+section{
+    width: 100%;
+    height: auto;
+    background-color: #f5f5f5;
+    padding: 50px 0px;
+}
+
+
+@media screen and (max-width: 980px) {
+    /*----MAIN-----*/
+    .main-statistics {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main-statistics > div > p:nth-child(1) {
+        text-align: center;
+        font: 600 1em/1em "Trebuchet MS";
+        border: 1px solid black;
+        padding: 5px;
+    }
+
+    .main-statistics > div {
+        width: 100%;
+        align-self: center;
+    }
+
+    .main-statistics > p {
+        width: 50%; /* Set width to 50% */
+        text-align: center; /* Center the text inside the element */
+        margin: 0 auto; /* Center the element itself */
+    }
 }
