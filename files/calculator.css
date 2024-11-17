@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+
+/*-------------HEADER--------------*/
+header{
+    width: 100%
+}
+
+.header-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-calculator{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+}
+
+label, span{
+    font: 500 0.845em/1em "Trebuchet MS";
+    padding-right: 10px;
+}
+
+input[type="text"], input[type="number"], select{
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 0;
+    font: 500 0.845em/1em "Trebuchet MS";
+    color: #182b59;
+}
+
+.personal-info{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.personal-info > input[type="radio"]{
+    margin-right: 10px;
+}
+
+input[type="number"]{
+    width: 185px;
+    margin-right: 22px;
+    margin-left: 22px;
+    padding-right: 20px;
+}
+
+.body-number{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.body-number > input[type="text"]{
+    width: 100px;
+    text-align: right;
+}
+
+#height + label{
+    margin-left: 16px;
+}
+
+.header-calculator > label{
+    margin-bottom: 10px;
+}
+
+.header-calculator > input, select{
+    margin-bottom: 20px;
+}
+
+input[type="submit"]{
+    border-radius: 5px;
+    background-color: #2e59bc;
+    color: white;
+    border: 0;
+    cursor: pointer;
+    font: 500 0.845em/1em "Trebuchet MS";
+    height: 40px;
+    margin: 20px 0px;
+}
+
+input[type="submit"]:hover{
+    background-color: #3668dd;
+}
+
+select {
+    appearance: none; 
+    background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    outline: none;
+    background-size: 20px;
+    height: 35px;
+    font: 500 0.8em/1em "Trebuchet MS";
+}
+
+.body-number > select{
+    width: 80px;
+}
