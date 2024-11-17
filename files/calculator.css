@@ -5,6 +5,7 @@
 body{
     margin: 0;
     padding: 0;
+    background-color: #f7f7f7;
 }
 
 
@@ -27,15 +28,14 @@ h2 {
     color:#545353;
 }
 
-p {
+header p {
     font: 500 0.845em/1.5em "Trebuchet MS";
     text-align: justify;
-    margin: 0 auto 20px;
     max-width: 600px;
     line-height: 1.6em;
     color: #555; 
+    margin: 10px auto 30px;
 }
-
 
 .header-calculator{
     width: 600px;
@@ -43,7 +43,7 @@ p {
     flex-direction: column;
     padding: 50px;
     border-radius: 10px;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 9px rgb(255, 255, 255);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
 }
 
 label, span{
@@ -97,6 +97,23 @@ input[type="number"]{
 
 .header-calculator > label{
     margin-bottom: 10px;
+}
+
+.header-calculator > label::after{
+    content: url("/graphics/svg/info-black.svg");
+    float: right;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+label::after {
+    pointer-events: none;
+}
+
+
+.header-calculator > label:hover::after{
+    content: url("/graphics/svg/info-gray.svg");
 }
 
 .header-calculator > input, select{
@@ -260,7 +277,7 @@ table{
     border-radius: 10px;
     border-collapse: collapse;
     margin: 20px 0px;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 9px rgb(255, 255, 255);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
 }
 
 table th{
@@ -292,6 +309,76 @@ section{
     height: auto;
     background-color: #f5f5f5;
     padding: 50px 0px;
+}
+
+.section-container{
+    width: 90%;
+    margin: auto;
+}
+.section-container h2{
+    border-top: 1px solid rgb(234, 234, 234);
+    padding-top: 30px;
+}
+
+.section-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 40px auto 80px;
+}
+
+.section-info p{
+    font: 500 0.845em/1em "Trebuchet MS";
+    text-align: justify;
+    max-width: 1000px;
+    line-height: 1.6em;
+    color: #555; 
+    margin: 5px auto 10px;
+}
+
+#title-formula{
+    width: 100%;
+    font: 600 0.845em/1em "Trebuchet MS";
+    text-align: left;
+    margin: 10px auto 10px;
+}
+
+p strong, strong{
+    color: #2e59bc;
+    text-align: right;
+}
+
+section img{
+    align-self: center;
+    margin: 20px 0px;
+}
+
+#bmi-formula-standard{
+    max-width: 200px;
+}
+
+#bmi-formula-imperial{
+    width: 250px;
+}
+
+section table{
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto 40px;
+    border-radius: 10px;
+    border-collapse: collapse;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
+}
+
+#section-bmr img{
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#tdee-table td{
+    width: 33.33%;
 }
 
 

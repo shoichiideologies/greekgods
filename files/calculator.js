@@ -221,6 +221,7 @@ function calculateBMR(height, weight, activityFactor) {
     const caloriesPerDay = bmr * activityFactor;
 
     // Update the results in the div
+    document.getElementById("bmr").textContent = bmr.toFixed(2) + " calories/day";
     document.getElementById("maintain-weight").textContent = caloriesPerDay.toFixed(2) + " calories/day";
     document.getElementById("mid-weight-loss").textContent = (caloriesPerDay - 500).toFixed(2) + " calories/day";
     document.getElementById("weight-loss").textContent = (caloriesPerDay - 750).toFixed(2) + " calories/day";
@@ -300,3 +301,26 @@ function toggleKatchMcardleFormula() {
     });
 }
 toggleKatchMcardleFormula();
+
+//------------------------------------------------------------
+// Select all labels with a data-target attribute
+const labels = document.querySelectorAll('label[data-target]');
+
+labels.forEach(label => {
+    label.addEventListener('click', (event) => {
+        // Prevent default behavior in case of future anchor tags
+        event.preventDefault();
+
+        // Get the target section's ID from the data attribute
+        const targetId = label.getAttribute('data-target');
+        const targetElement = document.querySelector(targetId);
+
+        // Scroll to the target section
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth', // Smooth scrolling
+                block: 'start', // Align at the start of the section
+            });
+        }
+    });
+});
