@@ -315,10 +315,6 @@ section{
     width: 90%;
     margin: auto;
 }
-.section-container h2{
-    border-top: 1px solid rgb(234, 234, 234);
-    padding-top: 30px;
-}
 
 .section-info{
     width: 100%;
@@ -371,14 +367,35 @@ section table{
     box-shadow:6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
 }
 
-#section-bmr img{
+#bmr-formula{
     width: 100%;
     max-width: 600px;
     margin: 20px auto;
 }
 
+#bmr-katch-lbm-formula{
+    width: 400px;
+}
+
+#bmr-katch-formula{
+    width: 300px;
+}
+
 #tdee-table td{
     width: 33.33%;
+}
+
+hr{
+    border: 1px solid #e7e7e7;
+    width: 1000px;
+}
+
+#tdee-formula{
+    width: 300px;
+}
+
+#protein-intake-formula{
+    width: 400px;
 }
 
 

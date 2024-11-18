@@ -235,16 +235,16 @@ function calculateCalories() {
 }
 
 function calculateProtein() {
-    const weight = parseFloat(document.getElementById('weight').value); // User's weight in kg
+    const { finalWeight } = convertMetric();
+
     let activityLevel = document.getElementById('activity').value; // Activity level
 
-    // If no activity level is provided, default to 'sedentary'
     if (!activityLevel) {
         activityLevel = "sedentary"; 
         document.getElementById('activity-result').textContent = "Sedentary (default)";
     }
 
-    if (isNaN(weight) || weight <= 0) {
+    if (isNaN(finalWeight) || finalWeight <= 0) {
         document.getElementById("protein-intake").textContent = "Invalid input";
         return;
     }
@@ -272,7 +272,7 @@ function calculateProtein() {
             break;
     }
 
-    const proteinIntake = weight * proteinFactor;
+    const proteinIntake = finalWeight * proteinFactor;
     document.getElementById("protein-intake").textContent = proteinIntake.toFixed(2) + " grams/day";
 }
 
