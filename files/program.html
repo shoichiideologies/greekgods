@@ -40,29 +40,42 @@
             <form class="header-program" action="">
                 
                 <div class="day" id="sunday">
-                    <h3>Sunday</h3>
+                    <h4>Sunday</h4>
                     <div class="exercise-box">
-                        <h4>TITLE</h4>
-                        <div class="exercise-list">
-                            <div class="exercise">
-                                Exercise one <button class="remove-exercise">-</button>
-                            </div>
-                        </div>
-                        <button class="add-exercise">Add Exercise</button>
+                        <table>
+                            <th>BODY MASS INDEX (BMI)</th>
+                            <tr>
+                                <td>BMI:</td>
+                                <td><span id="bmi-result">N/A</span></td>
+                            </tr>
+                            <tr>
+                                <td>Classification:</td>
+                                <td><span id="classification-result">N/A</span></td>
+                            </tr>
+                        </table>
+                            
+                      
                     </div>
+                    <input type="button" value="Edit" name="edit" />
                 </div>
 
-                <div class="monday">Monday</div>
-                <div class="tuesday">Tuesday</div>
-                <div class="wednesday">Wednesday</div>
-                <div class="thursday">Thursday</div>
-                <div class="friday">Friday</div>
-                <div class="saturday">Saturday</div>
+                <div class="day" id="monday">
+                    <h4></h4>
+                    <div class="exercise-box">
+                        <div class="exercise-list">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="day" id="tuesday"></div>
+                <div class="day" id="wednesday"></div>
+                <div class="day" id="thursday"></div>
+                <div class="day" id="friday"></div>
+                <div class="day" id="saturday"></div>
 
                 
             </form>
-            <button></button>
-        </div>
+            <button> SAVE PROGRAM</button>
     </header>
     <footer>
         <div class="footer-container">
