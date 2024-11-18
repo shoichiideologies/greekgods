@@ -3,9 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.css">
     <title>Document</title>
 </head>
 <body>
-    
+    <nav>
+        <button class="nav-menu-button" id="nav-menu-button">
+            <img src="/graphics/svg/menu-black.svg" alt="Menu" title="Menu">
+        </button>
+        <div class="nav-logo">
+            <img src="/graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods">
+        </div>
+        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/files/register.html'">
+            <img src="/graphics/svg/profile.svg" alt="Profile" title="Profile">
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/index.html">HOME</a></li>
+            <li><a href="program.html">PROGRAM</a></li>
+            <li><a href="blog.html"  onclick="location.reload(); return false;">BLOG</a></li>
+            <li><a href="calculator.html">CALCULATOR</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+        </ul>
+        <div class="nav-button">
+            <button onclick="window.location.href='files/register.html'">GET STARTED</button>
+        </div>
+    </nav>
+    <footer>
+        <div class="footer-container">
+            <ul class="footer-links">
+                <li><a href="/index.html">HOME</a></li>
+                <li><a href="blog.html">BLOG</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="laws.html">DISCLAIMER</a></li>
+                <li><a href="about.html">CONTACT</a></li>
+                <li><a href="laws.html">PRIVACY POLICY</a></li>
+                <li><a href="laws.html">TERMS OF USE</a></li>
+            </ul>
+            <div class="footer-socials">
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="/graphics/socials/facebook.png" alt="Facebook" title="Facebook">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="/graphics/socials/instagram.png" alt="Instagram" title="Instagram">
+                </a>
+                <a href="https://www.twitter.com" target="_blank">
+                    <img src="/graphics/socials/twitter.png" alt="Twitter" title="Twitter">
+                </a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2024 GreekGods. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/index.js"></script>
 </body>
 </html>

@@ -221,6 +221,7 @@ function calculateBMR(height, weight, activityFactor) {
     const caloriesPerDay = bmr * activityFactor;
 
     // Update the results in the div
+    document.getElementById("bmr").textContent = bmr.toFixed(2) + " calories/day";
     document.getElementById("maintain-weight").textContent = caloriesPerDay.toFixed(2) + " calories/day";
     document.getElementById("mid-weight-loss").textContent = (caloriesPerDay - 500).toFixed(2) + " calories/day";
     document.getElementById("weight-loss").textContent = (caloriesPerDay - 750).toFixed(2) + " calories/day";
@@ -234,16 +235,16 @@ function calculateCalories() {
 }
 
 function calculateProtein() {
-    const weight = parseFloat(document.getElementById('weight').value); // User's weight in kg
+    const { finalWeight } = convertMetric();
+
     let activityLevel = document.getElementById('activity').value; // Activity level
 
-    // If no activity level is provided, default to 'sedentary'
     if (!activityLevel) {
         activityLevel = "sedentary"; 
         document.getElementById('activity-result').textContent = "Sedentary (default)";
     }
 
-    if (isNaN(weight) || weight <= 0) {
+    if (isNaN(finalWeight) || finalWeight <= 0) {
         document.getElementById("protein-intake").textContent = "Invalid input";
         return;
     }
@@ -271,7 +272,7 @@ function calculateProtein() {
             break;
     }
 
-    const proteinIntake = weight * proteinFactor;
+    const proteinIntake = finalWeight * proteinFactor;
     document.getElementById("protein-intake").textContent = proteinIntake.toFixed(2) + " grams/day";
 }
 
@@ -300,3 +301,26 @@ function toggleKatchMcardleFormula() {
     });
 }
 toggleKatchMcardleFormula();
+
+//------------------------------------------------------------
+// Select all labels with a data-target attribute
+const labels = document.querySelectorAll('label[data-target]');
+
+labels.forEach(label => {
+    label.addEventListener('click', (event) => {
+        // Prevent default behavior in case of future anchor tags
+        event.preventDefault();
+
+        // Get the target section's ID from the data attribute
+        const targetId = label.getAttribute('data-target');
+        const targetElement = document.querySelector(targetId);
+
+        // Scroll to the target section
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth', // Smooth scrolling
+                block: 'start', // Align at the start of the section
+            });
+        }
+    });
+});
