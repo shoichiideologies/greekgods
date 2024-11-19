@@ -34,7 +34,7 @@ p {
 }
 
 .header-program > div:hover {
-    background-color:  rgb(190, 221, 250);
+    background-color:  rgb(230, 230, 230);
 }
 
 .header-program h4 {
@@ -50,7 +50,7 @@ p {
 .exercise-box {
     flex: 1;
     width: 100%;
-    max-height: 150px; /* Adjust the height as needed */
+    max-height: 200px; /* Adjust the height as needed */
     overflow-y: auto;
     margin-top: 10px;
     padding-right: 10px; /* Add padding to avoid content hiding behind the scrollbar */
