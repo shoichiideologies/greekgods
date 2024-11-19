@@ -1,13 +1,20 @@
-document.getElementById('edit-button').addEventListener('click', function() {
-    toggleEditMode(true);
+document.querySelectorAll('[id^=edit-]').forEach(button => {
+    button.addEventListener('click', function() {
+        const dayId = button.id.split('-')[1];
+        toggleEditMode(dayId, true);
+    });
 });
 
-document.getElementById('save-button').addEventListener('click', function() {
-    toggleEditMode(false);
+document.querySelectorAll('[id^=save-]').forEach(button => {
+    button.addEventListener('click', function() {
+        const dayId = button.id.split('-')[1];
+        toggleEditMode(dayId, false);
+    });
 });
 
-function toggleEditMode(editMode) {
-    const table = document.querySelector('.exercise-box table tbody');
+function toggleEditMode(dayId, editMode) {
+    const dayElement = document.getElementById(dayId);
+    const table = dayElement.querySelector('.exercise-box table tbody');
     const rows = table.querySelectorAll('tr');
 
     if (editMode) {
@@ -20,8 +27,8 @@ function toggleEditMode(editMode) {
                 cell.appendChild(input);
             });
         });
-        document.getElementById('edit-button').style.display = 'none';
-        document.getElementById('save-button').style.display = 'inline-block';
+        dayElement.querySelector(`#edit-${dayId}`).style.display = 'none';
+        dayElement.querySelector(`#save-${dayId}`).style.display = 'inline-block';
     } else {
         rows.forEach(row => {
             row.querySelectorAll('td').forEach(cell => {
@@ -29,7 +36,7 @@ function toggleEditMode(editMode) {
                 cell.textContent = input.value;
             });
         });
-        document.getElementById('edit-button').style.display = 'inline-block';
-        document.getElementById('save-button').style.display = 'none';
+        dayElement.querySelector(`#edit-${dayId}`).style.display = 'inline-block';
+        dayElement.querySelector(`#save-${dayId}`).style.display = 'none';
     }
 }
