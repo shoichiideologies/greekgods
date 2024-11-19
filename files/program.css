@@ -26,12 +26,11 @@ p {
 }
 .header-program > div {
     padding: 5px;
-    color: white;
-    background-color: #2e59bc;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
 }
 
 .header-program > div:hover {
@@ -41,6 +40,7 @@ p {
 .header-program h4 {
     text-align: center;
     width: 100%;
+    color: white;
     background-color: #1f4287; /* Highlight color */
     padding: 10px;
     border-radius: 5px;
@@ -50,9 +50,6 @@ p {
 .exercise-box {
     flex: 1;
     width: 100%;
-}
-
-.exercise-list {
     max-height: 150px; /* Adjust the height as needed */
     overflow-y: auto;
     margin-top: 10px;
@@ -70,6 +67,36 @@ input[type="button"] {
     margin: 20px 0px;
     align-self: center; 
 }
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table th{
+    padding: 20px;
+    width: 100%;
+    font: 600 0.845em/1em "Trebuchet MS";
+}
+
+table tr{
+    border-bottom: 1px solid #e6e6e6;
+    font: 500 0.9em/1em "Trebuchet MS";
+}
+
+table td{
+    padding: 10px;
+    width: 50%;
+    font: 500 0.845em/1em "Trebuchet MS";
+    padding: 15px 20px;
+}
+
+table td:nth-child(2){
+    text-align: right;
+}
+
+
 
 button{
     margin:auto;
