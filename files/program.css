@@ -34,7 +34,7 @@ p {
 }
 
 .header-program > div:hover {
-    background-color: #3668dd;
+    background-color:  rgb(190, 221, 250);
 }
 
 .header-program h4 {
@@ -54,6 +54,11 @@ p {
     overflow-y: auto;
     margin-top: 10px;
     padding-right: 10px; /* Add padding to avoid content hiding behind the scrollbar */
+}
+
+select{
+    margin: auto;
+    display: block;
 }
 
 input[type="button"] {
@@ -81,7 +86,7 @@ table th{
 }
 
 table tr{
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid #8b8a8a;
     font: 500 0.9em/1em "Trebuchet MS";
 }
 
@@ -95,7 +100,6 @@ table td{
 table td:nth-child(2){
     text-align: right;
 }
-
 
 
 button{

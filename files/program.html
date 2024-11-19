@@ -37,13 +37,23 @@
             Regardless of your level of experience, we will walk you through in designing a fun and successful exercise regimen.
         </p>
         <div class="header-container">
+
+            <select name="program-types" required>
+                <option value="" disabled selected>-Select Split-</option>
+                <option value="">Upper-Lower Split</option>
+                <option value="">Push/Pull/Legs (PPL)</option>
+                <option value="">Power Hypertrophy Upper Lower (PHUL)</option>
+                <option value="">Power Hypertrophy Adaptive Training (PHAT)</option>
+                <option value="">5-Day Split</option>
+            </select>
+
             <form class="header-program" action="">
-                
+
                 <div class="day" id="sunday">
                     <h4>Sunday</h4>
                     <div class="exercise-box">
                         <table>
-                            <th>PUSH DAY</th>
+                            <th>PUSH</th>
                             <tr>
                                 <td>Exercise One</td>
                                 <td>N/A</td>
@@ -56,12 +66,18 @@
                                 <td>Exercise Two</td>
                                 <td>N/A</td>
                             </tr>
+                        </table>
+                    </div>
+
+                    <input type="button" value="Edit" name="edit" />
+                </div>
+                <div class="day" id="monday">
+                    <h4>Monday</h4>
+                    <div class="exercise-box">
+                        <table>
+                            <th>PULL</th>
                             <tr>
-                                <td>Exercise Two</td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td>Exercise Two</td>
+                                <td>Exercise One</td>
                                 <td>N/A</td>
                             </tr>
                             <tr>
@@ -73,26 +89,118 @@
                                 <td>N/A</td>
                             </tr>
                         </table>
-                            
-                      
                     </div>
+
                     <input type="button" value="Edit" name="edit" />
                 </div>
-
-                <div class="day" id="monday">
-                    <h4></h4>
+                <div class="day" id="tuesday">
+                    <h4>Tuesday</h4>
                     <div class="exercise-box">
-                        <div class="exercise-list">
-
-                        </div>
+                        <table>
+                            <th>LEGS</th>
+                            <tr>
+                                <td>Exercise One</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                        </table>
                     </div>
-                </div>
-                <div class="day" id="tuesday"></div>
-                <div class="day" id="wednesday"></div>
-                <div class="day" id="thursday"></div>
-                <div class="day" id="friday"></div>
-                <div class="day" id="saturday"></div>
 
+
+
+                    <input type="button" value="Edit" name="edit" />
+                </div>
+                <div class="day" id="wednesday">
+                    <h4>Wednesday</h4>
+                    <div class="exercise-box">
+                        <table>
+                            <th>REST</th>
+                            <tr>
+                                <td>Rest</td>
+                                <td>N/A</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <input type="button" value="Edit" name="edit" />
+                </div>
+                <div class="day" id="thursday">
+                    <h4>Thursday</h4>
+                    <div class="exercise-box">
+                        <table>
+                            <th>PUSH</th>
+                            <tr>
+                                <td>Exercise One</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <input type="button" value="Edit" name="edit" />
+                </div>
+                <div class="day" id="friday">
+                    <h4>Friday</h4>
+                    <div class="exercise-box">
+                        <table>
+                            <th>PULL</th>
+                            <tr>
+                                <td>Exercise One</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+                    <input type="button" value="Edit" name="edit" />
+                </div>
+                <div class="day" id="saturday">
+                    <h4>Saturday</h4>
+                    <div class="exercise-box">
+                        <table>
+                            <th>LEGS</th>
+                            <tr>
+                                <td>Exercise One</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>Exercise Two</td>
+                                <td>N/A</td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+                    <input type="button" value="Edit" name="edit" />
+                </div>
                 
             </form>
             <button> SAVE PROGRAM</button>
