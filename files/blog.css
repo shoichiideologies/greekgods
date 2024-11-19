@@ -5,7 +5,6 @@
 body{
     padding: 0;
     margin: 0;
-    font: 500 0.845em/1em "Trebuchet MS", sans-serif;
     background-color: #F2F2F2;
 }
 
@@ -22,7 +21,7 @@ header{
 }
 
 .header-container > h3{
-    font:600 4vw/1em "Trebuchet MS", sans-serif;
+    font: 600 4vw/1em "Trebuchet MS", sans-serif;
     text-align: center;
     margin: auto;
     width: 70%;
@@ -49,6 +48,7 @@ main {
     display: flex;
     flex-direction: column;
     padding: 20px 0;
+    margin-bottom: 150px;
 }
 
 .main-container > div {
@@ -58,7 +58,7 @@ main {
     align-items: flex-start;
     height: auto;
     width: 90%;
-    margin: 20px auto;
+    margin: 0 auto;
     padding: 20px;
 }
 
@@ -73,9 +73,14 @@ main {
 }
 
 .main-container > div > h3{
-    width: 100%;
     padding: 10px 0;
     border-bottom: 1px solid rgb(204, 204, 204);
+    font: 600 1.2em/1.4em "Trebuchet MS", sans-serif;
+    color: #555;
+    margin: 40px 0 10px 0;
+    text-align: left;
+    width: 100%;
+    max-width: 1500px;
 }
 
 article {
@@ -84,7 +89,7 @@ article {
     background-color: #F2F2F2;
     padding: 10px;
     text-align: center;
-    height: 320px;
+    height: 340px;
     border-radius: 10px;
     box-shadow: 6px 6px 10px rgba(0,0,0,.1), -6px -6px 10px rgba(255, 255, 255, 0.9);
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
@@ -106,15 +111,19 @@ article img{
 }
 
 article h4{
-    font: 500 1em/1em "Trebuchet MS", sans-serif;
+    font: 600 0.9em/1em "Trebuchet MS", sans-serif;
     margin: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #474747;
 }
 
 article p{
-    font: 500 0.845em/1em "Trebuchet MS", sans-serif;
+    font: 500 0.75em/1em "Trebuchet MS", sans-serif;
     margin: 2px;
     text-align: center;
-    color: #2e59bc;
+    color: #1d3879;
+    text-align: justify;
 }
 
 /*----------------MEDIA----------------*/
