@@ -35,7 +35,19 @@ summary{
     transition: background-color 0.3s, color 0.3s;
 }
 
-button {
+.greekgods{
+    outline: none;
+    border: 0;
+    background-color: inherit;
+}
+
+.greekgods:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: underline;
+    border-radius: 5px;
+}
+
+.print-button {
     background-color: #007BFF;
     color: white;
     border: none;
@@ -47,11 +59,11 @@ button {
     text-align: center;
 }
 
-button:hover {
+.print-button:hover {
     background-color: #2991ff;
 }
 
-button::after {
+.print-button::after {
     content: url("/graphics/svg/print.svg");
     padding: 10px;
     text-align: center;
@@ -61,12 +73,16 @@ main {
     flex-grow: 1;  
     padding: 20px;
     overflow-y: auto;
+    margin: 50px;
 }
 
 .date {
     margin: 2px;
     font: 500 0.845em/1.5em "Trebuchet MS";
     text-align: right;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
 }
 
 section img {
@@ -101,7 +117,9 @@ section ul li a:hover {
 }
 
 main article {
-    margin: 30px 0 50px;
+    margin: 30px auto 50px;
+    max-width: 1200px;
+    width: 100%;
 }
 
 main article h2 {

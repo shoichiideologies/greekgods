@@ -40,7 +40,7 @@
                 <div class="header-first">
                     <div class="header-info" id="header-age">
                         <label for="age">Age</label>
-                        <input id="age" type="number" name="age"/>
+                        <input id="age" type="number" name="age" min="12" max="100"/>
                     </div>
     
                     <div class="header-info" id="header-gender">
@@ -103,13 +103,13 @@
                 </div>
               
 
-                <input type="submit" value="Calculate" name="submit" />
+                <input type="submit" value="Calculate" name="submit"/>
             </form>              
         </div>
     </header>
     <main>
         <div class="main-container">
-            <div class="main-info">
+            <div id="main-info" class="main-info">
                 <p>Statistics</p>
                 <p>Age: <span id="age-result">N/A</span></p>
                 <p>Gender: <span id="gender-result">N/A</span></p>

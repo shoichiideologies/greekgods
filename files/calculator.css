@@ -5,7 +5,7 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: #f7f7f7;
+    background-color: #f2f2f2;
 }
 
 
@@ -47,7 +47,7 @@ header p {
     flex-direction: column;
     padding: 50px;
     border-radius: 10px;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3), -9px -9px 6px rgb(255, 255, 255);
     flex-wrap: wrap;
 }
 
@@ -124,6 +124,7 @@ header p {
 
 .header-info > input[type="text"]{
     margin-right: 5px;
+    text-align: right;
 }
 
 
@@ -194,6 +195,15 @@ select {
 .katch-mcardle-container > label {
     width: 15%;
     font: 500 0.845em/1em "Trebuchet MS";
+}
+
+.katch-mcardle-container > input[type="number"]{
+    border-radius: 5px;
+    outline: none;
+    border: 0;
+    font: 500 0.845em/1em "Trebuchet MS";
+    color: #182b59;
+    padding: 10px;
 }
 
 .katch-mcardle-container > input[type="range"] {
@@ -328,12 +338,17 @@ table tr{
 table td{
     padding: 10px;
     width: 50%;
-    font: 500 0.845em/1em "Trebuchet MS";
+    font: 500 0.9em/1em "Trebuchet MS";
     padding: 15px 20px;
 }
 
 table td:nth-child(2){
     text-align: right;
+}
+
+table td span{
+    font: 500 0.9em/1em "Trebuchet MS";
+    color: #224189;
 }
 
 /*-------------SECTION--------------*/
@@ -359,7 +374,7 @@ section{
 }
 
 .section-info p{
-    font: 500 0.845em/1em "Trebuchet MS";
+    font: 500 1em/1em "Trebuchet MS";
     text-align: justify;
     max-width: 1000px;
     line-height: 1.6em;
@@ -517,6 +532,20 @@ hr{
     .header-info > input[type="number"], 
     .header-info > select {
         width: 100%;
+    }
+
+    .katch-mcardle-container > label{
+        width: 100%;
+    }
+
+    .katch-mcardle-container > #bodyFat{
+        width: 180%;
+        margin: 0;
+        padding: 0;
+    }
+    .katch-mcardle-container > #sliderValue{
+        width: 100%;
+        margin-top: 10px;
     }
 }
 

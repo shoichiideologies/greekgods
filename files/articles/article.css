@@ -29,6 +29,8 @@ h2 {
     font: 600 3vw/1.2em "Trebuchet MS";
     text-align: center;
     color: #555;
+    margin: 100px;
+    padding: 50px;
 }
 
 header p{
