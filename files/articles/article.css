@@ -95,14 +95,13 @@ main {
     max-width: 900px;
 }
 
-ul {
-    margin-left: 20px;
+main ul {
     width: 100%;
     max-width: 900px;
     padding: 0;
 }
 
-ul li {
+main ul li {
     margin-bottom: 10px;
     font: 500 0.845em/1.3em "Trebuchet MS";
     width: 100%;
