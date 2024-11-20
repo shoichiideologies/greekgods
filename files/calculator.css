@@ -36,89 +36,106 @@ header p {
     line-height: 1.6em;
     color: #555; 
     margin: 10px auto 30px;
+    padding: 10px;
+    width: 95%;
 }
 
 .header-calculator{
-    width: 600px;
+    width: 90%;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     padding: 50px;
     border-radius: 10px;
     box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
+    flex-wrap: wrap;
 }
 
-label, span{
+.header-calculator > div{
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.header-calculator label, span{
     font: 500 0.845em/1em "Trebuchet MS";
-    padding-right: 10px;
 }
 
-input[type="text"], input[type="number"], select{
-    padding: 10px;
+.header-first{
+    display: flex;
+}
+
+#header-age{
+    width: 50%;
+    display: flex;
+}
+
+#header-age label{
+    width: 20%;
+    align-self: center;
+}
+
+#header-age input{
+    width: 80%;
+}
+
+#header-gender{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#header-gender, #header-weight{
+    margin-left: 15px;
+}
+
+#header-second{
+    display:flex;
+}
+
+#header-height, #header-weight{
+    width: 50%;
+    display: flex;
+}
+
+#header-height label, #header-weight label{
+    width: 20%;
+    align-self: center;
+}
+
+#header-height input, #header-weight input{
+    width: 50%;
+}
+
+#header-height select, #header-weight select{
+    width: 30%;
+}
+
+#header-activity, #header-formula{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#header-activity label, #header-formula label{
+    padding-bottom: 5px;
+}
+
+.header-info > input[type="text"]{
+    margin-right: 5px;
+}
+
+
+.header-info > input[type="text"],
+.header-info > input[type="number"],
+.header-info > select{
     border-radius: 5px;
     outline: none;
     border: 0;
     font: 500 0.845em/1em "Trebuchet MS";
     color: #182b59;
-}
-
-.personal-info{
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.personal-info > input[type="radio"]{
-    margin-right: 10px;
-}
-
-input[type="number"]{
-    width: 185px;
-    margin-right: 22px;
-    margin-left: 22px;
-    padding-right: 20px;
-}
-
-.body-number{
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-.body-number > input[type="text"]{
-    width: 100px;
-    text-align: right;
-}
-
-.body-number > select{
-    width: 80px;
-}
-
-#heightMetric + label{
-    margin-left: 16px;
-}
-
-.header-calculator > label{
-    margin-bottom: 10px;
-}
-
-.header-calculator > label::after{
-    content: url("/graphics/svg/info-black.svg");
-    float: right;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-}
-
-label::after {
-    pointer-events: none;
-}
-
-
-.header-calculator > label:hover::after{
-    content: url("/graphics/svg/info-gray.svg");
-}
-
-.header-calculator > input, select{
-    margin-bottom: 20px;
+    padding: 10px;
 }
 
 input[type="submit"]{
@@ -134,6 +151,22 @@ input[type="submit"]{
 
 input[type="submit"]:hover{
     background-color: #3668dd;
+}
+
+.header-calculator > label::after{
+    content: url("/graphics/svg/info-black.svg");
+    float: right;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+label::after {
+    pointer-events: none;
+}
+
+.header-calculator > label:hover::after{
+    content: url("/graphics/svg/info-gray.svg");
 }
 
 select {
@@ -425,3 +458,65 @@ hr{
         margin: 0 auto; /* Center the element itself */
     }
 }
+
+@media screen and (max-width: 650px) {
+    /*----HEADER-----*/
+
+    .header-calculator{
+        padding: 30px;
+    }
+
+    .header-calculator > div{
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .header-first, .header-second {
+        flex-direction: column;
+    }
+
+    #header-age, #header-gender, #header-height, #header-weight {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #header-age label{
+        width: 20%;
+    }
+
+    #header-age input{
+        width: 80%;
+    }
+
+    #header-gender{
+        margin: 0;
+    }
+
+    #header-gender span{
+        margin-right: 30px;
+    }
+
+    #header-height, #header-weight{
+        margin-left: 0px;
+    }
+
+    #header-height label, #header-weight label{
+        width: 20%;
+        padding: 0;
+    }
+
+    #header-height input, #header-weight input{
+        width: 50%;
+    }
+
+    #header-height select, #header-weight select{
+        width: 30%;
+    }
+
+    .header-info > input[type="text"], 
+    .header-info > input[type="number"], 
+    .header-info > select {
+        width: 100%;
+    }
+}
+

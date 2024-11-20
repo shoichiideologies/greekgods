@@ -37,51 +37,64 @@
         </p>
         <div class="header-container">
             <form class="header-calculator" action="">
-                <div class="personal-info">
-                    <label for="age">Age</label>
-                    <input id="age" type="number" name="age"/>
-            
-                    <span>Gender</span>
-                    <input id="male" type="radio" value="male" name="gender"/>
-                    <label for="male">Male</label>
-                    <input id="female" type="radio" value="female" name="gender"/> 
-                    <label for="female">Female</label>
+                <div class="header-first">
+                    <div class="header-info" id="header-age">
+                        <label for="age">Age</label>
+                        <input id="age" type="number" name="age"/>
+                    </div>
+    
+                    <div class="header-info" id="header-gender">
+                        <span>Gender</span>
+                        <input id="male" type="radio" value="male" name="gender"/>
+                        <label for="male">Male</label>
+                        <input id="female" type="radio" value="female" name="gender"/> 
+                        <label for="female">Female</label>
+                    </div>
                 </div>
-            
-                <div class="body-number">
-                    <label for="height">Height</label>
-                    <input id="height" type="text" name="height"/> 
-                    <select name="heightMetrics" id="heightMetric">
-                        <option value="cm">.cm</option>
-                        <option value="in">.in</option>
-                        <option value="m">.m</option>
-                        <option value="ft">.ft</option>
-                    </select>
-                    <label for="weight">Weight</label>
-                    <input id="weight" type="text" name="weight"/>
-                    <select name="weightMetrics" id="weightMetric">
-                        <option value="lb">.lb</option>
-                        <option value="kg">.kg</option>
-                    </select>
+
+                <div class="header-second">
+                    <div class="header-info" id="header-height">
+                        <label for="height">Height</label>
+                        <input id="height" type="text" name="height"/> 
+                        <select name="heightMetrics" id="heightMetric">
+                            <option value="cm">.cm</option>
+                            <option value="in">.in</option>
+                            <option value="m">.m</option>
+                            <option value="ft">.ft</option>
+                        </select>
+                    </div>
+    
+                    <div class="header-info" id="header-weight">
+                        <label for="weight">Weight</label>
+                        <input id="weight" type="text" name="weight"/>
+                        <select name="weightMetrics" id="weightMetric">
+                            <option value="lb">.lb</option>
+                            <option value="kg">.kg</option>
+                        </select>
+                    </div>
                 </div>
-            
-                <label for="activity" data-target="#bmr-activity">Activity<span src="/graphics/svg/info-black.svg"></span></label>
-                <select name="activity" id="activity"> 
-                    <option value="" disabled selected></option>
-                    <option value="sedentary">Sedentary: little or no exercise</option>
-                    <option value="light">Light: exercise 1-3 times/week</option>
-                    <option value="moderate">Moderate: exercise 3-5 times/week</option>
-                    <option value="active">Active: intense exercise 6-7 times/week</option>
-                    <option value="very_active">Very Active: very intense exercise daily, or physical job</option>
-                </select>                
-            
-                <label for="formula" data-target="#section-bmr">Select Formula</label>
-                <select id="formula">
-                    <option value="" disabled selected></option>
-                    <option value="mifflin_st_jeor">Mifflin St. Jeor</option>
-                    <option value="revised_harris_benedict">Revised Harris-Benedict</option>
-                    <option value="katch_mcardle">Katch-McArdle</option>
-                </select>
+
+                <div class="header-info" id="header-activity">
+                    <label for="activity" data-target="#bmr-activity">Activity<span src="/graphics/svg/info-black.svg"></span></label>
+                    <select name="activity" id="activity"> 
+                        <option value="" disabled selected></option>
+                        <option value="sedentary">Sedentary: little or no exercise</option>
+                        <option value="light">Light: exercise 1-3 times/week</option>
+                        <option value="moderate">Moderate: exercise 3-5 times/week</option>
+                        <option value="active">Active: intense exercise 6-7 times/week</option>
+                        <option value="very_active">Very Active: very intense exercise daily, or physical job</option>
+                    </select> 
+                </div>    
+                
+                <div class="header-info" id="header-formula">
+                    <label for="formula" data-target="#section-bmr">Select Formula</label>
+                    <select id="formula">
+                        <option value="" disabled selected></option>
+                        <option value="mifflin_st_jeor">Mifflin St. Jeor</option>
+                        <option value="revised_harris_benedict">Revised Harris-Benedict</option>
+                        <option value="katch_mcardle">Katch-McArdle</option>
+                    </select>
+                </div>                
 
                 <div class="katch-mcardle-container" id="katchMcardleContainer" style="display: none;">
                     <label for="bodyFat">Body Fat:</label>
