@@ -106,6 +106,7 @@ main ul li {
     font: 500 0.845em/1.3em "Trebuchet MS";
     width: 100%;
     max-width: 900px;
+    margin-left: 30px;
 }
 
 strong {
