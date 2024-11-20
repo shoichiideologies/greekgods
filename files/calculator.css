@@ -154,19 +154,18 @@ input[type="submit"]:hover{
     background-color: #3668dd;
 }
 
-.header-calculator > label::after{
+#header-activity > label::after,
+#header-formula > label::after{
     content: url("/graphics/svg/info-black.svg");
     float: right;
     align-items: center;
     text-align: center;
     justify-content: center;
-}
-
-label::after {
     pointer-events: none;
 }
 
-.header-calculator > label:hover::after{
+#header-activity > label:hover::after,
+#header-formula > label:hover::after{
     content: url("/graphics/svg/info-gray.svg");
 }
 

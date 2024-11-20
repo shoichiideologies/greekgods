@@ -4,6 +4,11 @@ document.querySelector('.header-calculator').addEventListener('submit', function
     // Validation for required fields
     if (!validateForm()) {
         return; // Stop the form submission if validation fails
+    } else {
+        document.getElementById('main-info').scrollIntoView({
+            behavior: 'smooth', // Smooth scrolling
+            block: 'start', // Align at the start of the section
+        });
     }
 
     // Fetch input values
