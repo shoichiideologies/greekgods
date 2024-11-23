@@ -1,3 +1,16 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS";
+    background-color: #f5f5f5;
+}
+
+/*--------HEADER-----------*/
+
 header{
     width: 100%
 }
@@ -18,12 +31,31 @@ p {
     color: #555; 
 }
 
+select{
+    border-radius: 5px;
+    outline: none;
+    border: 0;
+    font: 500 0.845em/1em "Trebuchet MS";
+    color: #182b59;
+    padding: 10px;
+    appearance: none; 
+    background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    outline: none;
+    background-size: 20px;
+    height: 35px;
+    width: 400px;
+}
+
 .header-program{
     margin: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
     gap: 20px;
+    background-color: inherit;
 }
+
 .header-program > div {
     padding: 5px;
     border-radius: 5px;
@@ -34,7 +66,8 @@ p {
 }
 
 .header-program > div:hover {
-    background-color:  rgb(230, 230, 230);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3), -9px -9px 10px rgb(255, 255, 255);
+    transform: translate(-3);
 }
 
 .header-program h4 {
@@ -70,7 +103,8 @@ input[type="button"] {
     font: 500 0.845em/1em "Trebuchet MS";
     height: 40px;
     margin: 20px 0px;
-    align-self: center; 
+    align-self: center;
+    width: 100%; 
 }
 
 table{
@@ -81,12 +115,13 @@ table{
 
 table th{
     padding: 20px;
-    width: 100%;
     font: 600 0.845em/1em "Trebuchet MS";
+    width: 100%;
+    column-span: 2;
 }
 
 table tr{
-    border-bottom: 1px solid #8b8a8a;
+    border-bottom: 1px solid #dbdbdb;
     font: 500 0.9em/1em "Trebuchet MS";
 }
 
@@ -101,8 +136,7 @@ table td:nth-child(2){
     text-align: right;
 }
 
-
-button{
-    margin:auto;
+form + button{
+    margin: 50px auto;
     display: block;
 }
