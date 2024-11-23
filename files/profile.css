@@ -54,9 +54,14 @@ span{
 
 /*------------MEDIA-------------*/
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1100px) {
     .header-container{
         flex-direction: column;
+    }
+
+    .header-info{
+        width: 100%;
+        max-width: 1100px;
     }
 }
 

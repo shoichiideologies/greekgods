@@ -6,7 +6,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: "Trebuchet MS";
-    background-color: #f5f5f5;
+    background-color: #ffffff;
 }
 
 /*--------HEADER-----------*/
@@ -15,23 +15,53 @@ header{
     width: 100%
 }
 
-h2 {
-    font: 600 2em/1.2em "Trebuchet MS";
-    text-align: center;
-    margin: 40px 0px 10px 0px;
-    color:#545353;
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 50px;
+    color: rgb(45, 45, 45);
+    border: 1px solid #dadada;
 }
 
-p {
+.header-sections:nth-child(:first-child){
+    width: 70%;
+}
+
+.header-container h1{
+    font: 600 2rem/1em "Trebuchet MS";
+    padding: 0;
+    margin: 0;
+}
+
+.header-container p{
     font: 500 0.845em/1.5em "Trebuchet MS";
-    text-align: center;
-    margin: 0 auto 20px;
-    max-width: 800px;
-    line-height: 1.6em;
-    color: #555; 
+    padding: 0;
+    margin: 5px 0;
 }
 
-select{
+.header-sections:nth-child(2){
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 163px;
+}
+
+.header-sections-select{
+    display: flex;
+    align-items: center;
+}
+
+.header-sections label{
+    font: 500 0.845em/1em "Trebuchet MS";
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 110px;
+    margin-top: 10px;
+}
+
+.header-container select{
     border-radius: 5px;
     outline: none;
     border: 0;
@@ -40,103 +70,241 @@ select{
     padding: 10px;
     appearance: none; 
     background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     border-radius: 5px;
     outline: none;
     background-size: 20px;
     height: 35px;
-    width: 400px;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 250px;
 }
 
-.header-program{
-    margin: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
-    gap: 20px;
-    background-color: inherit;
+/*--------MAIN-----------*/
+
+main{
+    padding: 20px 50px;
+    width: 100%;
 }
 
-.header-program > div {
-    padding: 5px;
-    border-radius: 5px;
+.main-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px 20px;
+    flex: 1 1 0;
+    margin: 40px 0;
+}
+
+.main-days{
+    max-width: 320px;
+    height: 400px;
+    width: 100%;
+    align-items: center;
+}
+
+.main-days h4{
+    font: 600 1em/1.2em "Trebuchet MS";
+    letter-spacing: 0.05em;
+    margin: 0 0 7px 0;
+    color:#797979;
+    text-transform: uppercase;
+}
+
+.main-days .split{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
+    background-color: #f5f5f5;
+    height: 95%;
 }
-
-.header-program > div:hover {
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3), -9px -9px 10px rgb(255, 255, 255);
-    transform: translate(-3);
-}
-
-.header-program h4 {
-    text-align: center;
-    width: 100%;
-    color: white;
-    background-color: #1f4287; /* Highlight color */
-    padding: 10px;
-    border-radius: 5px;
+.main-days .split-name{
+    align-items: center;
+    justify-content: center;
+    padding-top: 12px;
     margin: 0;
 }
 
-.exercise-box {
-    flex: 1;
-    width: 100%;
-    max-height: 200px; /* Adjust the height as needed */
+.main-days .split-name::after{
+    content: url("/graphics/svg/edit-white.svg");
+    float: right;
+}
+
+.main-days .split-name:hover::after{
+    content: url("/graphics/svg/edit-gray.svg");
+    float: right;
+}
+
+.split h5{
+    font: 500 0.845em/1em "Trebuchet MS";
+    margin: 0;
+    height: 10%;
+    padding: 8px;
+    background-color: #11182a;
+    color: white;
+    text-align: center;
+}
+
+.split .workouts{
+    height: 80%;
     overflow-y: auto;
-    margin-top: 10px;
-    padding-right: 10px; /* Add padding to avoid content hiding behind the scrollbar */
 }
 
-select{
-    margin: auto;
-    display: block;
+.split .add{
+    height: 10%;
+    border-radius: 10px;
+    width: calc(100% - 17px);
+    margin: 5px auto;
+    background: url('/graphics/svg/add.svg') no-repeat center center;
+    border: 1px solid #11182a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
 }
 
-input[type="button"] {
+.split .add:hover{
+    background-color: #11182a;
+    cursor: pointer;
+}
+
+/*---------ADD DIVS DESIGN----------*/
+
+
+.workouts-div{
+    display: none;
+    height: 50px;
+    width: calc(100% - 17px);
+    margin: 10px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+}
+
+.workout-name{
+    font: 500 0.845em/1em "Trebuchet MS";
+    margin: 0;
+    padding-left: 10px;
+    color: #11182a;
+    width: 50%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.workouts-div .number{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.workouts-div .workout-reps, .workouts-div .workout-sets{
+    font: 500 0.7em/0.8em "Trebuchet MS";
+    padding: 0;
+    margin: 0;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding-right: 10px;
+    text-align: right;
+}
+
+
+/*---------ADD WORKOUT FORM----------*/
+
+.add-workout {
+    display: none; /* Initially hidden */
+    position: absolute; /* Position it absolutely */
+    z-index: 999; /* Make sure it appears above other elements */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px; /* Adjust width */
+}
+
+.add-workout > label {
+    font: 500 0.8em/1em "Trebuchet MS";
+    margin: 0;
+    padding: 10px;
+    color: #11182a;
+    text-align: left;
+    width: 100%;
+}
+
+.add-workout > input[type="text"],
+.add-workout > input[type="number"] {
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #efefef;
+    font: 500 0.845em/1em "Trebuchet MS";
+    height: 30px;
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.add-workout > button{
     border-radius: 5px;
     background-color: #2e59bc;
     color: white;
     border: 0;
     cursor: pointer;
     font: 500 0.845em/1em "Trebuchet MS";
-    height: 40px;
+    height: 30px;
     margin: 20px 0px;
     align-self: center;
-    width: 100%; 
+    width: calc(100% - 20px);
 }
 
-table{
-    width: 100%;
-    border-collapse: collapse;
+/*--------------AUTOCOMPLETE---------------*/
+
+.autocomplete-suggestions {
+    position: absolute;
+    top: 85px; /* Adjust based on your input field position */
+    width: calc(100% - 62px);
     margin: auto;
-}
-
-table th{
-    padding: 20px;
-    font: 600 0.845em/1em "Trebuchet MS";
-    width: 100%;
-    column-span: 2;
-}
-
-table tr{
-    border-bottom: 1px solid #dbdbdb;
-    font: 500 0.9em/1em "Trebuchet MS";
-}
-
-table td{
-    padding: 10px;
-    width: 50%;
+    background-color: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 999;
+    display: none; /* Initially hidden */
     font: 500 0.845em/1em "Trebuchet MS";
-    padding: 15px 20px;
 }
 
-table td:nth-child(2){
-    text-align: right;
+.autocomplete-suggestions div {
+    padding: 8px;
+    cursor: pointer;
 }
 
-form + button{
-    margin: 50px auto;
-    display: block;
+.autocomplete-suggestions div:hover {
+    background-color: #f1f1f1;
+}
+
+
+/*--------------MEDIA---------------*/
+
+@media screen and (max-width: 1400px){
+    .main-days{
+        margin: auto;
+    }
+    
+}
+
+@media screen and (max-width: 980px){
+    .header-container{
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+    }
+
+    .header-container .header-sections{
+        width: 100%;
+        padding-left: 0;
+    }
+    
 }

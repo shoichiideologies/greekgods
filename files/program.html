@@ -31,207 +31,112 @@
         </div>
     </nav>
     <header>
-        <h2>Program</h2>
-        <p>
-            Welcome! Create a customized workout plan that meets your fitness objectives. 
-            Regardless of your level of experience, we will walk you through in designing a fun and successful exercise regimen.
-        </p>
         <div class="header-container">
-
-            <select name="program-types" required>
-                <option value="" disabled selected>-Select Workout Split-</option>
-                <option value="">Upper-Lower Split</option>
-                <option value="">Push/Pull/Legs (PPL)</option>
-                <option value="">Power Hypertrophy Upper Lower (PHUL)</option>
-                <option value="">Power Hypertrophy Adaptive Training (PHAT)</option>
-                <option value="">5-Day Split</option>
-            </select>
-
-            <form class="header-program" action="">
-                <div class="day" id="sunday">
-                    <h4>Sunday</h4>
-                    <div class="exercise-box">
-                        <table>
-                            <thead>
-                                <tr><th colspan="2">PUSH</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Exercise One</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="button" value="Edit" name="edit" id="edit-sunday" />
-                    <input type="button" value="Save" name="save" id="save-sunday" style="display:none;" />
-                    <input type="button" value="Add Exercise" name="add-exercise" class="add-exercise" data-day="sunday" style="display:none;"/>
+            <div class="header-sections">
+                <h1 id="header-welcome-message">HI, ANGELO!</h1>
+                <p>Let's start to plan your weekly workouts.</p>
+            </div>
+            <div class="header-sections">
+                <div class="header-sections-select">
+                    <label for="workout-splits">Workout Splits</label>
+                <select name="header-workout-splits" id="workout-splits">
+                    <option value="" disabled selected>Select Workout Split</option>
+                    <option value="full-body">Full Body</option>
+                    <option value="upper-lower">Upper Lower Split</option>
+                    <option value="push-pull-legs">Push Pull Legs Split</option>
+                    <option value="push-pull">Push Pull Split</option>
+                    <option value="bro-split">Body Part Workout Split (Bro Split)</option>
+                </select>
                 </div>
-                <div class="day" id="monday">
-                    <h4>Monday</h4>
-                    <div class="exercise-box">
-                        <table>
-                            <thead>
-                                <tr><th colspan="2">PULL</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Exercise One</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="button" value="Edit" name="edit" id="edit-monday" />
-                    <input type="button" value="Save" name="save" id="save-monday" style="display:none;" />
-                    <input type="button" value="Add Exercise" name="add-exercise" class="add-exercise" data-day="monday" style="display:none;"/>
+                <div class="header-sections-select">
+                <label for="workout-splits-options">Days</label>
+                <select name="header-workout-splits-options" id="workout-splits-options">
+                    <option value="" disabled selected>Select Days</option>
+                </select>
                 </div>
-                <div class="day" id="tuesday">
-                    <h4>Tuesday</h4>
-                    <div class="exercise-box">
-                        <table>
-                            <thead>
-                                <tr><th colspan="2">LEGS</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Exercise One</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="button" value="Edit" name="edit" id="edit-tuesday" />
-                    <input type="button" value="Save" name="save" id="save-tuesday" style="display:none;" />
-                    <input type="button" value="Add Exercise" name="add-exercise" class="add-exercise" data-day="tuesday" style="display:none;" />
-                </div>
-                <div class="day" id="wednesday">
-                    <h4>Wednesday</h4>
-                    <div class="exercise-box">
-                        <table>
-                            <thead>
-                                <tr><th colspan="2">REST</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Rest</td>
-                                    <td>N/A</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="button" value="Edit" name="edit" id="edit-wednesday" />
-                    <input type="button" value="Save" name="save" id="save-wednesday" style="display:none;" />
-                    <input type="button" value="Add Exercise" name="add-exercise" class="add-exercise" data-day="wednesday" style="display:none;"/>
-                </div>
-                <div class="day" id="thursday">
-                    <h4>Thursday</h4>
-                    <div class="exercise-box">
-                        <table>
-                            <thead>
-                                <tr><th colspan="2">PUSH</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Exercise One</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="button" value="Edit" name="edit" id="edit-thursday" />
-                    <input type="button" value="Save" name="save" id="save-thursday" style="display:none;" />
-                    <input type="button" value="Add Exercise" name="add-exercise" class="add-exercise" data-day="thursday" style="display:none;"/>
-                </div>
-                <div class="day" id="friday">
-                    <h4>Friday</h4>
-                    <div class="exercise-box">
-                        <table>
-                            <thead>
-                                <tr><th colspan="2">PULL</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Exercise One</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="button" value="Edit" name="edit" id="edit-friday" />
-                    <input type="button" value="Save" name="save" id="save-friday" style="display:none;" />
-                    <input type="button" value="Add Exercise" name="add-exercise" class="add-exercise" data-day="friday" style="display:none;"/>
-                </div>
-                <div class="day" id="saturday">
-                    <h4>Saturday</h4>
-                    <div class="exercise-box">
-                        <table>
-                            <thead>
-                                <tr><th colspan="2">LEGS</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Exercise One</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                                <tr>
-                                    <td>Exercise Two</td>
-                                    <td>N/A</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="button" value="Edit" name="edit" id="edit-saturday" />
-                    <input type="button" value="Save" name="save" id="save-saturday" style="display:none;" />
-                    <input type="button" value="Add Exercise" name="add-exercise" class="add-exercise" data-day="saturday" style="display:none;" />
-                </div>
-            </form>
-            <button> SAVE PROGRAM</button>
+            </div>
+        </div>
     </header>
+    <main>
+        <div class="main-container">                
+            <div class="main-days" id="monday">
+                <h4>Monday</h4>
+                <div class="split">
+                    <h5 class="split-name"></h5>
+                    <div class="workouts"></div>
+                    <button class="add"></button>
+                </div>
+            </div>
+            <div class="main-days" id="tuesday">
+                <h4>Tuesday</h4>
+                <div class="split">
+                    <h5 class="split-name"></h5>
+                    <div class="workouts"></div>
+                    <button class="add"></button>
+                </div>
+            </div>
+            <div class="main-days" id="wednesday">
+                <h4>Wednesday</h4>
+                <div class="split">
+                    <h5 class="split-name"></h5>
+                    <div class="workouts"></div>
+                    <button class="add"></button>
+                </div>
+            </div>
+            <div class="main-days" id="thursday">
+                <h4>Thursday</h4>
+                <div class="split">
+                    <h5 class="split-name"></h5>
+                    <div class="workouts"></div>
+                    <button class="add"></button>
+                </div>
+            </div>
+            <div class="main-days" id="friday">
+                <h4>Friday</h4>
+                <div class="split">
+                    <h5 class="split-name"></h5>
+                    <div class="workouts"></div>
+                    <button class="add"></button>
+                </div>
+            </div>
+            <div class="main-days" id="saturday">
+                <h4>Saturday</h4>
+                <div class="split">
+                    <h5 class="split-name"></h5>
+                    <div class="workouts"></div>
+                    <button class="add"></button>
+                </div>
+            </div>
+            <div class="main-days" id="sunday">
+                <h4>Sunday</h4>
+                <div class="split">
+                    <h5 class="split-name"></h5>
+                    <div class="workouts"></div>
+                    <button class="add"></button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- DISPLAY:NONE -->
+    <form action="" class="add-workout">
+        <label for="form-workout">Workout</label>
+        <input type="text" id="workout-name">
+        <div class="autocomplete-suggestions"></div>
+        <label for="form-sets">Sets</label>
+        <input type="number" min="1" max="50" id="workout-sets">
+        <label for="form-reps">Reps</label>
+        <input type="number" min="1" max="50" id="workout-reps">
+        <button id="form-add">Add</button>
+    </form>
+    
+    <div class="workouts-div">
+        <input type="text" class="workout-name">
+        <div class="number">
+            <input type="number" min="1" max="50" class="workout-sets">
+            <input type="number" min="1" max="50" class="workout-reps">
+        </div>
+    </div>
     <footer>
         <div class="footer-container">
             <ul class="footer-links">
