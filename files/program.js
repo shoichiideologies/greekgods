@@ -184,73 +184,6 @@ document.addEventListener('click', function (event) {
     }
 });
 
-document.querySelector('#form-add').addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent form submission and page reload
-
-    // Get form input values
-    const workoutName = document.querySelector('#workout-name').value.trim();
-    const workoutSets = document.querySelector('#workout-sets').value;
-    const workoutReps = document.querySelector('#workout-reps').value;
-
-    if (!workoutName || !workoutSets || !workoutReps) {
-        alert('Please fill in all fields.');
-        return;
-    }
-
-    // Find the active main-day based on where the form was triggered
-    const activeAddButton = document.querySelector('.add[data-active="true"]');
-    const splitContainer = activeAddButton?.parentElement;
-    const workoutsContainer = splitContainer.querySelector('.workouts');
-    const splitNameElement = splitContainer.querySelector('.split-name');
-
-    if (!workoutsContainer || !splitNameElement) {
-        alert('No valid day selected.');
-        return;
-    }
-
-    // Create a new workout div
-    const newWorkout = document.createElement('div');
-    newWorkout.classList.add('workouts-div');
-
-    // Add workout name
-    const workoutNameElement = document.createElement('input');
-    workoutNameElement.classList.add('workout-name');
-    workoutNameElement.setAttribute('readonly', true); // Set to readonly initially
-    workoutNameElement.value = workoutName; // Set input value
-
-    // Add sets and reps container
-    const numbersContainer = document.createElement('div');
-    numbersContainer.classList.add('number');
-
-    const setsElement = document.createElement('input');
-    setsElement.classList.add('workout-sets');
-    setsElement.setAttribute('readonly', true); // Set to readonly initially
-    setsElement.value = `${workoutSets} x sets`; // Set input value for sets
-
-    const repsElement = document.createElement('input');
-    repsElement.classList.add('workout-reps');
-    repsElement.setAttribute('readonly', true); // Set to readonly initially
-    repsElement.value = `${workoutReps} x reps`; // Set input value for reps
-
-    // Append sets and reps to numbers container
-    numbersContainer.appendChild(setsElement);
-    numbersContainer.appendChild(repsElement);
-
-    // Append workout name and numbers container to the workout div
-    newWorkout.appendChild(workoutNameElement);
-    newWorkout.appendChild(numbersContainer);
-
-    // Append the new workout to the workouts container
-    workoutsContainer.appendChild(newWorkout);
-
-    // Reset the form
-    document.querySelector('.add-workout').style.display = 'none';
-    document.querySelector('#workout-name').value = '';
-    document.querySelector('#workout-sets').value = '';
-    document.querySelector('#workout-reps').value = '';
-    activeAddButton.removeAttribute('data-active');
-});
-
 // Update the add button click event to mark the button as active
 document.querySelectorAll('.add').forEach((button) => {
     button.addEventListener('click', function () {
@@ -426,7 +359,7 @@ document.querySelectorAll('.split-name').forEach(splitName => {
                     input.style.border = '1px solid white'; // Reset input border
                 });
                 workoutDiv.classList.add('editable'); // Add editable state
-                workoutDiv.style.border = '1px solid lightgreen'; // Highlight workout-div border
+                workoutDiv.style.border = '1px solid #182b59'; // Highlight workout-div border
             }
         });
 
@@ -436,5 +369,145 @@ document.querySelectorAll('.split-name').forEach(splitName => {
         } else {
             this.style.color = 'green'; // Example: Highlight when editable
         }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mainDays = document.querySelectorAll('.main-days'); // All the days
+    const addWorkoutForm = document.querySelector('.add-workout'); // The form to add workouts
+
+    // Toggle .active class when split-name is clicked
+    mainDays.forEach(day => {
+        const splitName = day.querySelector('.split-name');
+        const workoutsContainer = day.querySelector('.workouts');
+        const addButton = day.querySelector('.add');
+
+        // When the split-name is clicked, toggle visibility of all workouts divs and their delete buttons
+        splitName.addEventListener('click', () => {
+            const workoutDivs = workoutsContainer.querySelectorAll('.workouts-div');
+            workoutDivs.forEach(workoutDiv => {
+                workoutDiv.classList.toggle('active'); // Toggles workout div visibility and delete button
+            });
+
+            // Enable delete functionality if .add button hasn't been clicked
+            const deleteButtons = workoutsContainer.querySelectorAll('.delete');
+            deleteButtons.forEach(deleteButton => {
+                deleteButton.disabled = false; // Enable delete buttons
+            });
+        });
+
+        // When the .add button is clicked, disable delete functionality and reset all states
+        addButton.addEventListener('click', () => {
+            const workoutDivs = workoutsContainer.querySelectorAll('.workouts-div');
+            workoutDivs.forEach(workoutDiv => {
+                // Remove editable state and set inputs to readonly
+                workoutDiv.classList.remove('editable');
+                workoutDiv.style.border = '1px solid white'; // Reset border
+
+                const inputs = workoutDiv.querySelectorAll('input');
+                inputs.forEach(input => {
+                    input.setAttribute('readonly', true); // Set input to readonly
+                    input.style.border = '1px solid white'; // Reset input border
+                });
+
+                // Disable delete button when .add is clicked
+                const deleteButton = workoutDiv.querySelector('.delete');
+                if (deleteButton) {
+                    deleteButton.disabled = true; // Disable delete button
+                }
+            });
+
+            // Optional: Reset the style of the split-name when .add button is clicked
+            splitName.style.color = ''; // Reset color to default
+        });
+
+        // Attach delete functionality to the existing workout divs
+        const workoutsDivs = workoutsContainer.querySelectorAll('.workouts-div');
+        workoutsDivs.forEach(workoutDiv => {
+            const deleteButton = workoutDiv.querySelector('.delete');
+            if (deleteButton) {
+                deleteButton.addEventListener('click', () => {
+                    workoutDiv.remove(); // Remove the div when delete is clicked
+                });
+            }
+        });
+    });
+
+    // Add delete functionality to new workouts added through the form
+    document.querySelector('#form-add').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent form submission and page reload
+
+        // Get form input values
+        const workoutName = document.querySelector('#workout-name').value.trim();
+        const workoutSets = document.querySelector('#workout-sets').value;
+        const workoutReps = document.querySelector('#workout-reps').value;
+
+        if (!workoutName || !workoutSets || !workoutReps) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        // Find the active main-day based on where the form was triggered
+        const activeAddButton = document.querySelector('.add[data-active="true"]');
+        const splitContainer = activeAddButton?.parentElement;
+        const workoutsContainer = splitContainer.querySelector('.workouts');
+        const splitNameElement = splitContainer.querySelector('.split-name');
+
+        if (!workoutsContainer || !splitNameElement) {
+            alert('No valid day selected.');
+            return;
+        }
+
+        // Create a new workout div
+        const newWorkout = document.createElement('div');
+        newWorkout.classList.add('workouts-div');
+
+        // Add workout name
+        const workoutNameElement = document.createElement('input');
+        workoutNameElement.classList.add('workout-name');
+        workoutNameElement.setAttribute('readonly', true); // Set to readonly initially
+        workoutNameElement.value = workoutName; // Set input value
+
+        // Add sets and reps container
+        const numbersContainer = document.createElement('div');
+        numbersContainer.classList.add('number');
+
+        const setsElement = document.createElement('input');
+        setsElement.classList.add('workout-sets');
+        setsElement.setAttribute('readonly', true); // Set to readonly initially
+        setsElement.value = `${workoutSets} x sets`; // Set input value for sets
+
+        const repsElement = document.createElement('input');
+        repsElement.classList.add('workout-reps');
+        repsElement.setAttribute('readonly', true); // Set to readonly initially
+        repsElement.value = `${workoutReps} x reps`; // Set input value for reps
+
+        // Append sets and reps to numbers container
+        numbersContainer.appendChild(setsElement);
+        numbersContainer.appendChild(repsElement);
+
+        // Append workout name and numbers container to the workout div
+        newWorkout.appendChild(workoutNameElement);
+        newWorkout.appendChild(numbersContainer);
+
+        // Create and append the delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete');
+        newWorkout.appendChild(deleteButton);
+
+        // Add the new workout div to the workouts container
+        workoutsContainer.appendChild(newWorkout);
+
+        // Add event listener for the delete button
+        deleteButton.addEventListener('click', () => {
+            newWorkout.remove(); // Remove the workout div when delete is clicked
+        });
+
+        // Reset the form
+        document.querySelector('.add-workout').style.display = 'none';
+        document.querySelector('#workout-name').value = '';
+        document.querySelector('#workout-sets').value = '';
+        document.querySelector('#workout-reps').value = '';
+        activeAddButton.removeAttribute('data-active');
     });
 });

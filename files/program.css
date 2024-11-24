@@ -103,12 +103,18 @@ main{
     align-items: center;
 }
 
+.main-days .day{
+    display: flex;
+    justify-content: space-between;
+}
+
 .main-days h4{
     font: 600 1em/1.2em "Trebuchet MS";
     letter-spacing: 0.05em;
-    margin: 0 0 7px 0;
+    margin: 0 7px 0 0;
     color:#797979;
     text-transform: uppercase;
+    display: inline-block;
 }
 
 .main-days .split{
@@ -117,22 +123,17 @@ main{
     background-color: #f5f5f5;
     height: 95%;
 }
-/* .main-days .split-name{
-    align-items: center;
-    justify-content: center;
-    padding-top: 12px;
-    margin: 0;
-}
 
-.main-days .split-name::after{
-    content: url("/graphics/svg/edit-white.svg");
-    float: right;
+.delete {
+    background: url('/graphics/svg/remove.svg') no-repeat center center;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 5px; /* Space between .workouts-div and .delete */
+    display: none; /* Initially hidden */
 }
-
-.main-days .split-name:hover::after{
-    content: url("/graphics/svg/edit-gray.svg");
-    float: right;
-} */
 
 .split-name {
     position: relative;
@@ -189,6 +190,11 @@ main{
 }
 
 .split .add:hover{
+    background: url('/graphics/svg/add-white.svg') no-repeat center center;
+    cursor: pointer;
+}
+
+.split .add:hover{
     background-color: #11182a;
     cursor: pointer;
 }
@@ -196,7 +202,7 @@ main{
 /*---------ADD DIVS DESIGN----------*/
 
 
-.workouts-div{
+.workouts-div {
     display: none;
     height: 50px;
     width: calc(100% - 17px);
@@ -206,45 +212,45 @@ main{
     display: flex;
 }
 
-.workout-name{
-    /* font: 500 0.845em/1em "Trebuchet MS";
-    margin: 0;
-    padding-left: 10px;
-    color: #11182a;
-    width: 50%;
-    display: flex;
-    justify-content: left;
-    align-items: center; */
+.workouts-div .delete {
+    background: url('/graphics/svg/remove.svg') no-repeat center center;
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    width: 20%;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+    display: none; /* Initially hidden */
+    align-items: center;
+}
+
+.workouts-div.active .delete {
+    display: block; /* Show when active */
+}
+
+.workouts-div.active {
+    display: flex; /* Display both workout div and delete button inline */
+}
+
+.workout-name {
     width: 50%;
     outline: none;
     border: 1px solid #ffffff;
     font: 500 0.845em/1em "Trebuchet MS";
     height: 100%;
-    width: calc(100% - 20px);
-    margin-bottom: 10px;
-    padding: auto 10px;
+    padding: 10px;
     padding-left: 10px;
     border-radius: 10px;
 }
 
-.workouts-div .number{
+.workouts-div .number {
     width: 50%;
     display: flex;
     flex-direction: column;
 }
 
-.workouts-div .workout-reps, .workouts-div .workout-sets{
-    /* font: 500 0.7em/0.8em "Trebuchet MS";
-    padding: 0;
-    margin: 0;
-    height: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    padding-right: 10px;
-    text-align: right;
-     */
+.workouts-div .workout-reps,
+.workouts-div .workout-sets {
     outline: none;
     border: 1px solid #ffffff;
     font: 500 0.845em/1em "Trebuchet MS";
@@ -253,12 +259,10 @@ main{
     padding: 0;
     margin: 0;
     height: 50%;
-    width: 100%;
     text-align: right;
     padding-right: 10px;
     border-radius: 10px;
 }
-
 
 /*---------ADD WORKOUT FORM----------*/
 
