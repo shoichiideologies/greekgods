@@ -199,9 +199,11 @@ document.querySelector('#form-add').addEventListener('click', function (event) {
 
     // Find the active main-day based on where the form was triggered
     const activeAddButton = document.querySelector('.add[data-active="true"]');
-    const workoutsContainer = activeAddButton?.parentElement.querySelector('.workouts');
+    const splitContainer = activeAddButton?.parentElement;
+    const workoutsContainer = splitContainer.querySelector('.workouts');
+    const splitNameElement = splitContainer.querySelector('.split-name');
 
-    if (!workoutsContainer) {
+    if (!workoutsContainer || !splitNameElement) {
         alert('No valid day selected.');
         return;
     }
@@ -211,21 +213,24 @@ document.querySelector('#form-add').addEventListener('click', function (event) {
     newWorkout.classList.add('workouts-div');
 
     // Add workout name
-    const workoutNameElement = document.createElement('p');
+    const workoutNameElement = document.createElement('input');
     workoutNameElement.classList.add('workout-name');
-    workoutNameElement.textContent = workoutName;
+    workoutNameElement.setAttribute('readonly', true); // Set to readonly initially
+    workoutNameElement.value = workoutName; // Set input value
 
     // Add sets and reps container
     const numbersContainer = document.createElement('div');
     numbersContainer.classList.add('number');
 
-    const setsElement = document.createElement('p');
+    const setsElement = document.createElement('input');
     setsElement.classList.add('workout-sets');
-    setsElement.textContent = `${workoutSets} sets`;
+    setsElement.setAttribute('readonly', true); // Set to readonly initially
+    setsElement.value = `${workoutSets} x sets`; // Set input value for sets
 
-    const repsElement = document.createElement('p');
+    const repsElement = document.createElement('input');
     repsElement.classList.add('workout-reps');
-    repsElement.textContent = `${workoutReps} reps`;
+    repsElement.setAttribute('readonly', true); // Set to readonly initially
+    repsElement.value = `${workoutReps} x reps`; // Set input value for reps
 
     // Append sets and reps to numbers container
     numbersContainer.appendChild(setsElement);
@@ -388,23 +393,48 @@ document.getElementById("workout-splits-options").addEventListener("change", fun
     }
 });
 
-document.querySelectorAll('.main-days .split-name').forEach(splitName => {
-    const workoutsDiv = splitName.closest('.split').querySelector('.workouts-div');
-    
-    // When the user hovers over the .split-name, enable the inputs
-    splitName.addEventListener('mouseenter', function() {
-        workoutsDiv.classList.add('editable'); // Enable editing
-    });
-    
-    // When the user stops hovering, disable the inputs
-    splitName.addEventListener('mouseleave', function() {
-        if (!workoutsDiv.contains(document.activeElement)) {
-            workoutsDiv.classList.remove('editable'); // Disable editing if no input is focused
-        }
-    });
+document.querySelectorAll('.split-name').forEach(splitName => {
+    splitName.addEventListener('click', function () {
+        // Get all workouts-div containers within the parent main-days container
+        const mainDaysContainer = this.closest('.main-days');
+        const workoutsDivs = mainDaysContainer.querySelectorAll('.workouts-div');
 
-    // When the edit icon (in ::after) is clicked, toggle the editability
-    splitName.addEventListener('click', function() {
-        workoutsDiv.classList.toggle('editable'); // Toggle the editable class
+        if (!workoutsDivs.length) {
+            alert('No workouts available to edit.');
+            return;
+        }
+
+        // Check if the workouts-div containers are currently editable
+        const isEditable = workoutsDivs[0].classList.contains('editable');
+
+        // Toggle edit state
+        workoutsDivs.forEach(workoutDiv => {
+            const inputs = workoutDiv.querySelectorAll('input');
+
+            if (isEditable) {
+                // Make the inputs read-only and reset div border
+                inputs.forEach(input => {
+                    input.setAttribute('readonly', true);
+                    input.style.border = '1px solid white'; // Reset input border
+                });
+                workoutDiv.classList.remove('editable'); // Remove editable state
+                workoutDiv.style.border = '1px solid white'; // Reset workout-div border
+            } else {
+                // Make the inputs editable and set div border
+                inputs.forEach(input => {
+                    input.removeAttribute('readonly');
+                    input.style.border = '1px solid white'; // Reset input border
+                });
+                workoutDiv.classList.add('editable'); // Add editable state
+                workoutDiv.style.border = '1px solid lightgreen'; // Highlight workout-div border
+            }
+        });
+
+        // Optional: Indicate state change in split-name (e.g., change icon or text color)
+        if (isEditable) {
+            this.style.color = ''; // Reset style when not editable
+        } else {
+            this.style.color = 'green'; // Example: Highlight when editable
+        }
     });
 });
