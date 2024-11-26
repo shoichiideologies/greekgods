@@ -47,8 +47,11 @@ header p {
     flex-direction: column;
     padding: 50px;
     border-radius: 10px;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.3), -9px -9px 6px rgb(255, 255, 255);
     flex-wrap: wrap;
+}
+
+.header-calculator:hover{
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.3), -6px -6px 6px rgb(255, 255, 255);
 }
 
 .header-calculator > div{
