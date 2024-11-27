@@ -291,41 +291,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-document.getElementById("workout-splits-options").addEventListener("change", function () {
-    const splitType = document.getElementById("workout-splits").value;
-    const selectedSchedule = this.value;
-    const schedule = workoutSchedules[splitType][selectedSchedule];
-
-    if (schedule) {
-        Object.entries(schedule).forEach(([day, workout]) => {
-            const dayElement = document.getElementById(day.toLowerCase());
-            if (dayElement) {
-                const splitName = dayElement.querySelector(".split-name");
-                splitName.textContent = workout; // Update the split name for the day
-
-                // Check if the split name is "Rest" and handle the button click accordingly
-                const dayButton = dayElement.querySelector("button");
-                if (splitName.textContent === "Rest" && dayButton) {
-                    // Add event listener for when the user clicks the button
-                    dayButton.addEventListener('click', function () {
-                        if (!dayButton.disabled) {
-                            alert("No workout scheduled for this day. It's your rest day. Don't forget your protein. Happy Rest Day!"); // Show alert
-                            dayButton.disabled = true; // Disable the button so it cannot be clicked again
-                            // Prevent the .add-workout form from showing up
-                            const form = document.querySelector('.add-workout');
-                            form.style.display = 'none'; // Hide the add-workout form if rest day is clicked
-                        }
-                    });
-                    dayButton.disabled = false; // Ensure button is enabled initially
-                } else if (dayButton) {
-                    dayButton.onclick = null; // Remove any existing click event
-                    dayButton.disabled = false; // Enable the button if it was previously disabled
-                }
-            }
-        });
-    }
-});
-
 document.querySelectorAll('.split-name').forEach(splitName => {
     splitName.addEventListener('click', function () {
         // Get all workouts-div containers within the parent main-days container
@@ -370,6 +335,94 @@ document.querySelectorAll('.split-name').forEach(splitName => {
             this.style.color = 'green'; // Example: Highlight when editable
         }
     });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const mainContainer = document.querySelector('.main-container');
+    const workoutSplits = document.getElementById('workout-splits');
+    const workoutSplitsOptions = document.getElementById('workout-splits-options');
+    const splitNames = document.querySelectorAll('.split-name');
+
+    // Function to disable the main-container and its children
+    function disableMainContainer() {
+        mainContainer.style.pointerEvents = 'none'; // Disable interaction for main-container and children
+        mainContainer.style.opacity = '0.5'; // Make it visually disabled
+        // Ensure all buttons within .main-container are disabled
+        const buttons = mainContainer.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.disabled = true; // Explicitly disable buttons
+        });
+    }
+
+    // Function to enable the main-container and its children
+    function enableMainContainer() {
+        mainContainer.style.pointerEvents = 'auto'; // Enable interaction for main-container and children
+        mainContainer.style.opacity = '1'; // Reset to fully visible
+        // Ensure all buttons within .main-container are enabled
+        const buttons = mainContainer.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.disabled = false; // Explicitly enable buttons
+        });
+    }
+
+    // Function to reset split names
+    function resetSplitNames() {
+        splitNames.forEach(splitName => {
+            splitName.textContent = ''; // Clear the split name
+            const mainDaysContainer = splitName.closest('.main-days');
+            if (mainDaysContainer) {
+                mainDaysContainer.style.pointerEvents = 'auto'; // Enable interaction
+                mainDaysContainer.style.opacity = '1'; // Reset opacity
+            }
+        });
+    }
+
+    // Add event listener to handle workout-splits changes
+    workoutSplits.addEventListener('change', function () {
+        workoutSplitsOptions.value = ''; // Reset .workout-splits-options value
+        resetSplitNames(); // Reset all split names
+        disableMainContainer(); // Disable .main-container
+    });
+
+    // Add event listener to handle workout-splits-options changes
+    workoutSplitsOptions.addEventListener('change', function () {
+        // Enable main-container only if both dropdowns have values
+        if (workoutSplits.value && workoutSplitsOptions.value) {
+            enableMainContainer(); // Enable .main-container
+        } else {
+            disableMainContainer(); // Keep it disabled otherwise
+        }
+    });
+
+    // Initial state: Disable main-container on page load
+    disableMainContainer();
+});
+
+// Event listener for workout splits options changes
+document.getElementById("workout-splits-options").addEventListener("change", function () {
+    const splitType = document.getElementById("workout-splits").value;
+    const selectedSchedule = this.value;
+    const schedule = workoutSchedules[splitType][selectedSchedule];
+
+    if (schedule) {
+        Object.entries(schedule).forEach(([day, workout]) => {
+            const dayElement = document.getElementById(day.toLowerCase());
+            if (dayElement) {
+                const splitName = dayElement.querySelector(".split-name");
+                splitName.textContent = workout; // Update the split name for the day
+
+                // Disable the .main-days parent container if split name is "Rest"
+                const mainDaysContainer = dayElement.closest('.main-days');
+                if (splitName.textContent === "Rest" && mainDaysContainer) {
+                    mainDaysContainer.style.pointerEvents = 'none'; // Disable interaction
+                    mainDaysContainer.style.opacity = '0.5'; // Make it visually disabled
+                } else {
+                    mainDaysContainer.style.pointerEvents = 'auto'; // Enable interaction
+                    mainDaysContainer.style.opacity = '1'; // Reset opacity
+                }
+            }
+        });
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {

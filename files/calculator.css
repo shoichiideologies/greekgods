@@ -332,6 +332,19 @@ table th{
     font: 600 0.845em/1em "Trebuchet MS";
 }
 
+table th::after{
+    content: url("/graphics/svg/info-black.svg");
+    float: right;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+table th:hover::after{
+    content: url("/graphics/svg/info-gray.svg");
+}
+
 table tr{
     border-bottom: 1px solid #e6e6e6;
     font: 500 0.9em/1em "Trebuchet MS";

@@ -328,4 +328,31 @@ labels.forEach(label => {
             });
         }
     });
+
+    const tableHeaders = document.querySelectorAll('.main-bmi th, .main-calorie th, .main-protein th');
+
+    tableHeaders.forEach(th => {
+    th.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default behavior
+
+        // Identify the target section based on the table header class
+        let targetId;
+        if (th.closest('.main-bmi')) {
+            targetId = '#section-bmi';
+        } else if (th.closest('.main-calorie')) {
+            targetId = '#section-tdee';
+        } else if (th.closest('.main-protein')) {
+            targetId = '#section-protein';
+        }
+
+        // Scroll to the target section
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth', // Smooth scrolling
+                block: 'start' // Align at the start of the section
+            });
+        }
+    });
+});
 });

@@ -3,58 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/graphics/logo/favicon.png">
-    <link rel="stylesheet" href="register.css">
     <title>GreekGods | Register</title>
+    <link rel="stylesheet" href="register.css">
 </head>
 <body>
-    <form class="container" action="/Github/greekgods/includes/users/users.php" method="POST" id="registrationForm"> 
-        <div id="registerAccount">
-            <img src="/graphics/logo/logo.png" alt="Register"> 
-            <p id="register">Register</p>
-            <p id="description">Start strong with GreekGods, every journey begins here!</p>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="e.g. ada.lovelace@icloud.com" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-
-            <div class="terms">
-                <input type="checkbox" id="check" name="check" required>
-                <label for="check">
-                    I agree to the GreekGods <a href="/files/laws.html" target="_blank">Terms of Service</a>
-                    and acknowledge the <a href="/files/laws.html" target="_blank">Privacy Policy</a>.
-                </label>
-            </div>
-
-            <div class="error-message-container"></div>
-
-            <button type="button" id="registerButton">Agree and Start Now</button>
-            <hr>
-            <p>Already have an account? <a href="login.html">Login</a></p>
-        </div>
-        
-        <div id="registerInfo">
+    <div class="container">
+        <form action="/Github/greekgods/includes/users/users.php" method="POST" id="reg2">
             <p id="register">Register</p>
             <p id="description">Start strong with GreekGods, every journey begins here!</p>
 
             <div class="section">
                 <label for="first-name">First Name</label>
                 <input type="text" id="first-name" name="first-name" placeholder="e.g. Ada" required>
-
+            
                 <label for="last-name">Last Name</label>
                 <input type="text" id="last-name" name="last-name" placeholder="e.g. Lovelace" required>
-                
-                <label for="birthdate">Birthdate</label>
-                <input type="date" id="birthdate" name="birthdate" required>
             </div>
+            
+            <label for="birthdate">Birthdate</label>
+            <input type="date" id="birthdate" name="birthdate" required>
 
-            <label for="height">Height</label>
-            <div class="section-metrics">
+            <div class="section">
+                <label for="height">Height</label>
                 <input id="height" type="number" name="height" placeholder="e.g. 5.7" required> 
                 <select name="heightMetrics" id="heightMetric" required>
                     <option value="cm">.cm</option>
@@ -64,8 +34,8 @@
                 </select>
             </div>
 
-            <label for="weight">Weight</label>
-            <div class="section-metrics">
+            <div class="section">
+                <label for="weight">Weight</label>
                 <input id="weight" type="number" name="weight" placeholder="e.g. 100" required>
                 <select name="weightMetrics" id="weightMetric" required>
                     <option value="lb">.lb</option>
@@ -85,9 +55,29 @@
                 </select> 
             </div>    
             <hr>
-            <button type="submit" id="startJourneyNow">Start Journey Now</button>
-        </div>
-    </form>
-    <script src="register.js"></script>
+            <button type="submit">Start Journey Now</button>
+        </form>
+    </div>
+    <script>
+        // Retrieve email and password from URL query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        const password = urlParams.get('password');
+
+        if (email && password) {
+            // Create hidden fields for email and password and append to form
+            const emailInput = document.createElement('input');
+            emailInput.type = 'hidden';
+            emailInput.name = 'email';
+            emailInput.value = email;
+            document.getElementById('reg2').appendChild(emailInput);
+
+            const passwordInput = document.createElement('input');
+            passwordInput.type = 'hidden';
+            passwordInput.name = 'password';
+            passwordInput.value = password;
+            document.getElementById('reg2').appendChild(passwordInput);
+        }
+    </script>
 </body>
 </html>
