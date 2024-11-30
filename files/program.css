@@ -141,7 +141,7 @@ main{
 }
 
 .split-name::after {
-    content: url('/graphics/svg/edit-white.svg');
+    content: url('../graphics/svg/edit-white.svg');
     position: absolute;
     right: 10px;
     top: 50%;

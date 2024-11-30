@@ -9,14 +9,10 @@ $height = $_POST['height'] ?? null;
 $weight = $_POST['weight'] ?? null;
 $activity = $_POST['activity'] ?? null;
 
-
 // Validate required fields (ensure all fields are filled)
 if (!$email || !$password || !$firstName || !$lastName || !$birthdate || !$height || !$weight || !$activity) {
     die("Error: Missing required fields.");
 }
-
-// Hash the password to store it securely in the database
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Database connection details
 $localhost = "localhost";
@@ -34,12 +30,18 @@ if ($conn->connect_error) {
 
 // Prepare SQL statement to insert data into the 'users' table
 $stmt = $conn->prepare("INSERT INTO users (email, password, firstName, lastName, birthdate, height, weight, activity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssss", $email, $hashedPassword, $firstName, $lastName, $birthdate, $height, $weight, $activity);
+$stmt->bind_param("ssssssss", $email, $password, $firstName, $lastName, $birthdate, $height, $weight, $activity);
 
 // Execute the query to insert the data
 if ($stmt->execute()) {
     echo "New record created successfully"; // Success message
     header("Location: /Github/greekgods/index.html"); // Redirect to home page
     exit;
+} else {
+    echo "Error: " . $stmt->error;
 }
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
 ?>

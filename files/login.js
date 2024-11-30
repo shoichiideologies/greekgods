@@ -11,21 +11,6 @@ function displayErrorMessage(message) {
     errorMessageContainer.appendChild(errorMessage);
 }
 
-function validateEmail(email) {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email)) {
-        return "*Please enter a valid email address.";
-    }
-    return "Email is valid.";
-}
-
-function validatePassword(password) {
-    if (password.trim() === "") {
-        return "*Password cannot be empty.";
-    }
-    return "Password is valid.";
-}
-
 function validateForm(event) {
     let isValid = true;
 
@@ -45,10 +30,7 @@ function validateForm(event) {
 }
 
 document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault();  
-
     if (!validateForm(event)) {
-        return; 
+        event.preventDefault();  
     }
-    this.submit();
 });

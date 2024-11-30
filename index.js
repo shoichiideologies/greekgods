@@ -20,3 +20,4 @@ window.addEventListener('resize', () => {
         header.style.paddingTop = '100px'; 
     }
 });
+
