@@ -11,14 +11,7 @@ body{
 
 header{
     width: 100%;
-}
-
-.header-container{
-    background-color: inherit;
-    width: 100%;
-    display: flex;
-    padding: 30px;
-    gap: 30px;
+    background: white;
 }
 
 .header-info{
@@ -26,11 +19,10 @@ header{
     max-width: 900px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.1), -6px -6px 10px rgb(255, 255, 255);
 }
 
 h3{
-    font: 600 1.3em/1em "Trebuchet MS";
+    font: 900 1.3em/1em "Trebuchet MS";
     text-align: center;
     color: #555;
     margin: 10px 0px 30px 0px;

@@ -27,14 +27,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = mysqli_real_escape_string($conn, $password);
 
     // Step 5: Query the database to check if the email and password exist
-    $sql = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+    $sql = "SELECT user_id FROM users WHERE email='$email' AND password='$password'";
     $result = $conn->query($sql);
 
     // Step 6: Check if a matching record is found
     if ($result->num_rows > 0) {
-        // Successfully logged in
-        // Redirect to the user dashboard or home page
-        header("Location: ./profile.php"); // Change this to the page after successful login
+        // Fetch the user_id
+        $row = $result->fetch_assoc();
+        $userId = $row['user_id'];
+
+        // Redirect to the profile page with user_id as a query parameter
+        header("Location: ./profile.php?user_id=" . $userId);
         exit();
     } else {
         // No matching user found, set error message

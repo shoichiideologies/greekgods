@@ -34,8 +34,11 @@ $stmt->bind_param("ssssssss", $email, $password, $firstName, $lastName, $birthda
 
 // Execute the query to insert the data
 if ($stmt->execute()) {
-    echo "New record created successfully"; // Success message
-    header("Location: /Github/greekgods/index.html"); // Redirect to home page
+    // Get the user_id of the last inserted record
+    $userId = $conn->insert_id;
+
+    // Redirect to profile.php with user_id in the query string
+    header("Location: /Github/greekgods/files/profile.php?user_id=" . $userId);
     exit;
 } else {
     echo "Error: " . $stmt->error;
