@@ -6,7 +6,6 @@ const nav = document.querySelector('nav');
 document.addEventListener("DOMContentLoaded", () => {
     const userId = document.body.getAttribute('data-user-id');
     console.log("User ID from body:", userId);
-    // Append user_id to navigation links
     if (userId) {
         const links = document.querySelectorAll('#nav-links a');
         links.forEach(link => {
@@ -16,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 navMenuButton.addEventListener('click', () => {
     navLinks.classList.toggle('show');
 

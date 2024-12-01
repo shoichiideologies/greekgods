@@ -137,7 +137,7 @@ $conn->close();
             </div>
         </div>
     </footer>
-    <script src="./index.js" defer></script>
+    <script src="index.js" defer></script>
     <script>
         function calculateDerivedData(data) {
             const fullName = `${data.firstName} ${data.lastName}`;
