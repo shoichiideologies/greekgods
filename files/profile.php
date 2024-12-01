@@ -137,7 +137,7 @@ $conn->close();
             </div>
         </div>
     </footer>
-
+    <script src="../index.js"></script>
     <script>
         function calculateDerivedData(data) {
             const fullName = `${data.firstName} ${data.lastName}`;
@@ -208,6 +208,5 @@ $conn->close();
         // Initialize user data and calculate derived values
         calculateDerivedData(userData);
     </script>
-    <script src="../index.js"></script>
 </body>
 </html>
