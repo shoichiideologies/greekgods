@@ -1,39 +1,75 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+$servername = "localhost"; // Replace with your database server
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$dbname = "register"; // Replace with your database name
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT firstName, lastName FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$stmt->bind_result($firstName, $lastName);
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/Github/greekgods/graphics/logo/favicon.png">
-    <link rel="stylesheet" href="../index.css"> 
-    <link rel="stylesheet" href="program.css">
+    <link rel="icon" type="image/x-icon" href="./graphics/logo/logo.png">
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="./program.css">
+    <script type="text/javascript">
+        const userId = <?php echo json_encode($userId); ?>;
+    </script>
     <title>GreekGods | Program</title>
 </head>
 <body>
     <nav>
         <button class="nav-menu-button" id="nav-menu-button">
-            <img src="/Github/greekgods/graphics/svg/menu-black.svg" alt="Menu" title="Menu">
+            <img src="../graphics/svg/menu-black.svg" alt="Menu" title="Menu">
         </button>
         <div class="nav-logo">
-            <img src="/Github/greekgods/graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='/Github/greekgods/index.html'">
+            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='../index.php'">
         </div>
-        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/Github/greekgods/files/register.html'">
-            <img src="/Github/greekgods/graphics/svg/profile.svg" alt="Profile" title="Profile">
+        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='./register.html'">
+            <img src="../graphics/svg/profile.svg" alt="Profile" title="Profile">
         </button>
         <ul class="nav-links" id="nav-links">
-            <li><a href="/Github/greekgods/index.html">HOME</a></li>
-            <li><a href="program.html" onclick="location.reload(); return false;">PROGRAM</a></li>
-            <li><a href="blog.html">BLOG</a></li>
-            <li><a href="calculator.html">CALCULATOR</a></li>
-            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="./program.php" onclick="location.reload(); return false;">PROGRAM</a></li>
+            <li><a href="./blog.php">BLOG</a></li>
+            <li><a href="./calculator.php">CALCULATOR</a></li>
+            <li><a href="./about.php">ABOUT</a></li>
         </ul>
         <div class="nav-button">
-            <button onclick="window.location.href='register.html'">GET STARTED</button>
+            <button id="register-button" onclick="window.location.href='./register.html'">GET STARTED</button>
+            <button id="profile-button" onclick="window.location.href='./profile.php'"><img src="../graphics/svg/profile.svg" alt="Profile" title="Profile"></button>
+            <span id="profile-name"><?php echo htmlspecialchars($firstName . " " . $lastName); ?></span>
         </div>
     </nav>
     <header>
         <div class="header-container">
             <div class="header-sections">
-                <h1 id="header-welcome-message">HI, ANGELO!</h1>
+                <h1 id="header-welcome-message">HI, <?php echo htmlspecialchars($firstName); ?>!</h1>
                 <p>Let's start to plan your weekly workouts.</p>
             </div>
             <div class="header-sections">
@@ -141,23 +177,23 @@
     <footer>
         <div class="footer-container">
             <ul class="footer-links">
-                <li><a href="/Github/greekgods/index.html">HOME</a></li>
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="laws.html">DISCLAIMER</a></li>
-                <li><a href="about.html">CONTACT</a></li>
-                <li><a href="laws.html">PRIVACY POLICY</a></li>
-                <li><a href="laws.html">TERMS OF USE</a></li>
+                <li><a href="../index.php">HOME</a></li>
+                <li><a href="./blog.php">BLOG</a></li>
+                <li><a href="./about.php">ABOUT</a></li>
+                <li><a href="./laws.html">DISCLAIMER</a></li>
+                <li><a href="./about.php">CONTACT</a></li>
+                <li><a href="./laws.html">PRIVACY POLICY</a></li>
+                <li><a href="./laws.html">TERMS OF USE</a></li>
             </ul>
             <div class="footer-socials">
                 <a href="https://www.facebook.com" target="_blank">
-                    <img src="/Github/greekgods/graphics/socials/facebook.png" alt="Facebook" title="Facebook">
+                    <img src="../graphics/socials/facebook.png" alt="Facebook" title="Facebook">
                 </a>
                 <a href="https://www.instagram.com" target="_blank">
-                    <img src="/Github/greekgods/graphics/socials/instagram.png" alt="Instagram" title="Instagram">
+                    <img src="../graphics/socials/instagram.png" alt="Instagram" title="Instagram">
                 </a>
                 <a href="https://www.twitter.com" target="_blank">
-                    <img src="/Github/greekgods/graphics/socials/twitter.png" alt="Twitter" title="Twitter">
+                    <img src="../graphics/socials/twitter.png" alt="Twitter" title="Twitter">
                 </a>
             </div>
             <div class="footer-copyright">
@@ -165,7 +201,7 @@
             </div>
         </div>
     </footer>
-    <script src="/Github/greekgods/index.js"></script>
+    <script src="../index.js"></script>
     <script src="program.js"></script>
 </body>
 </html>

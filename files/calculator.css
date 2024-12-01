@@ -159,7 +159,7 @@ input[type="submit"]:hover{
 
 #header-activity > label::after,
 #header-formula > label::after{
-    content: url("/graphics/svg/info-black.svg");
+    content: url("../graphics/svg/info-black.svg");
     float: right;
     align-items: center;
     text-align: center;
@@ -169,12 +169,12 @@ input[type="submit"]:hover{
 
 #header-activity > label:hover::after,
 #header-formula > label:hover::after{
-    content: url("/graphics/svg/info-gray.svg");
+    content: url("../graphics/svg/info-gray.svg");
 }
 
 select {
     appearance: none; 
-    background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
+    background: url('../graphics/buttons/arrow-down.png') no-repeat right 10px center;
     background-color: #ffffff;
     border-radius: 5px;
     outline: none;
@@ -333,7 +333,7 @@ table th{
 }
 
 table th::after{
-    content: url("/graphics/svg/info-black.svg");
+    content: url("../graphics/svg/info-black.svg");
     float: right;
     align-items: center;
     text-align: center;
@@ -342,7 +342,7 @@ table th::after{
 }
 
 table th:hover::after{
-    content: url("/graphics/svg/info-gray.svg");
+    content: url("../graphics/svg/info-gray.svg");
 }
 
 table tr{

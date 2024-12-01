@@ -49,31 +49,29 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../graphics/logo/logo.png">
-    <!-- <link rel="stylesheet" href="../index.css">    -->
     <link rel="stylesheet" href="profile.css">
     <script type="text/javascript">
         const userId = <?php echo json_encode($userId); ?>;
     </script>
     <title>GreekGods | Profile</title>
 </head>
-<!-- data-user-id="<?php echo htmlspecialchars($userId); ?>" -->
 <body>
     <nav>
         <button class="nav-menu-button" id="nav-menu-button">
             <img src="../graphics/svg/menu-black.svg" alt="Menu" title="Menu">
         </button>
         <div class="nav-logo">
-            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='/Github/greekgods/index.php'">
+            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='../index.php'">
         </div>
-        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/Github/greekgods/files/register.html'">
+        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='./register.html'">
             <img src="../graphics/svg/profile.svg" alt="Profile" title="Profile">
         </button>
         <ul class="nav-links" id="nav-links">
             <li><a href="../index.php">HOME</a></li>
-            <li><a href="./program.html">PROGRAM</a></li>
-            <li><a href="./blog.html">BLOG</a></li>
-            <li><a href="./calculator.html">CALCULATOR</a></li>
-            <li><a href="./about.html">ABOUT</a></li>
+            <li><a href="./program.php">PROGRAM</a></li>
+            <li><a href="./blog.php">BLOG</a></li>
+            <li><a href="./calculator.php">CALCULATOR</a></li>
+            <li><a href="./about.php">ABOUT</a></li>
         </ul>
         <div class="nav-button">
             <button id="register-button" onclick="window.location.href='./register.html'">GET STARTED</button>
@@ -84,8 +82,8 @@ $conn->close();
     </nav>
     <header>
             <div id="header-welcome" style="box-sizing:border-box;width:100%;padding:10px 30px 0px 30px;display:inline-block;background-color:white;border-top:1px solid lightgray">
-                <h3 style="font-size: 3em;text-transform:uppercase;color:black;padding:0px;margin-top:20px;">HI, <?php echo htmlspecialchars($user['firstName']); ?>!</h3>
-                <p style="font:500 0.945em/1em 'Trebuchet MS';color:#555;text-align:center">Welcome to GreekGods! Let's start you fitness journey by embracing your body numbers!. Navigate to <a href="./blog.html">Blog</a> for step by step comprehensive fitness instructions.</p>
+                <h3 style="font-size: 3em;text-transform:uppercase;color:black;padding:0px;margin-top:20px;">WELCOME, <?php echo htmlspecialchars($user['firstName']); ?>!</h3>
+                <p style="font:500 0.945em/1em 'Trebuchet MS';color:#555;text-align:center">Welcome to GreekGods! Let's start you fitness journey by embracing your body numbers!. Navigate to <a href="./blog.php">Blog</a> for step by step comprehensive fitness instructions.</p>
             </div> 
 
         <div class="header-container">
@@ -122,10 +120,10 @@ $conn->close();
         <div class="footer-container">
             <ul class="footer-links">
                 <li><a href="../index.php">HOME</a></li>
-                <li><a href="./blog.html">BLOG</a></li>
-                <li><a href="./about.html">ABOUT</a></li>
+                <li><a href="./blog.php">BLOG</a></li>
+                <li><a href="./about.php">ABOUT</a></li>
                 <li><a href="./laws.html">DISCLAIMER</a></li>
-                <li><a href="./about.html">CONTACT</a></li>
+                <li><a href="./about.php">CONTACT</a></li>
                 <li><a href="./laws.html">PRIVACY POLICY</a></li>
                 <li><a href="./laws.html">TERMS OF USE</a></li>
             </ul>

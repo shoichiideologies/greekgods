@@ -39,7 +39,6 @@ $conn->close();
     <script type="text/javascript">
         const userId = <?php echo json_encode($userId); ?>;
     </script>
-    <script type="text/javascript" src="/Github/greekgods/index.js" defer></script>
     <title>GreekGods | Home</title>
 </head>
 <body>
@@ -51,15 +50,15 @@ $conn->close();
             <div class="nav-logo">
                 <img src="./graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="location.reload(); return false;">
             </div>
-            <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/Github/greekgods/files/register.html'">
+            <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='./files/register.html'">
                 <img src="./graphics/svg/profile.svg" alt="Profile" title="Profile">
             </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.php" onclick="location.reload(); return false;">HOME</a></li>
-                <li><a href="./files/program.html">PROGRAM</a></li>
-                <li><a href="./files/blog.html">BLOG</a></li>
-                <li><a href="./files/calculator.html">CALCULATOR</a></li>
-                <li><a href="./files/about.html">ABOUT</a></li>
+                <li><a href="./files/program.php">PROGRAM</a></li>
+                <li><a href="./files/blog.php">BLOG</a></li>
+                <li><a href="./files/calculator.php">CALCULATOR</a></li>
+                <li><a href="./files/about.php">ABOUT</a></li>
             </ul>
             <div class="nav-button">
                 <button id="register-button" onclick="window.location.href='./files/register.html'">GET STARTED</button>
@@ -88,10 +87,10 @@ $conn->close();
             <div class="footer-container">
                 <ul class="footer-links">
                     <li><a href="index.html" onclick="location.reload(); return false;">HOME</a></li>
-                    <li><a href="./files/blog.html">BLOG</a></li>
-                    <li><a href="./files/about.html">ABOUT</a></li>
+                    <li><a href="./files/blog.php">BLOG</a></li>
+                    <li><a href="./files/about.php">ABOUT</a></li>
                     <li><a href="./files/laws.html">DISCLAIMER</a></li>
-                    <li><a href="./files/about.html">CONTACT</a></li>
+                    <li><a href="./files/about.php">CONTACT</a></li>
                     <li><a href="./files/laws.html">PRIVACY POLICY</a></li>
                     <li><a href="./files/laws.html">TERMS OF USE</a></li>
                 </ul>
@@ -107,11 +106,11 @@ $conn->close();
                     </a>
                 </div>
                 <div class="footer-copyright">
-                    <p style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">&copy; 2024 GreekGods. All rights reserved.</p>
+                    <p>&copy; 2024 GreekGods. All rights reserved.</p>
                 </div>
             </div>
         </footer>
     </div>
-    <script src="index.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (navMenuProfile) {
             navMenuProfile.addEventListener("click", () => {
-                window.location.href = "./files/profile.php"; // Redirect to profile
+                window.location.href = "/Github/greekgods/files/profile.php"; // Redirect to profile
             });
         }
     } else {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (navMenuProfile) {
             navMenuProfile.addEventListener("click", () => {
-                window.location.href = "./login.php"; // Redirect to login
+                window.location.href = "/Github/greekgods/files/login.php"; // Redirect to login
             });
         }
     }

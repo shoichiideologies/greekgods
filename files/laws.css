@@ -41,12 +41,6 @@ summary{
     background-color: inherit;
 }
 
-.greekgods:hover{
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-decoration: underline;
-    border-radius: 5px;
-}
-
 .print-button {
     background-color: #007BFF;
     color: white;
@@ -64,7 +58,7 @@ summary{
 }
 
 .print-button::after {
-    content: url("/graphics/svg/print.svg");
+    content: url("../graphics/svg/print.svg");
     padding: 10px;
     text-align: center;
 }
@@ -130,14 +124,14 @@ main article h2 {
 }
 
 main article h2::after {
-    content: url("/graphics/svg/go-back.svg");
+    content: url("../graphics/svg/go-back.svg");
     float: right;
     cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 main article h2:hover::after {
-    content: url("/graphics/svg/go-back-blue.svg");
+    content: url("../graphics/svg/go-back-blue.svg");
     transform: scale(1.2);
     filter: brightness(1.2);
 }

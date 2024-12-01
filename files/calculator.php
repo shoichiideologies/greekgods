@@ -1,32 +1,69 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+$servername = "localhost"; // Replace with your database server
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$dbname = "register"; // Replace with your database name
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT firstName, lastName FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$stmt->bind_result($firstName, $lastName);
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../index.css">   
-    <link rel="stylesheet" href="calculator.css">
-    <title>GreekGods| Calculator</title>
+    <link rel="icon" type="image/x-icon" href="./graphics/logo/logo.png">
+    <link rel="stylesheet" href="../index.css">
+    <link rel="stylesheet" href="./calculator.css">
+    <script type="text/javascript">
+        const userId = <?php echo json_encode($userId); ?>;
+    </script>
+    <title>GreekGods | Calculator</title>
 </head>
 <body>
     <nav>
         <button class="nav-menu-button" id="nav-menu-button">
-            <img src="/graphics/svg/menu-black.svg" alt="Menu" title="Menu">
+            <img src="../graphics/svg/menu-black.svg" alt="Menu" title="Menu">
         </button>
         <div class="nav-logo">
-            <img src="/graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='/index.html'">
+            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='../index.php'">
         </div>
-        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/files/register.html'">
-            <img src="/graphics/svg/profile.svg" alt="Profile" title="Profile">
+        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='./register.html'">
+            <img src="../graphics/svg/profile.svg" alt="Profile" title="Profile">
         </button>
         <ul class="nav-links" id="nav-links">
-            <li><a href="/index.html">HOME</a></li>
-            <li><a href="program.html">PROGRAM</a></li>
-            <li><a href="blog.html">BLOG</a></li>
-            <li><a href="calculator.html" onclick="location.reload(); return false;">CALCULATOR</a></li>
-            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="./program.php">PROGRAM</a></li>
+            <li><a href="./blog.php">BLOG</a></li>
+            <li><a href="./calculator.php" onclick="location.reload(); return false;">CALCULATOR</a></li>
+            <li><a href="./about.php">ABOUT</a></li>
         </ul>
         <div class="nav-button">
-            <button onclick="window.location.href='register.html'">GET STARTED</button>
+            <button id="register-button" onclick="window.location.href='./register.html'">GET STARTED</button>
+            <button id="profile-button" onclick="window.location.href='./profile.php'"><img src="../graphics/svg/profile.svg" alt="Profile" title="Profile"></button>
+            <span id="profile-name"><?php echo htmlspecialchars($firstName . " " . $lastName); ?></span>
         </div>
     </nav>
     <header>
@@ -188,9 +225,9 @@
                 <p id="title-formula"><strong>Formula:</strong> To calculate BMI, use the following formulas:
                 </p>
                 <p id="title-formula"><strong>Standard Formula (Metric):</strong></p>
-                <img id="bmi-formula-standard" src="/graphics/formulas/bmi-formula-standard.png" alt="BMI Formula - Metric" title="BMI Formula">
+                <img id="bmi-formula-standard" src="../graphics/formulas/bmi-formula-standard.png" alt="BMI Formula - Metric" title="BMI Formula">
                 <p id="title-formula"><strong>Imperial Formula:</strong></p>
-                <img id="bmi-formula-imperial" src="/graphics/formulas/bmi-formula-imperial.png" alt="BMI Formula - Imperial" title="BMI Formula">
+                <img id="bmi-formula-imperial" src="../graphics/formulas/bmi-formula-imperial.png" alt="BMI Formula - Imperial" title="BMI Formula">
                 <table>
                     <tr>
                         <td><strong>Classification</strong></td>
@@ -240,29 +277,29 @@
 
                 <p id="title-formula"><strong>Mifflin - St Jeor Equation:</strong></p>
                 <p id="title-formula"><strong>(Metric) Male:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-mifflin-formula-male-metric.png" alt="BMR Formula - Metric Male" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-mifflin-formula-male-metric.png" alt="BMR Formula - Metric Male" title="BMR Formula">
                 <p id="title-formula"><strong>(Imperial) Male:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-mifflin-formula-male-imperial.png" alt="BMR Formula - Imperial Male" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-mifflin-formula-male-imperial.png" alt="BMR Formula - Imperial Male" title="BMR Formula">
                 <p id="title-formula"><strong>(Metric) Female:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-mifflin-formula-female-metric.png" alt="BMR Formula - Metric Female" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-mifflin-formula-female-metric.png" alt="BMR Formula - Metric Female" title="BMR Formula">
                 <p id="title-formula"><strong>(Imperial) Female:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-mifflin-formula-female-imperial.png" alt="BMR Formula - Imperial Female" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-mifflin-formula-female-imperial.png" alt="BMR Formula - Imperial Female" title="BMR Formula">
 
                 <p id="title-formula"><strong>Revised Harris-Benedict Equation:</strong></p>
                 <p id="title-formula"><strong>(Metric) Male:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-harris-formula-male-metric.png" alt="BMR Formula - Metric Male" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-harris-formula-male-metric.png" alt="BMR Formula - Metric Male" title="BMR Formula">
                 <p id="title-formula"><strong>(Imperial) Male:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-harris-formula-male-imperial.png" alt="BMR Formula - Imperial Male" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-harris-formula-male-imperial.png" alt="BMR Formula - Imperial Male" title="BMR Formula">
                 <p id="title-formula"><strong>(Metric) Female:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-harris-formula-female-metric.png" alt="BMR Formula - Metric Female" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-harris-formula-female-metric.png" alt="BMR Formula - Metric Female" title="BMR Formula">
                 <p id="title-formula"><strong>(Imperial) Female:</strong></p>
-                <img id="bmr-formula" src="/graphics/formulas/bmr-harris-formula-female-imperial.png" alt="BMR Formula - Imperial Female" title="BMR Formula">
+                <img id="bmr-formula" src="../graphics/formulas/bmr-harris-formula-female-imperial.png" alt="BMR Formula - Imperial Female" title="BMR Formula">
                 
                 <p id="title-formula"><strong>Katch-McArdle Equation:</strong></p>
                 <p id="title-formula"><strong>Katch-McArdle Lean Body Mass (LBM) Equation:</strong></p>
-                <img id="bmr-katch-lbm-formula" src="/graphics/formulas/bmr-katch-lbm-formula.png" alt="BMR Formula - Imperial" title="BMR Formula">
+                <img id="bmr-katch-lbm-formula" src="../graphics/formulas/bmr-katch-lbm-formula.png" alt="BMR Formula - Imperial" title="BMR Formula">
                 <p id="title-formula"><strong>Katch-McArdle Equation:</strong></p>
-                <img id="bmr-katch-formula" src="/graphics/formulas/bmr-katch-formula.png" alt="BMR Formula - Imperial" title="BMR Formula">
+                <img id="bmr-katch-formula" src="../graphics/formulas/bmr-katch-formula.png" alt="BMR Formula - Imperial" title="BMR Formula">
                 <table id="bmr-activity">
                     <tr>
                         <td><strong>Activity Level</strong></td>
@@ -303,7 +340,7 @@
                     TDEE represents the total number of calories you burn in a day, including both your basal metabolic rate (BMR) and calories burned through activity. It's an essential metric for determining how much you should eat to maintain, lose, or gain weight.
                 </p>
                 <p id="title-formula"><strong>Formula to Calculate TDEE</strong></p>
-                <img id="tdee-formula" src="/graphics/formulas/tdee-formula.png" alt="BMI Formula - Imperial" title="BMI Formula">
+                <img id="tdee-formula" src="../graphics/formulas/tdee-formula.png" alt="BMI Formula - Imperial" title="BMI Formula">
                 <table id="tdee-table">
                     <tr>
                         <td><strong>Activity Level</strong></td>
@@ -367,30 +404,30 @@
                     </tr>
                 </table>
                 <p id="title-formula"><strong>How to Calculate Protein Intake</strong></p>
-                <img id="protein-intake-formula" src="/graphics/formulas/protein-intake-formula.png" alt="BMI Formula - Imperial" title="Protein Intake Formula">            
+                <img id="protein-intake-formula" src="../graphics/formulas/protein-intake-formula.png" alt="BMI Formula - Imperial" title="Protein Intake Formula">            
             </div>
         </div>
     </section>
     <footer>
         <div class="footer-container">
             <ul class="footer-links">
-                <li><a href="/index.html">HOME</a></li>
-                <li><a href="/files/blog.html">BLOG</a></li>
-                <li><a href="/files/about.html">ABOUT</a></li>
-                <li><a href="/files/laws.html">DISCLAIMER</a></li>
-                <li><a href="/files/about.html">CONTACT</a></li>
-                <li><a href="/files/laws.html">PRIVACY POLICY</a></li>
-                <li><a href="/files/laws.html">TERMS OF USE</a></li>
+                <li><a href="../index.php">HOME</a></li>
+                <li><a href="./blog.php">BLOG</a></li>
+                <li><a href="./about.php">ABOUT</a></li>
+                <li><a href="./laws.html">DISCLAIMER</a></li>
+                <li><a href="./about.php">CONTACT</a></li>
+                <li><a href="./laws.html">PRIVACY POLICY</a></li>
+                <li><a href="./laws.html">TERMS OF USE</a></li>
             </ul>
             <div class="footer-socials">
                 <a href="https://www.facebook.com" target="_blank">
-                    <img src="/graphics/socials/facebook.png" alt="Facebook" title="Facebook">
+                    <img src="../graphics/socials/facebook.png" alt="Facebook" title="Facebook">
                 </a>
                 <a href="https://www.instagram.com" target="_blank">
-                    <img src="/graphics/socials/instagram.png" alt="Instagram" title="Instagram">
+                    <img src="../graphics/socials/instagram.png" alt="Instagram" title="Instagram">
                 </a>
                 <a href="https://www.twitter.com" target="_blank">
-                    <img src="/graphics/socials/twitter.png" alt="Twitter" title="Twitter">
+                    <img src="../graphics/socials/twitter.png" alt="Twitter" title="Twitter">
                 </a>
             </div>
             <div class="footer-copyright">
@@ -398,7 +435,7 @@
             </div>
         </div>
     </footer>
-    <script src="/index.js"></script>
-    <script src="calculator.js"></script>
+    <script src="../index.js"></script>
+    <script src="./calculator.js"></script>
 </body>
 </html>

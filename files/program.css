@@ -24,6 +24,12 @@ header{
     border: 1px solid #dadada;
 }
 
+#header-welcome-message{
+    font: 700 2.5em/1em "Trebuchet MS";
+    color: #232323;
+    text-transform: uppercase;
+}
+
 .header-sections:nth-child(:first-child){
     width: 70%;
 }
@@ -69,7 +75,7 @@ header{
     color: #182b59;
     padding: 10px;
     appearance: none; 
-    background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
+    background: url('../graphics/buttons/arrow-down.png') no-repeat right 10px center;
     background-color: #f5f5f5;
     border-radius: 5px;
     outline: none;
@@ -125,7 +131,7 @@ main{
 }
 
 .delete {
-    background: url('/graphics/svg/remove.svg') no-repeat center center;
+    background: url('../graphics/svg/remove.svg') no-repeat center center;
     border: 1px solid #ffffff;
     border-radius: 10px;
     width: 30px;
@@ -181,7 +187,7 @@ main{
     border-radius: 10px;
     width: calc(100% - 17px);
     margin: 5px auto;
-    background: url('/graphics/svg/add.svg') no-repeat center center;
+    background: url('../graphics/svg/add.svg') no-repeat center center;
     border: 1px solid #11182a;
     display: flex;
     justify-content: center;
@@ -190,7 +196,7 @@ main{
 }
 
 .split .add:hover{
-    background: url('/graphics/svg/add-white.svg') no-repeat center center;
+    background: url('../graphics/svg/add-white.svg') no-repeat center center;
     cursor: pointer;
 }
 
@@ -213,7 +219,7 @@ main{
 }
 
 .workouts-div .delete {
-    background: url('/graphics/svg/remove.svg') no-repeat center center;
+    background: url('../graphics/svg/remove.svg') no-repeat center center;
     border: 1px solid #ffffff;
     border-radius: 10px;
     width: 20%;
