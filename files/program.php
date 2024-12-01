@@ -72,27 +72,34 @@ $conn->close();
                 <h1 id="header-welcome-message">HI, <?php echo htmlspecialchars($firstName); ?>!</h1>
                 <p>Let's start to plan your weekly workouts.</p>
             </div>
-            <div class="header-sections">
-                <div class="header-sections-select">
-                    <label for="workout-splits">Workout Splits</label>
-                    <select name="header-workout-splits" id="workout-splits">
-                    <option value="" disabled selected>Select Workout Split</option>
-                    <option value="full-body">Full Body</option>
-                    <option value="upper-lower">Upper Lower Split</option>
-                    <option value="push-pull-legs">Push Pull Legs Split</option>
-                    <option value="push-pull">Push Pull Split</option>
-                    <option value="bro-split">Body Part Workout Split (Bro Split)</option>
-                </select>
-                </div>
-                <div class="header-sections-select">
-                <label for="workout-splits-options">Days</label>
-                <select name="header-workout-splits-options" id="workout-splits-options">
-                    <option value="" disabled selected>Select Days</option>
-                </select>
-                </div>
-            </div>
         </div>
     </header>
+    <section>
+        <div class="section-container">
+            <div class="section-select-container">
+                <div class="section-select">
+                    <label for="workout-splits">Workout Splits</label>
+                    <select name="header-workout-splits" id="workout-splits">
+                        <option value="" disabled selected>Select Workout Split</option>
+                        <option value="full-body">Full Body</option>
+                        <option value="upper-lower">Upper Lower Split</option>
+                        <option value="push-pull-legs">Push Pull Legs Split</option>
+                        <option value="push-pull">Push Pull Split</option>
+                        <option value="bro-split">Body Part Workout Split (Bro Split)</option>
+                    </select>
+                </div>
+                <div class="section-select">
+                    <label for="workout-splits-options">Days</label>
+                    <select name="header-workout-splits-options" id="workout-splits-options">
+                        <option value="" disabled selected>Select Days</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section-save">
+                <button id="save-program">SAVE PROGRAM</button>
+            </div>
+        </div>
+    </section>
     <main>
         <div class="main-container">                
             <div class="main-days" id="monday">

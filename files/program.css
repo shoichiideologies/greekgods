@@ -19,25 +19,17 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 50px;
+    padding: 30px 50px 5px 50px;
     color: rgb(45, 45, 45);
-    border: 1px solid #dadada;
+    border-top: 1px solid #dadada;
 }
 
 #header-welcome-message{
     font: 700 2.5em/1em "Trebuchet MS";
     color: #232323;
     text-transform: uppercase;
-}
-
-.header-sections:nth-child(:first-child){
-    width: 70%;
-}
-
-.header-container h1{
-    font: 600 2rem/1em "Trebuchet MS";
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
 
 .header-container p{
@@ -46,28 +38,39 @@ header{
     margin: 5px 0;
 }
 
-.header-sections:nth-child(2){
-    width: 40%;
+/*--------SECTION-----------*/
+
+section{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.section-container{
+    display: flex;
+    padding: 10px 75px 30px 50px;
+    color: rgb(45, 45, 45);
+    border-bottom: 1px solid #dadada;
+}
+
+.section-select-container{
+    width: 50%;
+    display: flex;
+    margin-right: 50px;
+}
+
+.section-select{
     display: flex;
     flex-direction: column;
-    padding-left: 163px;
+    margin-right: 20px;
 }
 
-.header-sections-select{
-    display: flex;
-    align-items: center;
-}
-
-.header-sections label{
+.section-select label{
     font: 500 0.845em/1em "Trebuchet MS";
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    width: 110px;
-    margin-top: 10px;
+    width: 320px;
 }
 
-.header-container select{
+.section-select select{
     border-radius: 5px;
     outline: none;
     border: 0;
@@ -78,12 +81,32 @@ header{
     background: url('../graphics/buttons/arrow-down.png') no-repeat right 10px center;
     background-color: #f5f5f5;
     border-radius: 5px;
-    outline: none;
     background-size: 20px;
     height: 35px;
     margin-top: 10px;
     width: 100%;
-    max-width: 250px;
+    max-width: 320px;
+}
+
+.section-save{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-left: auto;
+    width: 50%;
+}
+
+#save-program{
+    font: 700 0.845em/1em "Trebuchet MS";
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    background-color: #000000;
+    color: white;
+    padding: 0px 30px;
+    cursor: pointer;
+    justify-content: flex-end;
+    align-content: flex-end;
 }
 
 /*--------MAIN-----------*/
