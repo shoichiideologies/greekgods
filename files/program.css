@@ -150,7 +150,7 @@ main{
 }
 
 .split-name:hover::after {
-    content: url('/graphics/svg/edit-gray.svg');
+    content: url('../graphics/svg/edit-gray.svg');
 }
 
 .workouts-div input[readonly] {

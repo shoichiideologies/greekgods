@@ -7,6 +7,8 @@ if (!$userId) {
     die("Error: User ID not provided.");
 }
 
+echo "<script>const userId = $userId;</script>";
+
 // Database connection details
 $localhost = "localhost";
 $username = "root";
@@ -31,7 +33,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
-    // Pass user data to the front end (can be done with JSON or directly in JS)
+    // Pass user data to the front end
     echo "<script>const userData = " . json_encode($user) . ";</script>";
 } else {
     echo "Error: User not found.";
@@ -53,16 +55,16 @@ $conn->close();
 <body>
     <nav>
         <button class="nav-menu-button" id="nav-menu-button">
-            <img src="/Github/greekgods/graphics/svg/menu-black.svg" alt="Menu" title="Menu">
+            <img src="../graphics/svg/menu-black.svg" alt="Menu" title="Menu">
         </button>
         <div class="nav-logo">
-            <img src="/Github/greekgods/graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="location.reload(); return false;">
+            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="location.reload(); return false;">
         </div>
         <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/Github/greekgods/files/register.html'">
-            <img src="/Github/greekgods/graphics/svg/profile.svg" alt="Profile" title="Profile">
+            <img src="../graphics/svg/profile.svg" alt="Profile" title="Profile">
         </button>
         <ul class="nav-links" id="nav-links">
-            <li><a href="/Github/greekgods/index.html" onclick="location.reload(); return false;">HOME</a></li>
+            <li><a href="/Github/greekgods/index.html">HOME</a></li>
             <li><a href="/Github/greekgods/files/program.html">PROGRAM</a></li>
             <li><a href="/Github/greekgods/files/blog.html">BLOG</a></li>
             <li><a href="/Github/greekgods/files/calculator.html">CALCULATOR</a></li>
@@ -73,6 +75,10 @@ $conn->close();
         </div>
     </nav>
     <header>
+            <div id="header-welcome" style="box-sizing:border-box;width:100%;padding:10px 30px 0px 30px;display:inline-block;background-color:white;border-top:1px solid lightgray">
+                <h3 style="font-size: 3em;text-transform:uppercase;color:black;padding:0px;margin-top:20px;">HI, <?php echo htmlspecialchars($user['firstName']); ?></h3>
+                <p style="font:500 0.945em/1em 'Trebuchet MS';color:#555;text-align:center">Welcome to GreekGods! Let's start you fitness journey by embracing your body numbers!. Navigate to <a href="./blog.html">Blog</a> for step by step comprehensive fitness instructions.</p>
+            </div> 
 
         <div class="header-container">
             <div class="header-info" id="header-personal-info">
@@ -182,7 +188,6 @@ $conn->close();
             const protein = (data.weight * 1.6).toFixed(0);
 
             // Update HTML Elements
-            document.getElementById("first-name").textContent = data.firstName;
             document.getElementById("name").textContent = fullName;
             document.getElementById("birthdate").textContent = data.birthdate;
             document.getElementById("age").textContent = age;
