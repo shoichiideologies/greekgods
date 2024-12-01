@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Retrieve email and password from POST data
 $email = $_POST['email'] ?? null;
 $password = $_POST['password'] ?? null;
@@ -14,21 +15,17 @@ if (!$email || !$password || !$firstName || !$lastName || !$birthdate || !$heigh
     die("Error: Missing required fields.");
 }
 
-// Database connection details
 $localhost = "localhost";
 $username = "root";
-$dbPassword = ""; // Database password (leave empty if no password is set)
-$dbname = "register"; // Database name
+$dbPassword = ""; 
+$dbname = "register"; 
 
-// Establish a connection to the database
 $conn = new mysqli($localhost, $username, $dbPassword, $dbname);
 
-// Check if the connection was successful
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Prepare SQL statement to insert data into the 'users' table
 $stmt = $conn->prepare("INSERT INTO users (email, password, firstName, lastName, birthdate, height, weight, activity) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("ssssssss", $email, $password, $firstName, $lastName, $birthdate, $height, $weight, $activity);
 
@@ -36,9 +33,10 @@ $stmt->bind_param("ssssssss", $email, $password, $firstName, $lastName, $birthda
 if ($stmt->execute()) {
     // Get the user_id of the last inserted record
     $userId = $conn->insert_id;
+    $_SESSION['user_id'] = $userId;
 
-    // Redirect to profile.php with user_id in the query string
-    header("Location: /Github/greekgods/files/profile.php?user_id=" . $userId);
+    // Redirect to profile.php with user_id in the query 'string
+    header("Location: /Github/greekgods/files/profile.php");
     exit;
 } else {
     echo "Error: " . $stmt->error;

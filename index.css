@@ -116,7 +116,7 @@ nav {
     justify-content: center;
 }
 
-.nav-button button {
+#register-button {
     font: 700 0.845em/1em "Trebuchet MS";
     height: 50px;
     border-radius: 5px;
@@ -129,7 +129,33 @@ nav {
     align-content: flex-end;
 }
 
-.nav-button img {
+#profile-name{
+    font: 500 0.845em/1em "Trebuchet MS";
+}
+
+#logout{
+    font: 700 0.845em/1em "Trebuchet MS";
+    height: 50px;
+    border-radius: 5px;
+    border: 0;
+    background-color: black;
+    color: white;
+    padding: 0px 30px;
+    cursor: pointer;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+/*--------------ALTERNATIVES----------------*/
+
+#profile-button {
+    content: url(./graphics/svg/profile.svg);
+    padding: 0px 5px 0px 30px;
+    cursor: pointer;
+    justify-content: flex-end;
+    align-content: flex-end;
+    background: none;
+    border: none;
     display: none;
 }
 
@@ -311,9 +337,6 @@ footer{
         background-color: white;
         display: block;
         margin-right: 10px;
-    }
-
-    .nav-menu-profile:hover{
         cursor: pointer;
     }
 

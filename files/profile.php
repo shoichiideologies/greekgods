@@ -1,14 +1,13 @@
 <?php
-// Get the user_id from the query string
-$userId = $_GET['user_id'] ?? null;
+session_start();
+$userId = $_SESSION['user_id'];
 
 // Check if user_id is provided
 if (!$userId) {
     die("Error: User ID not provided.");
 }
 
-echo "<script>const userId = $userId;</script>";
-
+// echo "<script>const userId = $userId;</script>";
 // Database connection details
 $localhost = "localhost";
 $username = "root";
@@ -29,6 +28,7 @@ $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 
+
 // Fetch user data
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
@@ -48,35 +48,43 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../index.css">   
-    <link rel="stylesheet" href="./profile.css">
+    <link rel="icon" type="image/x-icon" href="../graphics/logo/logo.png">
+    <!-- <link rel="stylesheet" href="../index.css">    -->
+    <link rel="stylesheet" href="profile.css">
+    <script type="text/javascript">
+        const userId = <?php echo json_encode($userId); ?>;
+    </script>
     <title>GreekGods | Profile</title>
 </head>
-<body data-user-id="<?php echo htmlspecialchars($userId); ?>">
+<!-- data-user-id="<?php echo htmlspecialchars($userId); ?>" -->
+<body>
     <nav>
         <button class="nav-menu-button" id="nav-menu-button">
             <img src="../graphics/svg/menu-black.svg" alt="Menu" title="Menu">
         </button>
         <div class="nav-logo">
-            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="location.reload(); return false;">
+            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='/Github/greekgods/index.php'">
         </div>
         <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/Github/greekgods/files/register.html'">
             <img src="../graphics/svg/profile.svg" alt="Profile" title="Profile">
         </button>
         <ul class="nav-links" id="nav-links">
-            <li><a href="/Github/greekgods/index.html">HOME</a></li>
-            <li><a href="/Github/greekgods/files/program.html">PROGRAM</a></li>
-            <li><a href="/Github/greekgods/files/blog.html">BLOG</a></li>
-            <li><a href="/Github/greekgods/files/calculator.html">CALCULATOR</a></li>
-            <li><a href="/Github/greekgods/files/about.html">ABOUT</a></li>
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="./program.html">PROGRAM</a></li>
+            <li><a href="./blog.html">BLOG</a></li>
+            <li><a href="./calculator.html">CALCULATOR</a></li>
+            <li><a href="./about.html">ABOUT</a></li>
         </ul>
         <div class="nav-button">
-            <button onclick="window.location.href='/Github/greekgods/files/register.html'">GET STARTED</button>
+            <button id="register-button" onclick="window.location.href='./register.html'">GET STARTED</button>
+            <!-- <button id="profile-button" onclick="location.reload(); return false;"><img src="../graphics/svg/profile.svg" alt="Profile" title="Profile"></button> -->
+            <!-- <span id="profile-name"><?php echo htmlspecialchars($user['firstName'] . ' ' . $user['lastName']); ?></span> -->
+            <button id="logout">LOGOUT</button>
         </div>
     </nav>
     <header>
             <div id="header-welcome" style="box-sizing:border-box;width:100%;padding:10px 30px 0px 30px;display:inline-block;background-color:white;border-top:1px solid lightgray">
-                <h3 style="font-size: 3em;text-transform:uppercase;color:black;padding:0px;margin-top:20px;">HI, <?php echo htmlspecialchars($user['firstName']); ?></h3>
+                <h3 style="font-size: 3em;text-transform:uppercase;color:black;padding:0px;margin-top:20px;">HI, <?php echo htmlspecialchars($user['firstName']); ?>!</h3>
                 <p style="font:500 0.945em/1em 'Trebuchet MS';color:#555;text-align:center">Welcome to GreekGods! Let's start you fitness journey by embracing your body numbers!. Navigate to <a href="./blog.html">Blog</a> for step by step comprehensive fitness instructions.</p>
             </div> 
 
@@ -113,7 +121,7 @@ $conn->close();
     <footer>
         <div class="footer-container">
             <ul class="footer-links">
-                <li><a href="../index.html">HOME</a></li>
+                <li><a href="../index.php">HOME</a></li>
                 <li><a href="./blog.html">BLOG</a></li>
                 <li><a href="./about.html">ABOUT</a></li>
                 <li><a href="./laws.html">DISCLAIMER</a></li>
@@ -137,7 +145,6 @@ $conn->close();
             </div>
         </div>
     </footer>
-    <script src="index.js" defer></script>
     <script>
         function calculateDerivedData(data) {
             const fullName = `${data.firstName} ${data.lastName}`;
@@ -207,6 +214,22 @@ $conn->close();
 
         // Initialize user data and calculate derived values
         calculateDerivedData(userData);
+
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const userId = document.body.getAttribute('data-user-id');
+        //     console.log("User ID from body:", userId);
+        //     alert("User ID from body: " + userId);
+        //     if (userId) {
+        //         const links = document.querySelectorAll('#nav-links a');
+        //         links.forEach(link => {
+        //             const url = new URL(link.href);
+        //             url.searchParams.set('user_id', userId);
+        //             link.href = url.toString();
+        //         });
+        //     }
+        // });
     </script>
+    <script src="../index.js" defer></script>
+    <script src="./profile.js"></script>
 </body>
 </html>

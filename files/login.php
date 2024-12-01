@@ -1,14 +1,13 @@
 <?php
-// Step 1: Establish database connection
-$servername = "localhost"; // Change this to your DB host
-$username = "root"; // Your database username
-$password = ""; // Your database password
-$dbname = "register"; // Your database name
+session_start();
 
-// Create connection
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "register"; 
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -35,9 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Fetch the user_id
         $row = $result->fetch_assoc();
         $userId = $row['user_id'];
+        $_SESSION['user_id'] = $userId;
 
         // Redirect to the profile page with user_id as a query parameter
-        header("Location: ./profile.php?user_id=" . $userId);
+        header("Location: ./profile.php");
         exit();
     } else {
         // No matching user found, set error message
