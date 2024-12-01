@@ -3,19 +3,19 @@ const navMenuButton = document.getElementById('nav-menu-button');
 const header = document.querySelector('header');
 const nav = document.querySelector('nav');
 
-// Check if the userId variable is available
-if (typeof userId !== 'undefined') {
-    console.log("User ID:", userId); // Log the user_id for debugging
-
-    // Add user_id to links dynamically
-    const links = navLinks.querySelectorAll('a');
-    links.forEach(link => {
-        const url = new URL(link.href);
-        url.searchParams.set('user_id', userId); // Append user_id
-        link.href = url.toString();
-    });
-}
-
+document.addEventListener("DOMContentLoaded", () => {
+    const userId = document.body.getAttribute('data-user-id');
+    console.log("User ID from body:", userId);
+    // Append user_id to navigation links
+    if (userId) {
+        const links = document.querySelectorAll('#nav-links a');
+        links.forEach(link => {
+            const url = new URL(link.href);
+            url.searchParams.set('user_id', userId);
+            link.href = url.toString();
+        });
+    }
+});
 navMenuButton.addEventListener('click', () => {
     navLinks.classList.toggle('show');
 

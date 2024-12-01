@@ -52,7 +52,7 @@ $conn->close();
     <link rel="stylesheet" href="./profile.css">
     <title>GreekGods | Profile</title>
 </head>
-<body>
+<body data-user-id="<?php echo htmlspecialchars($userId); ?>">
     <nav>
         <button class="nav-menu-button" id="nav-menu-button">
             <img src="../graphics/svg/menu-black.svg" alt="Menu" title="Menu">
@@ -137,7 +137,7 @@ $conn->close();
             </div>
         </div>
     </footer>
-    <script src="../index.js"></script>
+    <script src="./index.js" defer></script>
     <script>
         function calculateDerivedData(data) {
             const fullName = `${data.firstName} ${data.lastName}`;
