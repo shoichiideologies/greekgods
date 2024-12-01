@@ -73,10 +73,6 @@ $conn->close();
         </div>
     </nav>
     <header>
-            <div id="header-welcome" style="box-sizing:border-box;width:100%;padding:10px 30px 0px 30px;display:inline-block;background-color:white;border-top:1px solid lightgray">
-                <h3 style="font-size: 3em;text-transform:uppercase;color:black;padding:0px;margin-top:20px;">HI, <?php echo htmlspecialchars($user['firstName']); ?></h3>
-                <p style="font:500 0.945em/1em 'Trebuchet MS';color:#555;text-align:center">Welcome to GreekGods! Let's start you fitness journey by embracing your body numbers!. Navigate to <a href="./blog.html">Blog</a> for step by step comprehensive fitness instructions.</p>
-            </div> 
 
         <div class="header-container">
             <div class="header-info" id="header-personal-info">
