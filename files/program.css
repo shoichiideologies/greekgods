@@ -51,23 +51,24 @@ section{
     padding: 10px 75px 30px 50px;
     color: rgb(45, 45, 45);
     border-bottom: 1px solid #dadada;
+    gap: 15px;
 }
 
 .section-select-container{
     width: 50%;
     display: flex;
-    margin-right: 50px;
+    gap: 20px;
 }
 
 .section-select{
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
+    width: 50%;
 }
 
 .section-select label{
     font: 500 0.845em/1em "Trebuchet MS";
-    width: 320px;
+    width: 50%;
 }
 
 .section-select select{
@@ -85,20 +86,20 @@ section{
     height: 35px;
     margin-top: 10px;
     width: 100%;
-    max-width: 320px;
 }
 
 .section-save{
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    margin-left: auto;
     width: 50%;
 }
 
-#save-program{
-    font: 700 0.845em/1em "Trebuchet MS";
-    height: 50px;
+#save-program, 
+#change-program, 
+#edit-program{
+    font: 500 0.845em/1em "Trebuchet MS";
+    height: 35px;
     border-radius: 5px;
     border: 0;
     background-color: #000000;
@@ -107,6 +108,15 @@ section{
     cursor: pointer;
     justify-content: flex-end;
     align-content: flex-end;
+    margin: 0 5px;
+    width: 33.33%;
+    max-width: 280px;
+}
+
+#save-program:hover, 
+#change-program:hover, 
+#edit-program:hover{
+    background-color: #292929;
 }
 
 /*--------MAIN-----------*/
@@ -221,11 +231,7 @@ main{
 .split .add:hover{
     background: url('../graphics/svg/add-white.svg') no-repeat center center;
     cursor: pointer;
-}
-
-.split .add:hover{
     background-color: #11182a;
-    cursor: pointer;
 }
 
 /*---------ADD DIVS DESIGN----------*/
@@ -298,7 +304,7 @@ main{
 .add-workout {
     display: none; /* Initially hidden */
     position: absolute; /* Position it absolutely */
-    z-index: 999; /* Make sure it appears above other elements */
+    z-index: 1000; /* Make sure it appears above other elements */
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -387,6 +393,18 @@ main{
     .header-container .header-sections{
         width: 100%;
         padding-left: 0;
+    }
+
+    .section-container{
+        flex-direction: column;;
+    }
+
+    .section-select-container{
+        width: 100%;
+    }
+
+    .section-save{
+        width: 100%;
     }
     
 }

@@ -2,16 +2,16 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../login.php");
+    header("Location: ./login.php");
     exit();
 }
 
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-$servername = "localhost"; // Replace with your database server
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "register"; // Replace with your database name
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "register";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -19,6 +19,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Fetch user details
 $sql = "SELECT firstName, lastName FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userId);
@@ -26,6 +27,85 @@ $stmt->execute();
 $stmt->bind_result($firstName, $lastName);
 $stmt->fetch();
 $stmt->close();
+
+// Check if a program already exists for the user
+$existingProgram = false;
+$existingProgramDetails = null;  // Initialize this as null
+
+if ($userId) {
+    // Check if there's an existing program for the user
+    $sql = "SELECT program, schedule FROM program WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // If a program exists, fetch the details
+    if ($result->num_rows > 0) {
+        $existingProgram = true;
+        $existingProgramDetails = $result->fetch_assoc();  // Store the program and schedule details
+    }
+
+    $stmt->close();
+}
+
+// Fetch user workouts
+$workoutData = [];
+if ($userId) {
+    $sql = "SELECT workoutName, workoutReps, workoutSets, workoutDay FROM workouts WHERE user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $workoutData[] = $row;
+    }
+    $stmt->close();
+}
+
+// Handle the POST request when saving the program
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['workouts'], $_POST['split'], $_POST['days'])) {
+    $workouts = json_decode($_POST['workouts'], true);
+    $split = $_POST['split'];
+    $days = $_POST['days'];
+
+    // Start transaction
+    $conn->begin_transaction();
+
+    try {
+        // Save program split and days in the program table
+        $stmt = $conn->prepare("INSERT INTO program (user_id, program, schedule) VALUES (?, ?, ?)");
+        $stmt->bind_param("iss", $userId, $split, $days);
+        $stmt->execute();
+        $stmt->close();
+
+        // Save workouts in the workouts table
+        $stmt = $conn->prepare("INSERT INTO workouts (user_id, workoutName, workoutReps, workoutSets, workoutDay) VALUES (?, ?, ?, ?, ?)");
+        foreach ($workouts as $workout) {
+            if (isset($workout['workoutDay'], $workout['workoutName'], $workout['workoutSets'], $workout['workoutReps'])) {
+                $workoutDay = $workout['workoutDay'];
+                $workoutName = $workout['workoutName'];
+                $workoutSets = $workout['workoutSets'];
+                $workoutReps = $workout['workoutReps'];
+
+                $stmt->bind_param("isiis", $userId, $workoutName, $workoutReps, $workoutSets, $workoutDay);
+                $stmt->execute();
+            }
+        }
+        $stmt->close();
+
+        // Commit transaction
+        $conn->commit();
+
+        echo json_encode(['success' => true, 'message' => 'Program saved successfully!']);
+    } catch (Exception $e) {
+        // Rollback transaction on error
+        $conn->rollback();
+        echo json_encode(['success' => false, 'message' => 'Failed to save program: ' . $e->getMessage()]);
+    }
+    exit();
+}
+
 $conn->close();
 ?>
 
@@ -34,11 +114,14 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="./graphics/logo/logo.png">
+    <link rel="icon" type="image/x-icon" href="../graphics/logo/logo.png">
     <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="./program.css">
     <script type="text/javascript">
         const userId = <?php echo json_encode($userId); ?>;
+        const workoutData = <?php echo json_encode($workoutData); ?>;
+        const existingProgram = <?php echo json_encode($existingProgram); ?>;
+        const existingProgramDetails = <?php echo json_encode($existingProgramDetails); ?>;
     </script>
     <title>GreekGods | Program</title>
 </head>
@@ -96,6 +179,8 @@ $conn->close();
                 </div>
             </div>
             <div class="section-save">
+                <button id="edit-program">EDIT PROGRAM</button>
+                <button id="change-program">CHANGE PROGRAM</button>
                 <button id="save-program">SAVE PROGRAM</button>
             </div>
         </div>
@@ -209,6 +294,156 @@ $conn->close();
         </div>
     </footer>
     <script src="../index.js"></script>
-    <script src="program.js"></script>
+    <script src="./program.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const workoutSplits = document.getElementById("workout-splits");
+            const workoutSplitsOptions = document.getElementById("workout-splits-options");
+            const saveButton = document.getElementById("save-program");
+            const changeButton = document.getElementById("change-program");
+
+            // Check if an existing program is present
+            if (existingProgram) {
+                // Populate the select elements with existing program details
+                if (existingProgramDetails) {
+                    const { program, schedule } = existingProgramDetails;
+                    // Set the values in the dropdowns
+                    workoutSplits.value = program;
+                    workoutSplitsOptions.value = schedule;
+
+                    // Disable the dropdowns and save button
+                    workoutSplits.disabled = true;
+                    workoutSplitsOptions.disabled = true;
+                    saveButton.disabled = true;
+
+                }
+            }
+
+            // Enable editing when 'CHANGE PROGRAM' is clicked
+            changeButton.addEventListener("click", () => {
+                workoutSplits.disabled = false;
+                workoutSplitsOptions.disabled = false;
+                saveButton.disabled = false;
+            });
+
+            // Populate workouts from fetched data
+            workoutData.forEach(workout => {
+                const { workoutDay, workoutName, workoutReps, workoutSets } = workout;
+                const dayElement = document.getElementById(workoutDay);
+
+                if (dayElement) {
+                    const workoutsDiv = dayElement.querySelector('.workouts');
+
+                    // Create a new workout entry
+                    const workoutDiv = document.createElement('form');
+                    workoutDiv.className = 'workouts-div';
+
+                    workoutDiv.innerHTML = `
+                        <input type="text" class="workout-name" value="${workoutName}" readonly>
+                        <div class="number">
+                            <input type="text" class="workout-sets" value="${workoutSets} x sets" readonly>
+                            <input type="text" class="workout-reps" value="${workoutReps} x reps" readonly>
+                        </div>
+                        <button class="delete"></button>
+                    `;
+
+                    workoutsDiv.appendChild(workoutDiv);
+                }
+            });
+        });
+
+        document.getElementById('save-program').addEventListener('click', async () => {
+            const split = document.getElementById('workout-splits').value;
+            const days = document.getElementById('workout-splits-options').value;
+
+            if (!split || !days) {
+                alert("Please select a workout split and days.");
+                return;
+            }
+
+            const mainDays = document.querySelectorAll('.main-days');
+            const workouts = [];
+
+            mainDays.forEach(day => {
+                const workoutDay = day.id;
+                const workoutDivs = day.querySelectorAll('.workouts-div');
+
+                workoutDivs.forEach(workoutDiv => {
+                    const workoutName = workoutDiv.querySelector('.workout-name')?.value.trim();
+                    const workoutSets = workoutDiv.querySelector('.workout-sets')?.value;
+                    const workoutReps = workoutDiv.querySelector('.workout-reps')?.value;
+
+                    if (workoutName && workoutSets && workoutReps) {
+                        workouts.push({
+                            workoutDay,
+                            workoutName,
+                            workoutSets,
+                            workoutReps
+                        });
+                    }
+                });
+            });
+
+            if (workouts.length > 0) {
+                const response = await fetch("", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `workouts=${JSON.stringify(workouts)}&split=${encodeURIComponent(split)}&days=${encodeURIComponent(days)}`
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    location.reload(); // Reload the page
+                } else {
+                    alert('Failed to save program: ' + result.message);
+                }
+            } else {
+                alert("Please add some workouts first.");
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const changeButton = document.getElementById("change-program");
+
+            // When "CHANGE PROGRAM" is clicked, show a confirmation prompt
+            changeButton.addEventListener("click", async () => {
+                // Check if there is anything to delete
+                if (!existingProgram || !existingProgramDetails || workoutData.length === 0) {
+                    alert("There is nothing to delete.");
+                    return;
+                }
+
+                const confirmation = confirm("Are you sure you want to change program? If yes, all of your workouts in your current program will be deleted.");
+                
+                if (confirmation) {
+                    try {
+                        // Send a request to delete the program and workouts from the database
+                        const response = await fetch("./delete_program.php", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                            },
+                            body: `userId=${encodeURIComponent(userId)}`
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            alert("Program and workouts have been deleted.");
+                            location.reload();  // Reload the page to reflect the changes
+                        } else {
+                            alert("Failed to delete program: " + result.message);
+                        }
+                    } catch (error) {
+                        alert("Error: " + error.message);
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

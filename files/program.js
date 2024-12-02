@@ -163,15 +163,23 @@ document.getElementById("workout-splits-options").addEventListener("change", fun
 
 
 document.querySelectorAll('.add').forEach(button => {
-    button.addEventListener('click', function () {
+    button.addEventListener('click', function (event) {
         const form = document.querySelector('.add-workout');
         const buttonRect = button.getBoundingClientRect();
 
-        // Position the form above the clicked button
-        form.style.left = `${buttonRect.left}px`;
-        form.style.top = `${buttonRect.top + window.scrollY - form.offsetHeight}px`;
+        // Show the form temporarily to calculate its height
+        form.style.display = 'block';
 
-        // Show the form
+        // Position the form above the clicked button
+        const formHeight = form.offsetHeight; // Calculate visible height
+        form.style.left = `${buttonRect.left}px`;
+        form.style.top = `${buttonRect.top + window.scrollY - formHeight}px`;
+
+        // Optional: Adjust position based on the cursor (event.pageX, event.pageY)
+        const cursorY = event.pageY;
+        form.style.top = `${cursorY - formHeight}px`;
+
+        // Keep the form visible
         form.style.display = 'flex';
     });
 });
@@ -346,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to disable the main-container and its children
     function disableMainContainer() {
         mainContainer.style.pointerEvents = 'none'; // Disable interaction for main-container and children
-        mainContainer.style.opacity = '0.5'; // Make it visually disabled
+        mainContainer.style.opacity = '0.8'; // Make it visually disabled
         // Ensure all buttons within .main-container are disabled
         const buttons = mainContainer.querySelectorAll('button');
         buttons.forEach(button => {
@@ -394,6 +402,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Add event listener to show an alert when interacting with the disabled container
+    mainContainer.addEventListener('click', function (event) {
+        if (mainContainer.style.pointerEvents === 'none') {
+            alert('Please select the required fields before proceeding.');
+            event.stopPropagation(); // Prevent further event propagation
+        }
+    });
+
     // Initial state: Disable main-container on page load
     disableMainContainer();
 });
@@ -415,7 +431,7 @@ document.getElementById("workout-splits-options").addEventListener("change", fun
                 const mainDaysContainer = dayElement.closest('.main-days');
                 if (splitName.textContent === "Rest" && mainDaysContainer) {
                     mainDaysContainer.style.pointerEvents = 'none'; // Disable interaction
-                    mainDaysContainer.style.opacity = '0.5'; // Make it visually disabled
+                    mainDaysContainer.style.opacity = '0.8'; // Make it visually disabled
                 } else {
                     mainDaysContainer.style.pointerEvents = 'auto'; // Enable interaction
                     mainDaysContainer.style.opacity = '1'; // Reset opacity
@@ -427,7 +443,6 @@ document.getElementById("workout-splits-options").addEventListener("change", fun
 
 document.addEventListener('DOMContentLoaded', () => {
     const mainDays = document.querySelectorAll('.main-days'); // All the days
-    const addWorkoutForm = document.querySelector('.add-workout'); // The form to add workouts
 
     // Toggle .active class when split-name is clicked
     mainDays.forEach(day => {
@@ -564,3 +579,4 @@ document.addEventListener('DOMContentLoaded', () => {
         activeAddButton.removeAttribute('data-active');
     });
 });
+
