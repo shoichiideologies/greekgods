@@ -3,8 +3,9 @@ session_start();
 $userId = $_SESSION['user_id'];
 
 // Check if user_id is provided
-if (!$userId) {
-    die("Error: User ID not provided.");
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ./login.php");
+    exit();
 }
 
 // echo "<script>const userId = $userId;</script>";
@@ -21,6 +22,29 @@ $conn = new mysqli($localhost, $username, $dbPassword, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+// Determine today's weekday in PHP
+$today = date("l"); // Returns full day name, e.g., "Monday"
+
+// Fetch workouts for the current day
+$stmt = $conn->prepare("
+    SELECT workoutName, workoutReps, workoutSets
+    FROM workouts
+    WHERE user_id = ? AND workoutDay = ?
+");
+$stmt->bind_param("is", $userId, $today);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$workouts = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $workouts[] = $row;
+    }
+}
+
+echo "<script>const workouts = " . json_encode($workouts) . ";</script>";
+
 
 // Prepare SQL statement to fetch user data
 $stmt = $conn->prepare("SELECT firstName, lastName, birthdate, height, weight, activity FROM users WHERE user_id = ?");
@@ -39,6 +63,7 @@ if ($result->num_rows > 0) {
     echo "Error: User not found.";
 }
 
+
 // Close the statement and connection
 $stmt->close();
 $conn->close();
@@ -49,7 +74,8 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../graphics/logo/logo.png">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="./profile.css">
+    <link rel="stylesheet" href="./register.css">
     <script type="text/javascript">
         const userId = <?php echo json_encode($userId); ?>;
     </script>
@@ -86,7 +112,7 @@ $conn->close();
                 <p style="font:500 0.945em/1em 'Trebuchet MS';color:#555;text-align:center">Welcome to GreekGods! Let's start you fitness journey by embracing your body numbers!. Navigate to <a href="./blog.php">Blog</a> for step by step comprehensive fitness instructions.</p>
             </div> 
 
-        <div class="header-container">
+            <div class="header-container">
             <div class="header-info" id="header-personal-info">
                 <h3>Personal Information</h3>
                 <p>Name: <span id="name"></span></p>
@@ -111,11 +137,82 @@ $conn->close();
 
             <div class="header-info" id="header-program">
                 <h3>Program</h3>
-                <div id="program">
+                <h4 id="weekday-today"></h4>
+                <h4 id="date-today"></h4> <!-- Added date display -->
+                <div class="split">
+                    <table class="workouts">
+                        <thead>
+                            <tr>
+                                <th>Workouts</th>
+                                <th>Reps</th>
+                                <th>Sets</th>
+                            </tr>
+                        </thead>
+                        <tbody id="workout-table-body">
+                            <!-- Rows will be dynamically inserted here -->
+                        </tbody>
+                    </table>
                 </div>
+                <button onclick="window.location.href='./program.php'">PROCEED TO PROGRAM</button>
+            </div>       
+        </div> 
+        <button id="edit-informations">EDIT INFORMATIONS</button>
+    </header>
+
+    <!-----------------DISPLAY:NONE----------------->
+    <section>
+        <div class="section-container">
+            <div class="form">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" >
+
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password">
+
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name">
+
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name">
+                
+            <label for="birthdate">Birthdate</label>
+            <input type="date" id="birthdate" name="birthdate">
+
+            <label for="height">Height</label>
+            <div class="section-metrics">
+                <input id="height" type="number" name="height" step="0.01"> 
+                <select name="heightMetrics" id="heightMetric">
+                    <option value="cm">.cm</option>
+                    <option value="in">.in</option>
+                    <option value="m">.m</option>
+                    <option value="ft">.ft</option>
+                </select>
+            </div>
+
+            <label for="weight">Weight</label>
+            <div class="section-metrics">
+                <input id="weight" type="number" name="weight" step="0.01">
+                <select name="weightMetrics" id="weightMetric">
+                    <option value="lb">.lb</option>
+                    <option value="kg">.kg</option>
+                </select>
+            </div>
+
+            <div class="section">
+                <label for="activity" data-target="#bmr-activity">Activity<span src="../graphics/svg/info-black.svg"></span></label>
+                <select name="activity" id="activity" required> 
+                    <option value="" disabled selected></option>
+                    <option value="sedentary">Sedentary: little or no exercise</option>
+                    <option value="light">Light: exercise 1-3 times/week</option>
+                    <option value="moderate">Moderate: exercise 3-5 times/week</option>
+                    <option value="active">Active: intense exercise 6-7 times/week</option>
+                    <option value="very_active">Very Active: very intense exercise daily, or physical job</option>
+                </select> 
+            </div>    
+            <button type="button" id="updateButton">Update</button>
             </div>
         </div>
-    </header>
+    </section>
     <footer>
         <div class="footer-container">
             <ul class="footer-links">
@@ -143,7 +240,55 @@ $conn->close();
             </div>
         </div>
     </footer>
+    <script src="./profile.js"></script>
     <script>
+         document.addEventListener("DOMContentLoaded", () => {
+        // Display today's weekday
+        const today = new Date();
+        const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        document.getElementById("weekday-today").textContent = weekdays[today.getDay()];
+
+        // Display today's date in MM, DD, YYYY format
+        document.getElementById("date-today").textContent = today.toLocaleDateString("en-US", {
+            month: "2-digit",
+            day: "2-digit",
+            year: "numeric",
+        });
+
+        // Populate the workout table
+        const workoutTableBody = document.getElementById("workout-table-body");
+        workoutTableBody.innerHTML = ""; // Clear previous rows if any
+
+        if (workouts.length > 0) {
+            workouts.forEach(workout => {
+                const row = document.createElement("tr");
+
+                const nameCell = document.createElement("td");
+                nameCell.textContent = workout.workoutName;
+
+                const repsCell = document.createElement("td");
+                repsCell.textContent = workout.workoutReps;
+
+                const setsCell = document.createElement("td");
+                setsCell.textContent = workout.workoutSets;
+
+                row.appendChild(nameCell);
+                row.appendChild(repsCell);
+                row.appendChild(setsCell);
+
+                workoutTableBody.appendChild(row);
+            });
+        } else {
+            const noWorkoutRow = document.createElement("tr");
+            const noWorkoutCell = document.createElement("td");
+            noWorkoutCell.textContent = "No workouts scheduled for today.";
+            noWorkoutCell.colSpan = 3; // Span across all columns
+            noWorkoutCell.style.textAlign = "center"; // Center the text
+            noWorkoutRow.appendChild(noWorkoutCell);
+            workoutTableBody.appendChild(noWorkoutRow);
+        }
+    });
+        
         function calculateDerivedData(data) {
             const fullName = `${data.firstName} ${data.lastName}`;
             const birthdate = new Date(data.birthdate);
@@ -213,21 +358,7 @@ $conn->close();
         // Initialize user data and calculate derived values
         calculateDerivedData(userData);
 
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     const userId = document.body.getAttribute('data-user-id');
-        //     console.log("User ID from body:", userId);
-        //     alert("User ID from body: " + userId);
-        //     if (userId) {
-        //         const links = document.querySelectorAll('#nav-links a');
-        //         links.forEach(link => {
-        //             const url = new URL(link.href);
-        //             url.searchParams.set('user_id', userId);
-        //             link.href = url.toString();
-        //         });
-        //     }
-        // });
     </script>
     <script src="../index.js" defer></script>
-    <script src="./profile.js"></script>
 </body>
 </html>

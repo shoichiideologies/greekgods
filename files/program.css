@@ -48,16 +48,14 @@ section{
 
 .section-container{
     display: flex;
-    padding: 10px 75px 30px 50px;
+    padding: 30px 50px;
     color: rgb(45, 45, 45);
     border-bottom: 1px solid #dadada;
-    gap: 15px;
 }
 
 .section-select-container{
     width: 50%;
     display: flex;
-    gap: 20px;
 }
 
 .section-select{
@@ -68,7 +66,7 @@ section{
 
 .section-select label{
     font: 500 0.845em/1em "Trebuchet MS";
-    width: 50%;
+    width: 100%;
 }
 
 .section-select select{
@@ -86,18 +84,19 @@ section{
     height: 35px;
     margin-top: 10px;
     width: 100%;
+    max-width: 320px;
 }
 
 .section-save{
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
     width: 50%;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 30px;
 }
 
 #save-program, 
-#change-program, 
-#edit-program{
+#change-program{
     font: 500 0.845em/1em "Trebuchet MS";
     height: 35px;
     border-radius: 5px;
@@ -109,13 +108,12 @@ section{
     justify-content: flex-end;
     align-content: flex-end;
     margin: 0 5px;
-    width: 33.33%;
-    max-width: 280px;
+    width: 50%;
+    max-width: 320px;
 }
 
 #save-program:hover, 
-#change-program:hover, 
-#edit-program:hover{
+#change-program:hover{
     background-color: #292929;
 }
 

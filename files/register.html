@@ -25,7 +25,7 @@
 
             <div class="terms">
                 <input type="checkbox" id="check" name="check" required>
-                <label for="check">
+                <label for="check" >
                     I agree to the GreekGods <a href="./laws.html" target="_blank">Terms of Service</a>
                     and acknowledge the <a href="./laws.html" target="_blank">Privacy Policy</a>.
                 </label>
@@ -54,7 +54,7 @@
 
             <label for="height">Height</label>
             <div class="section-metrics">
-                <input id="height" type="number" name="height" placeholder="e.g. 5.7" required> 
+                <input id="height" type="number" name="height" placeholder="e.g. 5.7" step="0.01" required> 
                 <select name="heightMetrics" id="heightMetric" required>
                     <option value="cm">.cm</option>
                     <option value="in">.in</option>
@@ -65,7 +65,7 @@
 
             <label for="weight">Weight</label>
             <div class="section-metrics">
-                <input id="weight" type="number" name="weight" placeholder="e.g. 100" required>
+                <input id="weight" type="number" name="weight" placeholder="e.g. 100" step="0.01" required>
                 <select name="weightMetrics" id="weightMetric" required>
                     <option value="lb">.lb</option>
                     <option value="kg">.kg</option>
@@ -73,7 +73,7 @@
             </div>
 
             <div class="section">
-                <label for="activity" data-target="#bmr-activity">Activity<span src="/graphics/svg/info-black.svg"></span></label>
+                <label for="activity" data-target="#bmr-activity">Activity<span src="../graphics/svg/info-black.svg"></span></label>
                 <select name="activity" id="activity" required> 
                     <option value="" disabled selected></option>
                     <option value="sedentary">Sedentary: little or no exercise</option>

@@ -127,7 +127,7 @@ input[type="date"]{
     border: 1px solid transparent;
     font: 500 0.8em/1em "Trebuchet MS";
     appearance: none; 
-    background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
+    background: url('../graphics/buttons/arrow-down.png') no-repeat right 10px center;
     outline: none;
     background-size: 20px;
     background-color: #f2f3f6;
@@ -142,7 +142,7 @@ input[type="date"]{
     border: 1px solid transparent;
     font: 500 0.8em/1em "Trebuchet MS";
     appearance: none; 
-    background: url('/graphics/buttons/arrow-down.png') no-repeat right 10px center;
+    background: url('../graphics/buttons/arrow-down.png') no-repeat right 10px center;
     outline: none;
     background-size: 20px;
     background-color: #f2f3f6;

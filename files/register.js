@@ -98,6 +98,13 @@ function validateForm() {
         isValid = false;
     }
 
+    // Checkbox validation
+    const termsCheckbox = document.getElementById('check');
+    if (!termsCheckbox.checked) {
+        displayErrorMessage('termsCheckbox', "*You must agree to the terms and conditions.");
+        isValid = false;
+    }
+
     return isValid;
 }
 

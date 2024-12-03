@@ -73,13 +73,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['workouts'], $_POST['s
     $conn->begin_transaction();
 
     try {
-        // Save program split and days in the program table
+        // Delete existing program and workouts
+        $stmt = $conn->prepare("DELETE FROM program WHERE user_id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $stmt->close();
+
+        $stmt = $conn->prepare("DELETE FROM workouts WHERE user_id = ?");
+        $stmt->bind_param("i", $userId);
+        $stmt->execute();
+        $stmt->close();
+
+        // Save new program split and days in the program table
         $stmt = $conn->prepare("INSERT INTO program (user_id, program, schedule) VALUES (?, ?, ?)");
         $stmt->bind_param("iss", $userId, $split, $days);
         $stmt->execute();
         $stmt->close();
 
-        // Save workouts in the workouts table
+        // Save new workouts in the workouts table
         $stmt = $conn->prepare("INSERT INTO workouts (user_id, workoutName, workoutReps, workoutSets, workoutDay) VALUES (?, ?, ?, ?, ?)");
         foreach ($workouts as $workout) {
             if (isset($workout['workoutDay'], $workout['workoutName'], $workout['workoutSets'], $workout['workoutReps'])) {
@@ -179,7 +190,6 @@ $conn->close();
                 </div>
             </div>
             <div class="section-save">
-                <button id="edit-program">EDIT PROGRAM</button>
                 <button id="change-program">CHANGE PROGRAM</button>
                 <button id="save-program">SAVE PROGRAM</button>
             </div>
@@ -302,29 +312,93 @@ $conn->close();
             const saveButton = document.getElementById("save-program");
             const changeButton = document.getElementById("change-program");
 
-            // Check if an existing program is present
-            if (existingProgram) {
-                // Populate the select elements with existing program details
+            const populateScheduleDropdown = (splitType) => {
+                workoutSplitsOptions.innerHTML = '<option value="" disabled selected>Select Days</option>';
+
+                if (workoutSchedules[splitType]) {
+                    Object.keys(workoutSchedules[splitType]).forEach(schedule => {
+                        const option = document.createElement("option");
+                        option.value = schedule;
+                        option.textContent = schedule;
+                        workoutSplitsOptions.appendChild(option);
+                    });
+                }
+            };
+
+            const setExistingProgramDetails = (existingProgramDetails) => {
                 if (existingProgramDetails) {
                     const { program, schedule } = existingProgramDetails;
-                    // Set the values in the dropdowns
+
+                    // Set the workout split dropdown
                     workoutSplits.value = program;
-                    workoutSplitsOptions.value = schedule;
 
-                    // Disable the dropdowns and save button
-                    workoutSplits.disabled = true;
+                    // Populate the days dropdown for the selected program
+                    populateScheduleDropdown(program);
+
                     workoutSplitsOptions.disabled = true;
-                    saveButton.disabled = true;
+                    workoutSplits.disabled = true;
 
+                    // Set the schedule value once options are loaded
+                    setTimeout(() => {
+                        const scheduleExists = [...workoutSplitsOptions.options].some(
+                            option => option.value === schedule
+                        );
+
+                        if (scheduleExists) {
+                            workoutSplitsOptions.value = schedule;
+                            // Trigger the workout plan update after setting the schedule
+                            updateWorkoutPlan();
+                        } else {
+                            console.warn(`Schedule "${schedule}" not found in dropdown options.`);
+                        }
+                    }, 0);
+                }
+            };
+
+            // If there's an existing program, set the values
+            setExistingProgramDetails(existingProgramDetails);
+
+
+            // Event listeners for dynamic dropdown population
+            workoutSplits.addEventListener("change", function () {
+                const splitType = this.value;
+                populateScheduleDropdown(splitType);
+            });
+
+            function updateWorkoutPlan() {
+                const splitType = workoutSplits.value; // Get the selected workout split
+                const selectedSchedule = workoutSplitsOptions.value;  // Get the selected schedule
+                const schedule = workoutSchedules[splitType] && workoutSchedules[splitType][selectedSchedule];
+
+                if (schedule) {
+                    // Iterate over each day and update the workout name
+                    Object.entries(schedule).forEach(([day, workout]) => {
+                        const dayElement = document.getElementById(day.toLowerCase());  // Ensure day ID is correct in HTML (lowercase)
+                        if (dayElement) {
+                            const splitName = dayElement.querySelector(".split-name");
+                            if (splitName) {
+                                splitName.textContent = workout;  // Update the split name for the day
+                            } else {
+                                console.warn(`No .split-name element found for ${day}`);
+                            }
+
+                            // Disable the main-days container and pointer events if workout is "Rest"
+                            const mainDayElement = document.querySelector(`#${day.toLowerCase()}.main-days`);
+                            if (mainDayElement && workout === "Rest") {
+                                mainDayElement.style.pointerEvents = "none";
+                                mainDayElement.style.opacity = "0.5"; // Optionally, reduce opacity to indicate disabled state
+                            } else if (mainDayElement && workout !== "Rest") {
+                                mainDayElement.style.pointerEvents = "auto";
+                                mainDayElement.style.opacity = "1"; // Reset opacity when not "Rest"
+                            }
+                        } else {
+                            console.warn(`No element found for day: ${day}`);
+                        }
+                    });
+                } else {
+                    console.warn(`No schedule found for ${splitType} and ${selectedSchedule}`);
                 }
             }
-
-            // Enable editing when 'CHANGE PROGRAM' is clicked
-            changeButton.addEventListener("click", () => {
-                workoutSplits.disabled = false;
-                workoutSplitsOptions.disabled = false;
-                saveButton.disabled = false;
-            });
 
             // Populate workouts from fetched data
             workoutData.forEach(workout => {
@@ -397,13 +471,22 @@ $conn->close();
 
                 if (result.success) {
                     alert(result.message);
-                    location.reload(); // Reload the page
+
+                    // Trigger the workout plan update to display the schedule
+                    updateWorkoutPlan();  // This will manually update the .split-name elements
+
+                    // Disable dropdowns after saving (if needed)
+                    workoutSplits.disabled = true;
+                    workoutSplitsOptions.disabled = true;
+
+                    // Optionally, reload the page or refresh data (if required)
+                    // location.reload();
                 } else {
                     alert('Failed to save program: ' + result.message);
                 }
             } else {
                 alert("Please add some workouts first.");
-            }
+            }   
         });
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -413,7 +496,7 @@ $conn->close();
             changeButton.addEventListener("click", async () => {
                 // Check if there is anything to delete
                 if (!existingProgram || !existingProgramDetails || workoutData.length === 0) {
-                    alert("There is nothing to delete.");
+                    alert("You dont have any a existing program yet.");
                     return;
                 }
 
@@ -444,6 +527,8 @@ $conn->close();
                 }
             });
         });
+
+        
     </script>
 </body>
 </html>
