@@ -26,11 +26,11 @@ header {
 }
 
 h2 {
-    font: 600 3vw/1.2em "Trebuchet MS";
+    font: 600 2.5em/1.2em "Trebuchet MS";
     text-align: center;
     color: #555;
-    margin: 100px;
-    padding: 50px;
+    margin: 30px;
+    padding: 30px;
 }
 
 header p{

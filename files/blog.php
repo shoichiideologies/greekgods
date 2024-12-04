@@ -1,23 +1,24 @@
 <?php
 session_start();
+include '../includes/connection.php';
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ./login.php");
-    exit();
-}
+// if (!isset($_SESSION['user_id'])) {
+//     header("Location: ./login.php");
+//     exit();
+// }
 
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-$servername = "localhost"; // Replace with your database server
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "register"; // Replace with your database name
+// $servername = "localhost"; // Replace with your database server
+// $username = "root"; // Replace with your database username
+// $password = ""; // Replace with your database password
+// $dbname = "register"; // Replace with your database name
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
 
 $sql = "SELECT firstName, lastName FROM users WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
