@@ -1,8 +1,8 @@
 <?php
-    $servername = "localhost"; // Replace with your database server
-    $username = "root"; // Replace with your database username
-    $password = ""; // Replace with your database password
-    $dbname = "register"; // Replace with your database name
+    $servername = "sql205.infinityfree.com"; // Replace with your database server
+    $username = "if0_37850282"; // Replace with your database username
+    $password = "4oxm7N4BFghQI9U"; // Replace with your database password
+    $dbname = "if0_37850282_register"; // Replace with your database name
     
     $conn = new mysqli($servername, $username, $password, $dbname);
     
