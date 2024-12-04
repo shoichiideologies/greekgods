@@ -1,32 +1,64 @@
+<?php
+session_start();
+
+$userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
+
+$servername = "localhost"; // Replace with your database server
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$dbname = "register"; // Replace with your database name
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT firstName, lastName FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$stmt->bind_result($firstName, $lastName);
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreekGods | Muscles</title>
+    <link rel="icon" type="image/x-icon" href="../graphics/logo/logo.png">
     <link rel="stylesheet" href="../index.css">
-    <link rel="stylesheet" href="article.css">
+    <link rel="stylesheet" href="./article.css">
+    <script type="text/javascript">
+        const userId = <?php echo json_encode($userId); ?>;
+    </script>
 </head>
 <body>
     <nav>
         <button class="nav-menu-button" id="nav-menu-button">
-            <img src="/graphics/svg/menu-black.svg" alt="Menu" title="Menu">
+            <img src="../graphics/svg/menu-black.svg" alt="Menu" title="Menu">
         </button>
         <div class="nav-logo">
-            <img src="/graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods">
+            <img src="../graphics/logo/greekgodslogo.png" alt="GreekGods" title="GreekGods" onclick="window.location.href='../index.php'">
         </div>
-        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='/files/register.html'">
-            <img src="/graphics/svg/profile.svg" alt="Profile" title="Profile">
+        <button class="nav-menu-profile" id="nav-menu-profile" onclick="window.location.href='../files/register.html'">
+            <img src="../graphics/svg/profile.svg" alt="Profile" title="Profile">
         </button>
         <ul class="nav-links" id="nav-links">
-            <li><a href="/index.html">HOME</a></li>
-            <li><a href="/files/program.html">PROGRAM</a></li>
-            <li><a href="/files/blog.html">BLOG</a></li>
-            <li><a href="/files/calculator.html">CALCULATOR</a></li>
-            <li><a href="/files/about.html">ABOUT</a></li>
+            <li><a href="../index.php">HOME</a></li>
+            <li><a href="../files/program.php">PROGRAM</a></li>
+            <li><a href="../files/blog.php">BLOG</a></li>
+            <li><a href="../files/calculator.php">CALCULATOR</a></li>
+            <li><a href="../files/about.php">ABOUT</a></li>
         </ul>
         <div class="nav-button">
-            <button onclick="window.location.href='/files/register.html'">GET STARTED</button>
+            <button id="register-button" onclick="window.location.href='../files/register.html'">GET STARTED</button>
+            <button id="profile-button" onclick="window.location.href='../files/profile.php'"><img src="../graphics/svg/profile.svg" alt="Profile" title="Profile"></button>
+            <span id="profile-name"><?php echo htmlspecialchars($firstName . " " . $lastName); ?></span>
         </div>
     </nav>
     <header>
@@ -75,23 +107,23 @@
     <footer>
         <div class="footer-container">
             <ul class="footer-links">
-                <li><a href="/index.html">HOME</a></li>
-                <li><a href="/files/blog.html">BLOG</a></li>
-                <li><a href="/files/about.html">ABOUT</a></li>
-                <li><a href="/files/laws.html">DISCLAIMER</a></li>
-                <li><a href="files/about.html">CONTACT</a></li>
-                <li><a href="/files/laws.html">PRIVACY POLICY</a></li>
-                <li><a href="/files/laws.html">TERMS OF USE</a></li>
+                <li><a href="../index.php">HOME</a></li>
+                <li><a href="../files/blog.php">BLOG</a></li>
+                <li><a href="../files/about.php">ABOUT</a></li>
+                <li><a href="../files/laws.html">DISCLAIMER</a></li>
+                <li><a href="../files/about.php">CONTACT</a></li>
+                <li><a href="../files/laws.html">PRIVACY POLICY</a></li>
+                <li><a href="../files/laws.html">TERMS OF USE</a></li>
             </ul>
             <div class="footer-socials">
                 <a href="https://www.facebook.com" target="_blank">
-                    <img src="/graphics/socials/facebook.png" alt="Facebook" title="Facebook">
+                    <img src="../graphics/socials/facebook.png" alt="Facebook" title="Facebook">
                 </a>
                 <a href="https://www.instagram.com" target="_blank">
-                    <img src="/graphics/socials/instagram.png" alt="Instagram" title="Instagram">
+                    <img src="../graphics/socials/instagram.png" alt="Instagram" title="Instagram">
                 </a>
                 <a href="https://www.twitter.com" target="_blank">
-                    <img src="/graphics/socials/twitter.png" alt="Twitter" title="Twitter">
+                    <img src="../graphics/socials/twitter.png" alt="Twitter" title="Twitter">
                 </a>
             </div>
             <div class="footer-copyright">
@@ -99,7 +131,6 @@
             </div>
         </div>
     </footer>
-    <script src="/index.js"></script>
+    <script src="../index.js"></script>
 </body>
 </html>
-

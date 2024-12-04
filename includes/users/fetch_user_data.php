@@ -21,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch user data
-$stmt = $conn->prepare("SELECT email, firstName, lastName, birthdate, height, weight, activity FROM users WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT email, password, firstName, lastName, birthdate, height, weight, activity FROM users WHERE user_id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();

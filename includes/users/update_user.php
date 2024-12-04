@@ -32,11 +32,10 @@ $stmt = $conn->prepare("
     SET email = ?, password = ?, firstName = ?, lastName = ?, birthdate = ?, height = ?, weight = ?, activity = ?
     WHERE user_id = ?
 ");
-$passwordHash = $data['password'] ? password_hash($data['password'], PASSWORD_DEFAULT) : null;
 $stmt->bind_param(
     "ssssssssi",
     $data['email'],
-    $passwordHash,
+    $data['password'],
     $data['firstName'],
     $data['lastName'],
     $data['birthdate'],

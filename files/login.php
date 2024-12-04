@@ -53,13 +53,14 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../graphics/logo/logo.png">
     <link rel="stylesheet" href="login.css">
     <title>GreekGods | Login</title>
 </head>
 <body>
     <div class="container">
         <form id="login-form" action="login.php" method="POST">
-            <img src="/Github/greekgods/graphics/logo/logo.png" onclick="location.href='/index.html'" alt="Logo" title="Click here to redirect to home">
+            <img src="../graphics/logo/logo.png" onclick="location.href='../index.php'" alt="Logo" title="Click here to redirect to home">
             <p>Login</p>
             <p id="description">Ready to power up your fitness journey? We're excited to see you back—let’s keep reaching those goals together!</p>
         

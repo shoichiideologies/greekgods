@@ -223,6 +223,96 @@ header{
 
 /*--------------MAIN----------------*/
 
+.index-main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50px 50px;
+    gap: 30px;
+}
+
+.index-section-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.index-section-container .section-workouts{
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0;
+    background-color: white;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.index-section-container .section-workouts:hover{
+    box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.1);
+    transform: translate(0, -10px);
+}
+
+.index-section-container #picture{
+    width: 40%;
+    height: 400px;
+    padding: 0;
+    margin: 0;
+}
+
+.index-section-container #picture img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.index-section-container #description{
+    width: 60%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-workouts h3{
+    color: black;
+    font: 700 1.8em/1em "Trebuchet MS";
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.section-workouts p{
+    color: black;
+    font: 500 1em/1em "Trebuchet MS";
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 10px 10px 50px 10px;
+    text-align: center;
+}
+
+.section-workouts button{
+    font: 700 0.845em/1em "Trebuchet MS";
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 0px 50px;
+    cursor: pointer;
+    justify-content: flex-end;
+    align-content: flex-end;
+}
+
+.section-workouts button:hover{
+    background-color: black;
+    color: white;
+}
+
 
 /*--------------FOOTER----------------*/
 
@@ -362,6 +452,25 @@ footer{
         align-items: flex-end;
         justify-content: flex-end;
         margin: 0;
+    }
+    /*-----MAIN-----*/
+
+    .index-section-container{
+        flex-direction: column;
+    }
+
+    .index-section-container .section-workouts{
+        margin: 0;
+        padding: 0;
+    }
+
+    .index-section-container #description, .index-section-container #picture{
+        width: 100%;
+        height: 400px;
+    }
+
+    #reverse{
+        flex-direction: column-reverse;
     }
 
     /*-----FOOTER-----*/

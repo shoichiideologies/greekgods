@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sectionElement.style.display = "flex"; // Make the section visible
         sectionElement.style.zIndex = "999"; // Bring it to the front
 
+
         // Fetch the user data from the server
         fetch("../includes/users/fetch_user_data.php")
             .then(response => response.json())
@@ -32,12 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (data.success) {
                     // Populate the form fields with fetched data
                     document.getElementById("email").value = data.user.email || '';
-                    document.getElementById("password").value = '**********'; 
+                    document.getElementById("password").value = data.user.password || ''; 
                     document.getElementById("first-name").value = data.user.firstName || '';
                     document.getElementById("last-name").value = data.user.lastName || '';
-                    document.getElementById("birthdate").value = data.user.birthdate.slice(0, 10); // Trims time if present
-                    document.getElementById("height").value = parseFloat(data.user.height) || '';
-                    document.getElementById("weight").value = parseFloat(data.user.weight) || '';
+                    document.getElementById("birthdate-change").value = data.user.birthdate.slice(0, 10); // Trims time if present
+                    document.getElementById("height-change").value = parseFloat(data.user.height) || '';
+                    document.getElementById("weight-change").value = parseFloat(data.user.weight) || '';
                     document.getElementById("activity").value = data.user.activity || '';
                 } else {
                     alert("Failed to fetch user data: " + data.message);
@@ -52,12 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
     updateButton.addEventListener("click", () => {
         const updatedData = {
             email: document.getElementById("email").value,
-            password: document.getElementById("password").value, // Send password if changed
+            password: document.getElementById("password").value,
             firstName: document.getElementById("first-name").value,
             lastName: document.getElementById("last-name").value,
-            birthdate: document.getElementById("birthdate").value,
-            height: document.getElementById("height").value,
-            weight: document.getElementById("weight").value,
+            birthdate: document.getElementById("birthdate-change").value,
+            height: document.getElementById("height-change").value,
+            weight: document.getElementById("weight-change").value,
             activity: document.getElementById("activity").value,
         };
 

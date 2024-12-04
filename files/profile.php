@@ -176,11 +176,11 @@ $conn->close();
             <input type="text" id="last-name" name="last-name">
                 
             <label for="birthdate">Birthdate</label>
-            <input type="date" id="birthdate" name="birthdate">
+            <input type="text" id="birthdate-change" name="birthdate">
 
             <label for="height">Height</label>
             <div class="section-metrics">
-                <input id="height" type="number" name="height" step="0.01"> 
+                <input id="height-change" type="text" name="height" step="0.01"> 
                 <select name="heightMetrics" id="heightMetric">
                     <option value="cm">.cm</option>
                     <option value="in">.in</option>
@@ -191,7 +191,7 @@ $conn->close();
 
             <label for="weight">Weight</label>
             <div class="section-metrics">
-                <input id="weight" type="number" name="weight" step="0.01">
+                <input id="weight-change" type="text" name="weight" step="0.01">
                 <select name="weightMetrics" id="weightMetric">
                     <option value="lb">.lb</option>
                     <option value="kg">.kg</option>

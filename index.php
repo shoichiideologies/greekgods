@@ -78,10 +78,47 @@ $conn->close();
                 </div>
             </div>
         </header>
-        <main>
-            <section>
-                <h2>User ID: <?php echo htmlspecialchars($userId); ?></h2>
-            </section>
+        <main class="index-main">
+            <div class="index-section-container">
+                <div class="section-workouts" id="picture">
+                    <img src="./graphics/images/home.jpg" alt="Progress Tracking">
+                </div>
+                <div class="section-workouts" id="description">
+                    <h3>Track Your Progress</h3>
+                    <p>Stay on top of your fitness with real-time updates on your BMI and workout achievements.</p>
+                    <button onclick="window.location.href='./files/program.php'">Track Now</button>
+                </div>
+            </div>
+            <div class="index-section-container" id="reverse">
+                <div class="section-workouts" id="description">
+                    <h3>Customized Plans for Every Goal</h3>
+                    <p>Whether you're looking to lose weight, gain muscle, or maintain health, GreekGods got you covered.</p>
+                    <button onclick="window.location.href='./files/calculator.php'">Customize</button>
+                </div>
+                <div class="section-workouts" id="picture">
+                    <img src="./graphics/images/home1.jpg" alt="Customizing Plan">
+                </div>
+            </div>
+            <div class="index-section-container">
+                <div class="section-workouts" id="picture">
+                    <img src="./graphics/images/home2.jpg" alt="Fitness Tips">
+                </div>
+                <div class="section-workouts" id="description">
+                    <h3>Daily Fitness Tips</h3>
+                    <p>Get actionable tips and tricks to keep you motivated and on track.</p>
+                    <button onclick="window.location.href='./files/blog.php'">Learn Now</button>
+                </div>
+            </div>
+            <div class="index-section-container" id="reverse">
+                <div class="section-workouts" id="description">
+                    <h3>Completely Free</h3>
+                    <p>All our tools are available to you at no cost, ever!</p>
+                    <button onclick="window.location.href='./files/about.php'">Know more about GreekGods</button>
+                </div>
+                <div class="section-workouts" id="picture">
+                    <img src="./graphics/images/home3.jpg" alt="Learn More">
+                </div>
+            </div>
         </main>
         <footer>
             <div class="footer-container">
