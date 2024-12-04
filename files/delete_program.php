@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../includes/connection.php';
 
 // if (!isset($_SESSION['user_id'])) {
 //     header("Location: ./login.php");
@@ -8,16 +7,16 @@ include '../includes/connection.php';
 // }
 
 $userId = $_SESSION['user_id'];
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "register";
+$servername = "sql205.infinityfree.com"; // Replace with your database server
+$username = "if0_37850282"; // Replace with your database username
+$password = "4oxm7N4BFghQI9U"; // Replace with your database password
+$dbname = "if0_37850282_register"; // Replace with your database name
 
-// $conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Check if user ID is provided
 if (isset($_POST['userId'])) {
