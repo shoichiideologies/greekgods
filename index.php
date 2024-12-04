@@ -84,9 +84,9 @@ $conn->close();
                     <img src="./graphics/images/home.jpg" alt="Progress Tracking">
                 </div>
                 <div class="section-workouts" id="description">
-                    <h3>Track Your Workouts</h3>
-                    <p>Stay on top of your fitness with real-time updates on your BMI and workout achievements.</p>
-                    <button onclick="window.location.href='./files/program.php'">Track Now</button>
+                    <h3>Calculate your body statistics</h3>
+                    <p>Stay on top of your fitness with real-time updates on your BMI, BMR, and workout achievements.</p>
+                    <button onclick="window.location.href='./files/calculator.php'">Calculate Now</button>
                 </div>
             </div>
             <div class="index-section-container" id="reverse">
