@@ -68,13 +68,13 @@ $conn->close();
         </nav>
         <header>
             <div class="header-container">
-                <img src="/Github/greekgods/graphics/images/welcome-image.png" alt="people barbell exercise">
+                <img src="./graphics/images/welcome-image.png" alt="people barbell exercise">
                 <div class="header-add">
                     <span class="header-descriptions">
                         <p>Build confidence, be stronger, and transform.</p>
                         <p>START YOUR JOURNEY NOW.</p>
                     </span>
-                    <button onclick="window.location.href='/Github/greekgods/files/register.html'">REGISTER</button>
+                    <button onclick="window.location.href='./files/register.html'">REGISTER</button>
                 </div>
             </div>
         </header>
@@ -84,16 +84,16 @@ $conn->close();
                     <img src="./graphics/images/home.jpg" alt="Progress Tracking">
                 </div>
                 <div class="section-workouts" id="description">
-                    <h3>Track Your Progress</h3>
+                    <h3>Track Your Workouts</h3>
                     <p>Stay on top of your fitness with real-time updates on your BMI and workout achievements.</p>
                     <button onclick="window.location.href='./files/program.php'">Track Now</button>
                 </div>
             </div>
             <div class="index-section-container" id="reverse">
                 <div class="section-workouts" id="description">
-                    <h3>Customized Plans for Every Goal</h3>
+                    <h3>Customized Workouts for Every Goal</h3>
                     <p>Whether you're looking to lose weight, gain muscle, or maintain health, GreekGods got you covered.</p>
-                    <button onclick="window.location.href='./files/calculator.php'">Customize</button>
+                    <button onclick="window.location.href='./files/program.php'">Customize</button>
                 </div>
                 <div class="section-workouts" id="picture">
                     <img src="./graphics/images/home1.jpg" alt="Customizing Plan">

@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// echo "<script>const userId = $userId;</script>";
+echo "<script>const userId = $userId;</script>";
 // Database connection details
 $servername = "sql205.infinityfree.com"; // Replace with your database server
 $username = "if0_37850282"; // Replace with your database username
