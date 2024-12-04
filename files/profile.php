@@ -8,14 +8,12 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Database connection details
 $servername = "sql205.infinityfree.com"; // Replace with your database server
 $username = "if0_37850282"; // Replace with your database username
 $password = "4oxm7N4BFghQI9U"; // Replace with your database password
 $dbname = "if0_37850282_register"; // Replace with your database name
 
-// Establish a connection to the database
-$conn = new mysqli($localhost, $username, $dbPassword, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check if the connection was successful
 if ($conn->connect_error) {
