@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../includes/connection.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ./login.php");
@@ -9,16 +8,16 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "register";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "register";
 
-// $conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Fetch user details
 $sql = "SELECT firstName, lastName FROM users WHERE user_id = ?";

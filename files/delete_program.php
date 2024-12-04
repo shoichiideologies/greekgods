@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../includes/connection.php';
 
 // if (!isset($_SESSION['user_id'])) {
 //     header("Location: ./login.php");
@@ -8,16 +7,16 @@ include '../includes/connection.php';
 // }
 
 $userId = $_SESSION['user_id'];
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "register";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "register";
 
-// $conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Check if user ID is provided
 if (isset($_POST['userId'])) {

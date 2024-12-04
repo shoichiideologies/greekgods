@@ -1,6 +1,5 @@
 <?php
 session_start();
-include '../includes/connection.php';
 $userId = $_SESSION['user_id'];
 
 // Check if user_id is provided
@@ -11,18 +10,18 @@ if (!isset($_SESSION['user_id'])) {
 
 // echo "<script>const userId = $userId;</script>";
 // Database connection details
-// $localhost = "localhost";
-// $username = "root";
-// $dbPassword = "";
-// $dbname = "register";
+$localhost = "localhost";
+$username = "root";
+$dbPassword = "";
+$dbname = "register";
 
-// // Establish a connection to the database
-// $conn = new mysqli($localhost, $username, $dbPassword, $dbname);
+// Establish a connection to the database
+$conn = new mysqli($localhost, $username, $dbPassword, $dbname);
 
-// // Check if the connection was successful
-// if ($conn->connect_error) {
-//     die("Connection failed: " . $conn->connect_error);
-// }
+// Check if the connection was successful
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Determine today's weekday in PHP
 $today = date("l"); // Returns full day name, e.g., "Monday"
