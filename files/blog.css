@@ -98,6 +98,7 @@ article {
 article:hover {
     box-shadow: 6px 6px 12px rgba(0,0,0,.3), -6px -6px 6px white;
     transform: translateY(-3px); /* Moves the article upwards */
+    cursor: pointer;
 }
 
 
