@@ -36,7 +36,7 @@ if ($stmt->execute()) {
     $_SESSION['user_id'] = $userId;
 
     // Redirect to profile.php with user_id in the query 'string
-    header("Location: /profile.php");
+    header("Location: ./profile.php");
     exit;
 } else {
     echo "Error: " . $stmt->error;
