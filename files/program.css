@@ -398,11 +398,27 @@ main{
     }
 
     .section-select-container{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .section-select{
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #workout-splits, #workout-splits-options{
         width: 100%;
     }
 
     .section-save{
         width: 100%;
+        max-width: 100%;
+    }
+
+    .section-save button{
+        width: 100%;
+        max-width: 100%;
     }
     
 }

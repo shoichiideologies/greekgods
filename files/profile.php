@@ -166,9 +166,6 @@ $conn->close();
             <label for="email">Email</label>
             <input type="text" id="email" name="email" >
 
-            <label for="password">Password</label>
-            <input type="text" id="password" name="password">
-
             <label for="first-name">First Name</label>
             <input type="text" id="first-name" name="first-name">
 
