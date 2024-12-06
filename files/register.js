@@ -4,16 +4,18 @@ const confirmPassword = document.getElementById('confirm-password');
 const registerAccountForm = document.getElementById('registerAccount');
 const registerInfoForm = document.getElementById('registerInfo');
 
-// Function to display error messages
-function displayErrorMessage(inputId, message) {
-    const errorMessageContainer = document.querySelector('.error-message-container');
+function displayErrorMessage(containerClass, message) {
+    // Find the relevant error-message-container dynamically
+    const errorMessageContainer = document.querySelector(`#${containerClass} .error-message-container`);
+    if (!errorMessageContainer) {
+        console.error(`Error container not found for ${containerClass}!`);
+        return;
+    }
 
-    // Create a new error message element
-    let errorMessage = document.createElement('div');
+    const errorMessage = document.createElement('div');
     errorMessage.classList.add('error-message');
     errorMessage.textContent = message;
 
-    // Append error message to the container
     errorMessageContainer.appendChild(errorMessage);
 }
 
@@ -40,6 +42,85 @@ function validatePassword(password) {
 function validatePasswordMatch(password, confirmPassword) {
     if (password !== confirmPassword) return "*Passwords do not match.";
     return "Passwords match.";
+}
+
+// Form validation
+function validateForm1() {
+    let isValid = true;
+
+    // Clear previous error messages in this form
+    document.querySelectorAll('#registerAccount .error-message').forEach(msg => msg.remove());
+
+    // Validate password
+    const passwordValidationMessage = validatePassword(password.value);
+    if (passwordValidationMessage !== "Password is valid.") {
+        displayErrorMessage('registerAccount', passwordValidationMessage);
+        isValid = false;
+    }
+
+    // Validate password match
+    const passwordMatchMessage = validatePasswordMatch(password.value, confirmPassword.value);
+    if (passwordMatchMessage !== "Passwords match.") {
+        displayErrorMessage('registerAccount', passwordMatchMessage);
+        isValid = false;
+    }
+
+    // Checkbox validation
+    const termsCheckbox = document.getElementById('check');
+    if (!termsCheckbox.checked) {
+        displayErrorMessage('registerAccount', "*You must agree to the terms and conditions.");
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function validatePersonalDetails(firstName, lastName, birthdate, height, weight, activity) {
+    const isMinor = 14;
+    const isSenior = 80;
+
+    if (!firstName || !lastName || !birthdate || !height || !weight || !activity) 
+        return "Ensure all fields have valid inputs.";
+
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    if (age < isMinor) return `*You must be at least ${isMinor} years old to register.`;
+    if (age > isSenior) return `*You must be less than ${isSenior} years to proceed.`;
+    if (isNaN(height) || height <= 0) return "*Height must be a positive number.";
+    if (isNaN(weight) || weight <= 0) return "*Weight must be a positive number.";
+
+    return "Personal Details are Valid"; // Explicitly return null if there are no errors
+}
+
+function validateForm2() {
+    let isValid = true;
+
+    // Clear previous error messages in this form
+    document.querySelectorAll('#registerInfo .error-message').forEach(msg => msg.remove());
+
+    // Fetch form values
+    const firstName = document.getElementById("first-name").value;
+    const lastName = document.getElementById("last-name").value;
+    const birthdate = document.getElementById("birthdate").value;
+    const height = document.getElementById("height").value;
+    const weight = document.getElementById("weight").value;
+    const activity = document.getElementById("activity").value;
+
+    // Validate personal details
+    const personalDetailsMessage = validatePersonalDetails(firstName, lastName, birthdate, height, weight, activity);
+    if (personalDetailsMessage !== "Personal Details are Valid") {
+        displayErrorMessage('registerInfo', personalDetailsMessage);
+        isValid = false;
+    }
+
+    return isValid;
 }
 
 function convertMetric() {
@@ -79,52 +160,26 @@ function convertMetric() {
     return { finalHeight, finalWeight };
 }
 
-// Form validation
-function validateForm() {
-    let isValid = true;
-
-    // Clear previous error messages
-    document.querySelectorAll('.error-message').forEach(msg => msg.remove());
-
-    const passwordValidationMessage = validatePassword(password.value);
-    if (passwordValidationMessage !== "Password is valid.") {
-        displayErrorMessage('password', passwordValidationMessage);
-        isValid = false;
-    }
-
-    const passwordMatchMessage = validatePasswordMatch(password.value, confirmPassword.value);
-    if (passwordMatchMessage !== "Passwords match.") {
-        displayErrorMessage('confirm-password', passwordMatchMessage);
-        isValid = false;
-    }
-
-    // Checkbox validation
-    const termsCheckbox = document.getElementById('check');
-    if (!termsCheckbox.checked) {
-        displayErrorMessage('termsCheckbox', "*You must agree to the terms and conditions.");
-        isValid = false;
-    }
-
-    return isValid;
-}
-
 // Register button click handler to navigate to registerInfo form
 document.querySelector('#registerButton').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the default button behavior
 
-    if (!validateForm()) {
+    if (!validateForm1()) {
         return; // If validation fails, stop here
     }
 
-    // Hide registerAccount form and show registerInfo form
     registerAccountForm.style.display = 'none';
     registerInfoForm.style.display = 'block';
 });
 
 // RegisterInfo form submit handler
 document.querySelector('#startJourneyNow').addEventListener('click', function(event) {
-    
-    event.preventDefault(); // Prevent form submission initially
+    event.preventDefault(); 
+
+    if (!validateForm2()) {
+        return;
+    }
+
     const conversion = convertMetric();
     if (conversion) {
         const { finalHeight, finalWeight } = conversion;
