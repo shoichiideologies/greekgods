@@ -13,6 +13,7 @@ body{
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    padding:0 40px;
 }
 
 .container #registerAccount, 
