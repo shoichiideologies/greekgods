@@ -1,4 +1,4 @@
-## Greekgods 
+# Greekgods 
 
 <img src="graphics/logo/logo.png" alt="Greekgods logo" width="100"/>
 
