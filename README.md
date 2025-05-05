@@ -2,7 +2,7 @@
 
 <img src="graphics/logo/logo.png" alt="Greekgods logo" width="100"/>
 
-A beginner friendly fitness website that will help you plan weekly workouts, calculate body statistics, and be guided on your fitness journey.
+A beginner-friendly fitness website designed to help you plan weekly workouts, track body metrics, and guide you through your fitness journey with confidence.
 
 ---
 
